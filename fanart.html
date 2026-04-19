@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Coming Soon | Senyawa Project</title>
+    <!-- Font Awesome 6 (free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0a0a0a;
+            font-family: 'Poppins', 'Segoe UI', system-ui, -apple-system, 'Inter', sans-serif;
+            color: #f0f0f0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            /* Background gradasi gelap dengan sentuhan maroon seperti halaman utama */
+            background: radial-gradient(circle at 30% 10%, #1a0a0e, #020202 85%);
+        }
+
+        /* custom font (Poppins via Google Fonts) */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&family=Poppins:wght@400;500;600;700;800&display=swap');
+
+        :root {
+            --senyawa: #670C1F;
+            --senyawa-dark: #4a0715;
+            --senyawa-glow: rgba(103, 12, 31, 0.4);
+            --text-light: #f5f3f0;
+        }
+
+        /* Tombol back di kiri atas - fixed position */
+        .back-top-left {
+            position: fixed;
+            top: 28px;
+            left: 28px;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(12px);
+            padding: 10px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            color: #f0f0f0;
+            font-weight: 500;
+            font-size: 0.95rem;
+            border: 1px solid rgba(103, 12, 31, 0.5);
+            transition: all 0.25s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        .back-top-left i {
+            font-size: 1rem;
+            transition: transform 0.2s;
+        }
+        .back-top-left:hover {
+            background: var(--senyawa);
+            border-color: rgba(255, 200, 200, 0.6);
+            transform: translateX(-3px);
+            box-shadow: 0 4px 14px rgba(103,12,31,0.4);
+        }
+        .back-top-left:hover i {
+            transform: translateX(-4px);
+        }
+
+        /* Container utama untuk konten COMING SOON */
+        .coming-soon-container {
+            text-align: center;
+            padding: 2rem;
+            max-width: 900px;
+            width: 100%;
+            animation: fadeUp 0.9s ease;
+        }
+
+        /* Logo kecil di atas (optional) untuk branding */
+        .mini-logo {
+            margin-bottom: 2rem;
+        }
+        .mini-logo img {
+            height: 70px;
+            width: auto;
+            filter: drop-shadow(0 0 12px rgba(103,12,31,0.5));
+            transition: transform 0.2s;
+        }
+        .mini-logo img:hover {
+            transform: scale(1.02);
+        }
+
+        /* Teks COMING SOON utama */
+        .coming-title {
+            font-size: 5rem;
+            font-weight: 800;
+            letter-spacing: 6px;
+            background: linear-gradient(135deg, #ffffff, #e0a0a0, #b84c5c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 10px rgba(103,12,31,0.3);
+            margin-bottom: 1rem;
+        }
+
+        /* Subtitle / deskripsi singkat */
+        .coming-sub {
+            font-size: 1.3rem;
+            font-weight: 400;
+            color: #d4c5c5;
+            margin-bottom: 2rem;
+            border-top: 1px solid rgba(103,12,31,0.5);
+            display: inline-block;
+            padding-top: 0.8rem;
+        }
+
+        /* Efek garis maroon glow */
+        .glow-line {
+            width: 120px;
+            height: 3px;
+            background: var(--senyawa);
+            margin: 1.5rem auto;
+            border-radius: 10px;
+            box-shadow: 0 0 12px var(--senyawa-glow);
+        }
+
+        /* Animasi fade up */
+        @keyframes fadeUp {
+            0% { opacity: 0; transform: translateY(35px);}
+            100% { opacity: 1; transform: translateY(0);}
+        }
+
+        /* Efek maroon ornament (lingkaran blur di belakang) */
+        .bg-ornament {
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(103,12,31,0.15), transparent 70%);
+            border-radius: 50%;
+            top: -200px;
+            right: -150px;
+            z-index: -1;
+            pointer-events: none;
+        }
+        .bg-ornament2 {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(103,12,31,0.1), transparent 70%);
+            border-radius: 50%;
+            bottom: -250px;
+            left: -200px;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 680px) {
+            .coming-title {
+                font-size: 2.8rem;
+                letter-spacing: 3px;
+            }
+            .coming-sub {
+                font-size: 1rem;
+            }
+            .mini-logo img {
+                height: 50px;
+            }
+            .back-top-left {
+                top: 18px;
+                left: 18px;
+                padding: 7px 16px;
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .coming-title {
+                font-size: 2.2rem;
+                letter-spacing: 2px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Tombol kembali ke beranda di kiri atas dengan panah -->
+    <a href="index.html" class="back-top-left">
+        <i class="fas fa-arrow-left"></i>
+        <span>Kembali ke Beranda</span>
+    </a>
+
+    <!-- Ornamen background mempercantik dengan nuansa maroon -->
+    <div class="bg-ornament"></div>
+    <div class="bg-ornament2"></div>
+
+    <div class="coming-soon-container">
+        <!-- Logo kecil (optional) menggunakan aset yang sama jika ada, fallback jika tidak ditemukan -->
+        <div class="mini-logo">
+            <img src="assets/Logo Senyawa no BG.png" alt="Senyawa" onerror="this.src='https://placehold.co/200x80/670C1F/white?text=SNY'">
+        </div>
+
+        <!-- Judul Coming Soon dengan gaya bold -->
+        <h1 class="coming-title">COMING SOON</h1>
+        <div class="glow-line"></div>
+        <p class="coming-sub">Halaman sedang dalam pengembangan</p>
+        
+        <!-- Teks tambahan "sesuatu yang epik..." sudah dihapus sesuai permintaan -->
+    </div>
+
+    <!-- Simple script fallback jika ada error gambar -->
+    <script>
+        // Menangani kemungkinan logo tidak ditemukan dengan fallback yang lebih halus
+        document.addEventListener('DOMContentLoaded', () => {
+            const logoImg = document.querySelector('.mini-logo img');
+            if (logoImg && logoImg.complete) {
+                if (logoImg.naturalWidth === 0 && logoImg.naturalHeight === 0) {
+                    logoImg.onerror();
+                }
+            }
+            if (logoImg) {
+                logoImg.onerror = () => {
+                    logoImg.src = 'https://placehold.co/200x80/670C1F/white?text=SENYAWA';
+                    logoImg.style.borderRadius = '12px';
+                };
+            }
+        });
+    </script>
+</body>
+</html>

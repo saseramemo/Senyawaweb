@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Senyawa Project | Komunitas Youtuber Minecraft Indonesia</title>
+    <!-- Font Awesome 6 (free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0a0a0a;
+            font-family: 'Poppins', 'Segoe UI', system-ui, -apple-system, 'Inter', sans-serif;
+            color: #f0f0f0;
+            scroll-behavior: smooth;
+        }
+
+        /* custom font (Poppins via Google Fonts) */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&family=Poppins:wght@400;500;600;700;800&display=swap');
+
+        /* warna utama SENYAWA HEX #670C1F */
+        :root {
+            --senyawa: #670C1F;
+            --senyawa-dark: #4a0715;
+            --senyawa-glow: rgba(103, 12, 31, 0.4);
+            --text-light: #f5f3f0;
+            --card-bg: #111111;
+            --border-dim: #2a2a2a;
+        }
+
+        /* scroll smooth & bar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e1e1e;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--senyawa);
+            border-radius: 10px;
+        }
+
+        /* container umum */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        /* navigasi */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            backdrop-filter: blur(16px);
+            background: rgba(10, 10, 10, 0.85);
+            z-index: 100;
+            border-bottom: 1px solid rgba(103, 12, 31, 0.5);
+            transition: 0.2s;
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 32px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        /* Logo kiri: gambar kecil tanpa background (no BG) */
+        .nav-logo-img {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .nav-logo-img img {
+            height: 44px;
+            width: auto;
+            display: block;
+            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4));
+            transition: transform 0.2s;
+        }
+        .nav-logo-img img:hover {
+            transform: scale(1.02);
+        }
+        .logo-text {
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            background: linear-gradient(135deg, #fff, #e0b0b0);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        .nav-links a {
+            color: #eee;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.2s;
+            font-size: 1rem;
+        }
+        .nav-links a:hover {
+            color: #e0a0a0;
+            border-bottom: 2px solid var(--senyawa);
+        }
+        /* responsive nav sederhana */
+        .menu-toggle {
+            display: none;
+            font-size: 1.6rem;
+            cursor: pointer;
+            color: white;
+        }
+
+        /* Hero section - logo besar satu layar */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: radial-gradient(circle at 30% 10%, #1a0a0e, #020202 85%);
+            position: relative;
+        }
+        .hero-logo {
+            max-width: 85%;
+            width: 700px;
+            animation: fadeUp 1s ease;
+        }
+        .hero-logo img {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 0 15px rgba(103,12,31,0.6));
+        }
+        .subtitle {
+            font-size: 1.6rem;
+            letter-spacing: 2px;
+            font-weight: 400;
+            margin-top: 1rem;
+            color: #e0c8c8;
+            border-top: 1px solid rgba(103,12,31,0.6);
+            padding-top: 1rem;
+            display: inline-block;
+        }
+        .hero-socials {
+            margin-top: 2rem;
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .social-icon {
+            background: rgba(20, 20, 20, 0.8);
+            backdrop-filter: blur(4px);
+            width: 56px;
+            height: 56px;
+            border-radius: 60px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: #fff;
+            transition: 0.2s;
+            border: 1px solid #3a2a2a;
+            text-decoration: none;
+        }
+        .social-icon:hover {
+            transform: translateY(-6px);
+            background: var(--senyawa);
+            border-color: #ffb7b7;
+            color: white;
+        }
+
+        /* section umum */
+        section {
+            padding: 90px 0;
+            border-bottom: 1px solid #1f1f1f;
+        }
+        
+        /* Section header dengan title dan tombol di kanan */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .section-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+            margin-bottom: 0;
+        }
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 0;
+            width: 70px;
+            height: 4px;
+            background: var(--senyawa);
+            border-radius: 4px;
+        }
+        
+        /* Tombol Lihat Semua Project untuk di kanan atas */
+        .section-view-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #670C1F 0%, #4a0715 100%);
+            color: white;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 10px 24px;
+            border-radius: 60px;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            border: 1px solid rgba(255, 200, 200, 0.3);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+        .section-view-btn i {
+            font-size: 1rem;
+            transition: transform 0.2s;
+        }
+        .section-view-btn:hover {
+            transform: translateY(-3px);
+            background: linear-gradient(135deg, #7e142a 0%, #5c0919 100%);
+            border-color: rgba(255, 180, 180, 0.6);
+            box-shadow: 0 12px 22px -8px rgba(103,12,31,0.5);
+        }
+        .section-view-btn:hover i {
+            transform: translateX(5px);
+        }
+        
+        /* MEMBERS GRID - FOTO TIDAK TERCROP, TANPA BULAT SUDUT AGAR ASLI */
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .member-card {
+            background: #141414;
+            border-radius: 20px;
+            padding: 1.2rem 0.8rem 1rem;
+            text-align: center;
+            transition: 0.25s ease;
+            border: 1px solid #262626;
+            backdrop-filter: blur(2px);
+        }
+        .member-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--senyawa);
+            box-shadow: 0 15px 25px -12px rgba(0,0,0,0.6);
+        }
+        /* Container foto: TIDAK ADA border-radius yang memotong gambar, sudut tidak halus */
+        .member-img {
+            width: 100%;
+            max-width: 160px;
+            margin: 0 auto;
+            background: #1a1a1a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* tidak ada border-radius, sehingga gambar persegi asli tanpa crop sudut */
+            border-radius: 0px;
+            overflow: visible;
+        }
+        .member-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+            /* memastikan rasio asli tanpa modifikasi object-fit cover */
+            object-fit: contain;
+            background: #111;
+            border-radius: 0px;
+            /* tidak ada rounding sama sekali — bebas dari crop sudut */
+        }
+        .member-name {
+            margin-top: 12px;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        .member-yt {
+            font-size: 0.8rem;
+            color: #bdbdbd;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 6px;
+        }
+        .member-yt i {
+            font-size: 0.9rem;
+            color: #ff3333;
+        }
+
+        /* collaborators */
+        .collab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .collab-card {
+            background: #141414;
+            border-radius: 28px;
+            padding: 1.6rem;
+            text-align: center;
+            transition: 0.2s;
+            border: 1px solid #2a2a2a;
+        }
+        .collab-logo {
+            max-width: 160px;
+            margin: 0 auto;
+        }
+        .collab-logo img {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+        }
+
+        /* about us text */
+        .about-text {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            max-width: 900px;
+            background: #0d0d0d;
+            padding: 2rem;
+            border-radius: 32px;
+            border-left: 6px solid var(--senyawa);
+            margin-top: 1rem;
+        }
+
+        /* Projects playlist */
+        .projects-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 2rem;
+            margin-bottom: 0;
+        }
+        .project-card {
+            flex: 1 1 280px;
+            background: #0c0c0c;
+            border-radius: 28px;
+            overflow: hidden;
+            transition: 0.2s;
+            border: 1px solid #222;
+        }
+        .project-card iframe {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border: none;
+        }
+        .project-info {
+            padding: 1rem;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        /* footer */
+        footer {
+            background: #050505;
+            padding: 2rem;
+            text-align: center;
+            color: #aaa;
+            font-size: 0.9rem;
+            border-top: 1px solid #1f1f1f;
+        }
+        /* tambahan dekoratif untuk footer */
+        .footer-time {
+            font-size: 0.8rem;
+            margin-top: 10px;
+            color: #777;
+            letter-spacing: 0.5px;
+        }
+        .footer-heart {
+            color: #e05a5a;
+            display: inline-block;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        .footer-divider {
+            width: 60px;
+            height: 1px;
+            background: #333;
+            margin: 12px auto;
+        }
+
+        @keyframes fadeUp {
+            0% { opacity: 0; transform: translateY(30px);}
+            100% { opacity: 1; transform: translateY(0);}
+        }
+
+        /* responsive */
+        @media (max-width: 880px) {
+            .container {
+                padding: 0 24px;
+            }
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                flex-direction: column;
+                background: rgba(0,0,0,0.95);
+                backdrop-filter: blur(20px);
+                width: 70%;
+                height: calc(100vh - 70px);
+                padding: 2rem;
+                gap: 2rem;
+                transition: 0.3s;
+                border-right: 1px solid var(--senyawa);
+            }
+            .nav-links.active {
+                left: 0;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .hero-logo {
+                width: 90%;
+            }
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .section-view-btn {
+                margin-bottom: 0.5rem;
+            }
+            .members-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 1.2rem;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .members-grid {
+                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+                gap: 1rem;
+            }
+            .member-img {
+                max-width: 120px;
+            }
+            .section-view-btn {
+                padding: 8px 18px;
+                font-size: 0.85rem;
+            }
+        }
+        button, a {
+            cursor: pointer;
+        }
+        .social-icon i {
+            pointer-events: none;
+        }
+        /* tambahan untuk memastikan foto member tidak ada sudut membulat */
+        .member-card, .member-img, .member-img img {
+            border-radius: 0px !important;
+        }
+        .member-img {
+            border-radius: 0px;
+            overflow: visible;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-container">
+        <div class="nav-logo-img">
+            <!-- Logo kecil tanpa background dari folder assets (Logo Senyawa no BG.png) -->
+            <img src="assets/Logo Senyawa no BG.png" alt="Senyawa Icon" onerror="this.src='https://placehold.co/100x60?text=S'">
+            <span class="logo-text">SENYAWA</span>
+        </div>
+        <div class="menu-toggle" id="menuToggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#members">Member</a></li>
+            <li><a href="#projects">Project</a></li>
+            <li><a href="store.html" id="storeNavLink">Store</a></li>
+            <li><a href="fanart.html" id="storeNavLink">fanart</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Hero section dengan logo besar satu layar -->
+<section id="home" class="hero">
+    <div class="hero-logo">
+        <!-- Logo Senyawa Project utama -->
+        <img src="assets/Logo Senyawa Project.png" alt="Senyawa Project Logo" onerror="this.src='https://placehold.co/800x400?text=Logo+Senyawa'">
+    </div>
+    <div class="subtitle">the next big thing.</div>
+    <div class="hero-socials">
+        <a href="https://www.youtube.com/@senyawaproject" target="_blank" class="social-icon"><i class="fab fa-youtube"></i></a>
+        <a href="https://www.instagram.com/projectsenyawa/" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.tiktok.com/@senyawaproject" target="_blank" class="social-icon"><i class="fab fa-tiktok"></i></a>
+        <a href="https://discord.com/invite/xGTeNEsPjg" target="_blank" class="social-icon"><i class="fab fa-discord"></i></a>
+        <a href="https://www.whatsapp.com/channel/0029Vb7VUtNCBtxLqh7n0C0n" target="_blank" class="social-icon"><i class="fab fa-whatsapp"></i>
+</a>
+    </div>
+</section>
+
+<!-- ABOUT US section -->
+<section id="about">
+    <div class="container">
+        <h2 class="section-title">◈ About Us</h2>
+        <div class="about-text">
+            <p>Senyawa Project adalah sebuah grup komunitas yang dibangun sebagai wadah untuk berkolaborasi, berkreasi, dan berekspresi bagi para konten kreator dengan latar belakang dan gaya konten yang berbeda. Komunitas ini memiliki tujuan untuk menciptakan konten yang epik, seru, dan autentik, menghadirkan series, event, serta proyek kolaborasi yang belum pernah ada sebelumnya.</p>
+        </div>
+    </div>
+</section>
+
+<!-- MEMBERS SECTION (foto asli, tanpa crop sudut halus, tidak ada border-radius) -->
+<section id="members">
+    <div class="container">
+        <h2 class="section-title">◈ Members</h2>
+        <div class="members-grid" id="membersGrid">
+            <!-- Data member akan diisi javascript dari daftar foto dan channel youtube -->
+        </div>
+    </div>
+</section>
+
+<!-- COLLABORATORS section -->
+<section id="collaborators">
+    <div class="container">
+        <h2 class="section-title">◈ Collaborators</h2>
+        <div class="collab-grid">
+            <div class="collab-card">
+                <div class="collab-logo">
+                    <img src="assets/Logo Senovshop.png" alt="Senovshop" onerror="this.src='https://placehold.co/300x150?text=Senovshop'">
+                </div>
+                <h3 style="margin-top: 12px;">Senovshop</h3>
+            </div>
+            <div class="collab-card">
+                <div class="collab-logo">
+                    <img src="assets/Logo ALStore.png" alt="ALStore" onerror="this.src='https://placehold.co/300x150?text=ALStore'">
+                </div>
+                <h3 style="margin-top: 12px;">ALStore</h3>
+            </div>
+             <div class="collab-card">
+                <div class="collab-logo">
+                    <img src="assets/Logo Arqonara.png" alt="Arqonara" onerror="this.src='https://placehold.co/300x150?text=ALStore'">
+                </div>
+                <h3 style="margin-top: 12px;">Arqonara</h3>
+            </div>
+                
+        </div>
+    </div>
+</section>
+
+<!-- OUR PROJECTS section: playlist youtube + tombol Lihat Semua Project di kanan atas -->
+<section id="projects">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">◈ Our Projects</h2>
+            <!-- Tombol lihat semua project yang mengarah ke project.html (posisi kanan atas) -->
+            <a href="project.html" class="section-view-btn" id="viewAllProjectsBtn">
+                <span>Lihat semua project</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+        <div class="projects-grid" id="projectsGrid">
+            <!-- playlist akan di generate via js -->
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>© 2025 Senyawa Project — Komunitas Youtuber Minecraft Indonesia. All rights reserved.</p>
+    <p style="margin-top: 8px; font-size: 0.8rem;">Created by Sasera</p>
+    
+    <!-- TAMBAHAN: dekorasi garis & jam real-time (tanpa merubah struktur footer asli) -->
+    <div class="footer-divider"></div>
+    <div class="footer-time" id="liveDateTime"></div>
+    <div style="margin-top: 10px; font-size: 0.75rem;">
+        <span>Made with <span class="footer-heart">❤️</span> for Senyawa Community</span>
+    </div>
+</footer>
+
+<script>
+    // Fungsi update jam & tanggal real-time (tambahan)
+    function updateDateTime() {
+        const now = new Date();
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', timeZoneName: 'short' };
+        const formatted = now.toLocaleDateString('id-ID', options);
+        const dateTimeElem = document.getElementById('liveDateTime');
+        if (dateTimeElem) dateTimeElem.textContent = formatted;
+    }
+    updateDateTime();
+    setInterval(updateDateTime, 1000);
+
+    // Daftar Member sesuai file gambar + channel youtube 
+    const membersList = [
+        { img: "Akagim.png", name: "Akagim", yt: "https://www.youtube.com/@Akagim" },
+        { img: "Amaruuru.png", name: "Amaruuru", yt: "https://www.youtube.com/@amaruuru" },
+        { img: "Dainveil.png", name: "Dainveil", yt: "https://www.youtube.com/@Dainveil" },
+        { img: "Darel.png", name: "Darel", yt: "https://www.youtube.com/channel/UCILE_q8OdzE4kJ2Hc9lMJkQ" },
+        { img: "Dzake.png", name: "Dzake", yt: "https://www.youtube.com/@dzakeee" },
+        { img: "Ermalio.png", name: "Ermalio", yt: "https://www.youtube.com/@ErmaisErolio" },
+        { img: "Gadink.png", name: "Gadink", yt: "https://www.youtube.com/@gadinkmc" },
+        { img: "IkiApid.png", name: "IkiApid", yt: "https://www.youtube.com/@ikiapid" },
+        { img: "Kean.png", name: "Kean", yt: "https://www.youtube.com/@KeanTuruXD" },
+        { img: "Nijar.png", name: "Nijar", yt: "https://www.youtube.com/@NijarMC" },
+        { img: "nunskuy.png", name: "nunskuy", yt: "https://www.youtube.com/@nunskuy" },
+        { img: "RefaMC.png", name: "RefaMC", yt: "https://www.youtube.com/@RefaMC13" },
+        { img: "Reinwal.png", name: "Reinwal", yt: "https://www.youtube.com/@reinwal" },
+        { img: "Ryashel.png", name: "Ryashel", yt: "https://www.youtube.com/@Nyashel" },
+        { img: "Sasera.png", name: "Sasera", yt: "https://www.youtube.com/@Saseraa" },
+        { img: "Trindz.png", name: "Trindz", yt: "https://www.youtube.com/@trindz" },   
+        { img: "Ulerr.png", name: "Ulerr", yt: "https://www.youtube.com/@ulersakti2" },
+        { img: "Zabizz.png", name: "Zabizz", yt: "https://www.youtube.com/@Zabiz28" }
+    ];
+
+    // Daftar project playlist
+    const projectsData = [
+        { title: "Senyawa SMP", playlistId: "PLXxoI8twiEB_nKrlz3M887MSVNNDlBUkV" },
+        { title: "Skyblock Battle Royale", playlistId: "PLXxoI8twiEB_Z0uAUZwHE6I6JMQq8xCsg" },
+        { title: "Underground Battle Royale", playlistId: "PLXxoI8twiEB-wtzUfTzO89ADA_GOZ0LFn" },
+        { title: "Buildoria", playlistId: "PLXxoI8twiEB99rCkw1ON6CHrwgU337EBB" },
+        { title: "50 Player One Chunk", playlistId: "PLXxoI8twiEB-cocyijLJ3a0bUk1Zhr8EP" },
+          { title: "Devastated SMP", playlistId: "PLXxoI8twiEB_RPTi2pKkCNbND2WkK8bmp" },
+    ];
+
+    // Render members 
+    function renderMembers() {
+        const container = document.getElementById("membersGrid");
+        if (!container) return;
+        container.innerHTML = "";
+        membersList.forEach(member => {
+            const card = document.createElement("div");
+            card.className = "member-card";
+            const imgPath = `assets/${member.img}`;
+            // Tidak ada border-radius pada img container maupun gambar. Foto tampil original ratio & bentuk asli.
+            card.innerHTML = `
+                <div class="member-img">
+                    <img src="${imgPath}" alt="${member.name}" loading="lazy" onerror="this.src='https://placehold.co/400x400/333333/white?text=${member.name}'">
+                </div>
+                <div class="member-name">${member.name}</div>
+                <a href="${member.yt}" target="_blank" class="member-yt"><i class="fab fa-youtube"></i> YouTube</a>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    // Render projects (embed playlist youtube)
+    function renderProjects() {
+        const container = document.getElementById("projectsGrid");
+        if (!container) return;
+        container.innerHTML = "";
+        projectsData.forEach(project => {
+            const embedUrl = `https://www.youtube.com/embed/videoseries?list=${project.playlistId}&controls=1&rel=0`;
+            const card = document.createElement("div");
+            card.className = "project-card";
+            card.innerHTML = `
+                <iframe src="${embedUrl}" title="${project.title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <div class="project-info">${project.title}</div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    // fallback untuk logo utama dan logo navbar tanpa background
+    function handleLogoFallback() {
+        const mainLogo = document.querySelector('.hero-logo img');
+        if (mainLogo) {
+            mainLogo.onerror = () => {
+                mainLogo.src = 'https://placehold.co/800x400/670C1F/white?text=SENYAWA+PROJECT';
+            };
+        }
+        const smallLogo = document.querySelector('.nav-logo-img img');
+        if (smallLogo) {
+            smallLogo.onerror = () => {
+                smallLogo.src = 'https://placehold.co/100x60/670C1F/white?text=SNY';
+            };
+        }
+    }
+
+    // Navigasi smooth + mobile toggle + penanganan link store & project agar tidak menggangu smooth scroll asli
+    function setupNavigation() {
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        if (menuToggle) {
+            menuToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+        }
+        
+        // Tutup nav saat link diklik, dan untuk link internal (#) tetap smooth scroll
+        // Untuk link yang menuju ke halaman eksternal seperti store.html & project.html, biarkan berjalan normal (tanpa preventDefault)
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                if (navLinks.classList.contains('active')) navLinks.classList.remove('active');
+                
+                const href = link.getAttribute('href');
+                // Jika href adalah anchor internal (diawali #) maka lakukan smooth scroll
+                if (href && href.startsWith('#')) {
+                    e.preventDefault();
+                    const targetId = href.substring(1);
+                    if (targetId === 'home') {
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    } else {
+                        const targetElement = document.getElementById(targetId);
+                        if (targetElement) {
+                            targetElement.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }
+                }
+                // Jika href menuju ke file html lain (store.html, project.html) biarkan default behavior
+            });
+        });
+        
+        // Home link khusus
+        const homeLink = document.querySelector('a[href="#home"]');
+        if (homeLink) {
+            homeLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                if (navLinks.classList.contains('active')) navLinks.classList.remove('active');
+            });
+        }
+        // Member link internal
+        const memberLink = document.querySelector('a[href="#members"]');
+        if (memberLink) memberLink.addEventListener('click', (e) => { 
+            e.preventDefault(); 
+            document.getElementById('members')?.scrollIntoView({ behavior: 'smooth' });
+            if (navLinks.classList.contains('active')) navLinks.classList.remove('active');
+        });
+        const aboutLink = document.querySelector('a[href="#about"]');
+        if (aboutLink) aboutLink.addEventListener('click', (e) => { 
+            e.preventDefault(); 
+            document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
+            if (navLinks.classList.contains('active')) navLinks.classList.remove('active');
+        });
+        const projectLink = document.querySelector('a[href="#projects"]');
+        if (projectLink) projectLink.addEventListener('click', (e) => { 
+            e.preventDefault(); 
+            document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+            if (navLinks.classList.contains('active')) navLinks.classList.remove('active');
+        });
+    }
+
+    // fallback gambar untuk kolaborator juga
+    function globalImageFallback() {
+        const collabImgs = document.querySelectorAll('.collab-logo img');
+        collabImgs.forEach(img => {
+            img.onerror = function() {
+                this.src = 'https://placehold.co/400x200/2c2c2c/white?text=Logo+Partner';
+            };
+        });
+    }
+
+    // extra: memastikan semua member image tidak memiliki sudut lengkung apapun (override gaya jika ada)
+    function enforceNoBorderRadiusOnMemberImages() {
+        // gaya inline tambahan via JS untuk keyakinan
+        const style = document.createElement('style');
+        style.textContent = `
+            .member-img, .member-img img, .member-card .member-img, .member-card .member-img img {
+                border-radius: 0px !important;
+                overflow: visible !important;
+            }
+            .member-card {
+                border-radius: 20px; /* card tetap sedikit rounded tapi foto tetap persegi tanpa terpotong sudut */
+            }
+            .member-img {
+                border-radius: 0px !important;
+                background: transparent;
+            }
+        `;
+        document.head.appendChild(style);
+    }
+
+    // init
+    document.addEventListener('DOMContentLoaded', () => {
+        renderMembers();
+        renderProjects();
+        setupNavigation();
+        handleLogoFallback();
+        globalImageFallback();
+        enforceNoBorderRadiusOnMemberImages();
+        console.log("Senyawa Project web siap! Member foto tanpa crop / sudut halus, logo header dengan file no BG. Tombol 'Lihat semua project' di kanan atas section Our Projects dan menu 'Store' telah ditambahkan.");
+    });
+</script>
+</body>
+</html>
