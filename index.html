@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Senyawa Project | Komunitas Youtuber Minecraft Indonesia</title>
     <!-- Font Awesome 6 (free) -->
-    <link rel="icon" type="image/x-icon" href="assets/Logo Senyawa no BG.ico">
+     <link rel="icon" type="image/x-icon" href="assets/Logo Senyawa no BG.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -486,6 +486,195 @@
             border-radius: 0px;
             overflow: visible;
         }
+
+        /* ========== STYLE NOTIFIKASI (TAMBAHAN) ========== */
+        .notification-bell {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+        }
+        .bell-button {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #670C1F, #4a0715);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(103, 12, 31, 0.5);
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255,255,255,0.2);
+            position: relative;
+        }
+        .bell-button:hover {
+            transform: scale(1.08);
+            box-shadow: 0 10px 28px rgba(103, 12, 31, 0.7);
+        }
+        .bell-button i {
+            font-size: 28px;
+            color: white;
+        }
+        .bell-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #ff4444;
+            color: white;
+            font-size: 11px;
+            font-weight: bold;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: monospace;
+        }
+        .notification-popup {
+            position: fixed;
+            bottom: 110px;
+            right: 30px;
+            width: 340px;
+            max-width: calc(100vw - 60px);
+            background: #1a1a1a;
+            border-radius: 20px;
+            box-shadow: 0 12px 35px rgba(0,0,0,0.6);
+            border: 1px solid #670C1F;
+            z-index: 999;
+            overflow: hidden;
+            animation: slideInRight 0.25s ease;
+        }
+        .notification-popup.hide {
+            display: none;
+        }
+        .notification-header {
+            background: #670C1F;
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        .notification-header i {
+            cursor: pointer;
+            opacity: 0.8;
+            transition: 0.2s;
+        }
+        .notification-header i:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+        .notification-body {
+            padding: 16px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .notification-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #333;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            color: #ddd;
+        }
+        .notification-item:last-child {
+            border-bottom: none;
+        }
+        .notification-item.has-image {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+        .notification-item.has-image .notif-thumb {
+            width: 55px;
+            height: 55px;
+            flex-shrink: 0;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #2a2a2a;
+        }
+        .notification-item.has-image .notif-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .notification-item.has-image .notif-content {
+            flex: 1;
+        }
+        .notification-item .notif-link {
+            color: #e0a0a0;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .notification-item .notif-link:hover {
+            text-decoration: underline;
+        }
+        .notification-date {
+            font-size: 0.7rem;
+            color: #777;
+            margin-top: 4px;
+            display: block;
+        }
+        .countdown-timer {
+            display: inline-block;
+            background: #2a0a0a;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-family: monospace;
+            font-size: 0.75rem;
+            margin-top: 8px;
+            color: #ff8888;
+            border: 1px solid #670C1F;
+        }
+        .countdown-expired {
+            color: #ff5555;
+            background: #330000;
+        }
+        .empty-notif {
+            text-align: center;
+            padding: 25px 15px;
+            color: #888;
+            font-size: 0.85rem;
+        }
+        .mark-read-btn {
+            background: #670C1F;
+            border: none;
+            color: white;
+            border-radius: 12px;
+            padding: 2px 10px;
+            font-size: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .mark-read-btn:hover {
+            background: #8a0f2a;
+        }
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(40px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0) scale(1);
+            }
+        }
+        @media (max-width: 560px) {
+            .notification-popup {
+                width: 280px;
+                right: 20px;
+                bottom: 100px;
+            }
+            .bell-button {
+                width: 50px;
+                height: 50px;
+            }
+            .bell-button i {
+                font-size: 24px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -506,8 +695,7 @@
             <li><a href="#members">Member</a></li>
             <li><a href="#projects">Project</a></li>
             <li><a href="store.html" id="storeNavLink">Store</a></li>
-            <li><a href="fanart.html" id="storeNavLink">Fanart</a></li>
-            
+            <!-- <li><a href="fanart.html" id="storeNavLink">fanart</a></li> -->
         </ul>
     </div>
 </nav>
@@ -572,7 +760,6 @@
                 </div>
                 <h3 style="margin-top: 12px;">Arqonara</h3>
             </div>
-                
         </div>
     </div>
 </section>
@@ -593,6 +780,23 @@
         </div>
     </div>
 </section>
+
+<!-- ========== FLOATING NOTIFICATION BELL ========== -->
+<div class="notification-bell">
+    <div class="bell-button" id="bellButton">
+        <i class="fas fa-bell"></i>
+        <span class="bell-badge" id="bellBadge" style="display: none;">0</span>
+    </div>
+</div>
+
+<!-- Popup Notifikasi -->
+<div class="notification-popup hide" id="notifPopup">
+    <div class="notification-header">
+        <span><i class="fas fa-bell" style="margin-right: 8px;"></i> Notifikasi</span>
+        <i class="fas fa-times" id="closeNotifPopup"></i>
+    </div>
+    <div class="notification-body" id="notifBody"></div>
+</div>
 
 <footer>
     <p>© 2025 Senyawa Project — Komunitas Youtuber Minecraft Indonesia. All rights reserved.</p>
@@ -638,7 +842,7 @@
         { img: "Sasera.png", name: "Sasera", yt: "https://www.youtube.com/@Saseraa" },
         { img: "Trindz.png", name: "Trindz", yt: "https://www.youtube.com/@trindz" },   
         { img: "Ulerr.png", name: "Ulerr", yt: "https://www.youtube.com/@ulersakti2" },
-        { img: "Zabizz.png", name: "Zabizz", yt: "https://www.youtube.com/@Zabiz28" }
+        { img: "Zabizz.png", name: "Zabizz", yt: "https://www.youtube.com/@Zabiz28" },
     ];
 
     // Daftar project playlist
@@ -648,7 +852,7 @@
         { title: "Underground Battle Royale", playlistId: "PLXxoI8twiEB-wtzUfTzO89ADA_GOZ0LFn" },
         { title: "Buildoria", playlistId: "PLXxoI8twiEB99rCkw1ON6CHrwgU337EBB" },
         { title: "50 Player One Chunk", playlistId: "PLXxoI8twiEB-cocyijLJ3a0bUk1Zhr8EP" },
-          { title: "Devastated SMP", playlistId: "PLXxoI8twiEB_RPTi2pKkCNbND2WkK8bmp" },
+        { title: "Devastated SMP", playlistId: "PLXxoI8twiEB_RPTi2pKkCNbND2WkK8bmp" },
     ];
 
     // Render members 
@@ -660,7 +864,6 @@
             const card = document.createElement("div");
             card.className = "member-card";
             const imgPath = `assets/${member.img}`;
-            // Tidak ada border-radius pada img container maupun gambar. Foto tampil original ratio & bentuk asli.
             card.innerHTML = `
                 <div class="member-img">
                     <img src="${imgPath}" alt="${member.name}" loading="lazy" onerror="this.src='https://placehold.co/400x400/333333/white?text=${member.name}'">
@@ -715,14 +918,11 @@
             });
         }
         
-        // Tutup nav saat link diklik, dan untuk link internal (#) tetap smooth scroll
-        // Untuk link yang menuju ke halaman eksternal seperti store.html & project.html, biarkan berjalan normal (tanpa preventDefault)
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', (e) => {
                 if (navLinks.classList.contains('active')) navLinks.classList.remove('active');
                 
                 const href = link.getAttribute('href');
-                // Jika href adalah anchor internal (diawali #) maka lakukan smooth scroll
                 if (href && href.startsWith('#')) {
                     e.preventDefault();
                     const targetId = href.substring(1);
@@ -735,11 +935,9 @@
                         }
                     }
                 }
-                // Jika href menuju ke file html lain (store.html, project.html) biarkan default behavior
             });
         });
         
-        // Home link khusus
         const homeLink = document.querySelector('a[href="#home"]');
         if (homeLink) {
             homeLink.addEventListener('click', (e) => {
@@ -748,7 +946,6 @@
                 if (navLinks.classList.contains('active')) navLinks.classList.remove('active');
             });
         }
-        // Member link internal
         const memberLink = document.querySelector('a[href="#members"]');
         if (memberLink) memberLink.addEventListener('click', (e) => { 
             e.preventDefault(); 
@@ -769,7 +966,6 @@
         });
     }
 
-    // fallback gambar untuk kolaborator juga
     function globalImageFallback() {
         const collabImgs = document.querySelectorAll('.collab-logo img');
         collabImgs.forEach(img => {
@@ -779,9 +975,7 @@
         });
     }
 
-    // extra: memastikan semua member image tidak memiliki sudut lengkung apapun (override gaya jika ada)
     function enforceNoBorderRadiusOnMemberImages() {
-        // gaya inline tambahan via JS untuk keyakinan
         const style = document.createElement('style');
         style.textContent = `
             .member-img, .member-img img, .member-card .member-img, .member-card .member-img img {
@@ -789,7 +983,7 @@
                 overflow: visible !important;
             }
             .member-card {
-                border-radius: 20px; /* card tetap sedikit rounded tapi foto tetap persegi tanpa terpotong sudut */
+                border-radius: 20px;
             }
             .member-img {
                 border-radius: 0px !important;
@@ -799,6 +993,280 @@
         document.head.appendChild(style);
     }
 
+    // ========== SISTEM NOTIFIKASI LENGKAP ==========
+    // DATA NOTIFIKASI - EDIT SESUAI KEBUTUHAN
+    const notificationsData = [
+{
+    id: 2, // Sesuaikan dengan urutan ID terakhir Anda
+    message: "Kesempatan terakhir! Pendaftaran 100 Player One Chunk akan segera ditutup.",
+    date: "8 Mei 2026",
+    targetDate: "2026-05-08 23:59:59",
+    isCountdown: true,
+    countdownText: "Pendaftaran berakhir dalam: ",
+    expiredText: "Pendaftaran 100 Player One Chunk telah ditutup!",
+    link: "https://docs.google.com/forms/d/e/1FAIpQLSdixVLElWSZ4l092MFg47Wwm5BkJofkZfyyiqvv2cgrRDPv5w/viewform",
+    linkText: "Daftar Sekarang →"
+},
+{
+    id: 1, 
+    message: "Persiapkan dirimu! Event 100 Player One Chunk akan segera dimulai!",
+    date: "10 Mei 2026",
+    targetDate: "2026-05-10 19:00:00",
+    isCountdown: true,
+    countdownText: "Event dimulai dalam: ",
+    expiredText: "Event sedang berlangsung!"
+},
+{
+    id: 9, 
+    message: "Ingin info lebih lengkap soal event, jadwal, dan lainnya? Join Discord resmi kami sekarang!",
+    date: "8 Mei 2026",
+    link: "https://discord.com/invite/xGTeNEsPjg",
+    linkText: "Join Discord Senyawa →"
+},
+
+        // Notifikasi biasa (hanya teks)
+        // {
+        //     id: 1,
+        //     message: "Selamat! Event Skyblock Battle Royale akan segera dimulai minggu depan!",
+        //     date: "15 Mei 2025"
+        // },
+        // {
+        //     id: 2,
+        //     message: "Merchandise terbaru Senyawa Hoodie sudah tersedia di Store!",
+        //     date: "10 Mei 2025"
+        // },
+        // Notifikasi dengan link
+        // {
+        //     id: 3,
+        //     message: "Dapatkan diskon 20% untuk pembelian merchandise Senyawa!",
+        //     date: "12 Mei 2025",
+        //     link: "store.html",
+        //     linkText: "Belanja Sekarang →"
+        // },
+        // Notifikasi dengan gambar
+        // {
+        //     id: 4,
+        //     message: "Hoodie Senyawa Edition sekarang tersedia! Desain eksklusif limited edition.",
+        //     date: "5 Mei 2025",
+        //     imageUrl: "assets/merch/hoodie.png",
+        //     imageAlt: "Hoodie Senyawa",
+        //     link: "store.html",
+        //     linkText: "Lihat Detail"
+        // },
+        // Notifikasi COUNTDOWN (hitungan mundur)
+        // {
+        //     id: 5,
+        //     message: "Pendaftaran Event Skyblock Battle Royale akan ditutup!",
+        //     date: "20 Mei 2025",
+        //     targetDate: "2025-06-01 23:59:59",
+        //     isCountdown: true,
+        //     countdownText: "Pendaftaran ditutup dalam: ",
+        //     expiredText: "Pendaftaran telah ditutup!"
+        // },
+        // {
+        //     id: 6,
+        //     message: "Pre-Order Merchandise Hoodie Senyawa berakhir!",
+        //     date: "18 Mei 2025",
+        //     targetDate: "2025-05-31 23:59:59",
+        //     isCountdown: true,
+        //     countdownText: "Pre-Order berakhir dalam: ",
+        //     expiredText: "Pre-Order telah berakhir!"
+        // }
+    ];
+
+    function getReadNotifIds() {
+        return JSON.parse(localStorage.getItem('senyawa_read_notifications') || '[]');
+    }
+
+    function markNotificationAsRead(notifId) {
+        let readIds = getReadNotifIds();
+        if (!readIds.includes(notifId)) {
+            readIds.push(notifId);
+            localStorage.setItem('senyawa_read_notifications', JSON.stringify(readIds));
+        }
+        updateBellBadge();
+        renderNotificationPopup();
+    }
+
+    function markAllAsRead() {
+        let allIds = notificationsData.map(n => n.id);
+        localStorage.setItem('senyawa_read_notifications', JSON.stringify(allIds));
+        updateBellBadge();
+        renderNotificationPopup();
+    }
+
+    function getUnreadCount() {
+        let readIds = getReadNotifIds();
+        return notificationsData.filter(n => !readIds.includes(n.id)).length;
+    }
+
+    function updateBellBadge() {
+        const badge = document.getElementById('bellBadge');
+        if (badge) {
+            let unread = getUnreadCount();
+            if (unread > 0) {
+                badge.textContent = unread > 99 ? '99+' : unread;
+                badge.style.display = 'flex';
+            } else {
+                badge.style.display = 'none';
+            }
+        }
+    }
+
+    function getCountdownText(targetDateStr, expiredText) {
+        const target = new Date(targetDateStr).getTime();
+        const now = new Date().getTime();
+        const diff = target - now;
+        
+        if (diff <= 0) {
+            return { text: expiredText, isExpired: true };
+        }
+        
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+        
+        let text = "";
+        if (days > 0) text += `${days} hari `;
+        if (hours > 0 || days > 0) text += `${hours} jam `;
+        text += `${minutes} menit ${seconds} detik`;
+        
+        return { text: text, isExpired: false };
+    }
+
+    function updateAllCountdowns() {
+        const countdownElements = document.querySelectorAll('.countdown-timer[data-target]');
+        countdownElements.forEach(elem => {
+            const targetDate = elem.getAttribute('data-target');
+            const expiredText = elem.getAttribute('data-expired');
+            const result = getCountdownText(targetDate, expiredText);
+            elem.textContent = result.text;
+            if (result.isExpired) {
+                elem.classList.add('countdown-expired');
+            } else {
+                elem.classList.remove('countdown-expired');
+            }
+        });
+    }
+
+    function renderNotificationPopup() {
+        const container = document.getElementById('notifBody');
+        if (!container) return;
+        
+        let readIds = getReadNotifIds();
+        
+        if (notificationsData.length === 0) {
+            container.innerHTML = '<div class="empty-notif"><i class="far fa-bell-slash"></i> Tidak ada notifikasi</div>';
+            return;
+        }
+        
+        let html = '';
+        notificationsData.forEach(notif => {
+            const isRead = readIds.includes(notif.id);
+            const hasImage = notif.imageUrl && notif.imageUrl.trim() !== '';
+            const hasLink = notif.link && notif.link.trim() !== '';
+            const isCountdown = notif.isCountdown === true;
+            
+            if (hasImage) {
+                html += `
+                    <div class="notification-item has-image" data-id="${notif.id}" style="opacity: ${isRead ? 0.6 : 1};">
+                        <div class="notif-thumb">
+                            <img src="${notif.imageUrl}" alt="${notif.imageAlt || 'Gambar notifikasi'}" onerror="this.src='https://placehold.co/55x55/333/666?text=No+Image'">
+                        </div>
+                        <div class="notif-content">
+                            <div>${notif.message}</div>
+                            ${notif.date ? `<span class="notification-date"><i class="far fa-calendar-alt"></i> ${notif.date}</span>` : ''}
+                            ${isCountdown ? `<div class="countdown-timer" data-target="${notif.targetDate}" data-expired="${notif.expiredText || '⏰ Waktu telah habis!'}">${notif.countdownText || ''} menghitung...</div>` : ''}
+                            ${hasLink ? `<div style="margin-top: 6px;"><a href="${notif.link}" target="${notif.link.startsWith('http') ? '_blank' : '_self'}" class="notif-link">${notif.linkText || 'Lihat Selengkapnya →'}</a></div>` : ''}
+                            ${!isRead ? `<button class="mark-read-btn" data-id="${notif.id}" style="margin-top: 6px;">✓ Tandai Dibaca</button>` : `<span style="font-size: 10px; color: #558; margin-top: 6px; display: inline-block;"><i class="fas fa-check-circle"></i> Sudah dibaca</span>`}
+                        </div>
+                    </div>
+                `;
+            } else {
+                html += `
+                    <div class="notification-item" data-id="${notif.id}" style="opacity: ${isRead ? 0.6 : 1};">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                            <div style="flex:1;">
+                                ${notif.message}
+                                ${notif.date ? `<span class="notification-date"><i class="far fa-calendar-alt"></i> ${notif.date}</span>` : ''}
+                                ${isCountdown ? `<div class="countdown-timer" data-target="${notif.targetDate}" data-expired="${notif.expiredText || 'Waktu telah habis!'}">${notif.countdownText || ''} menghitung...</div>` : ''}
+                                ${hasLink ? `<div style="margin-top: 6px;"><a href="${notif.link}" target="${notif.link.startsWith('http') ? '_blank' : '_self'}" class="notif-link">${notif.linkText || 'Selengkapnya →'}</a></div>` : ''}
+                            </div>
+                            ${!isRead ? `<button class="mark-read-btn" data-id="${notif.id}" style="margin-left: 8px;">Baca</button>` : '<span style="font-size: 10px; color: #558; margin-left: 8px;"><i class="fas fa-check-circle"></i></span>'}
+                        </div>
+                    </div>
+                `;
+            }
+        });
+        
+        html += `<div style="text-align: center; margin-top: 10px;"><button id="markAllReadBtn" style="background: none; border: 1px solid #670C1F; color: #e0a0a0; border-radius: 30px; padding: 5px 12px; font-size: 11px; cursor: pointer; width: 100%;">Tandai semua sudah dibaca</button></div>`;
+        container.innerHTML = html;
+        
+        document.querySelectorAll('.mark-read-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const id = parseInt(btn.getAttribute('data-id'));
+                markNotificationAsRead(id);
+            });
+        });
+        
+        const markAllBtn = document.getElementById('markAllReadBtn');
+        if (markAllBtn) {
+            markAllBtn.addEventListener('click', () => {
+                markAllAsRead();
+            });
+        }
+        
+        updateAllCountdowns();
+    }
+
+    let countdownInterval = null;
+    function startCountdownUpdater() {
+        if (countdownInterval) clearInterval(countdownInterval);
+        countdownInterval = setInterval(() => {
+            const popup = document.getElementById('notifPopup');
+            if (popup && !popup.classList.contains('hide')) {
+                updateAllCountdowns();
+            }
+        }, 1000);
+    }
+    startCountdownUpdater();
+
+    function setupNotificationBell() {
+        const bellBtn = document.getElementById('bellButton');
+        const closePopup = document.getElementById('closeNotifPopup');
+        if (bellBtn) {
+            bellBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const popup = document.getElementById('notifPopup');
+                if (popup) {
+                    if (popup.classList.contains('hide')) {
+                        renderNotificationPopup();
+                        popup.classList.remove('hide');
+                    } else {
+                        popup.classList.add('hide');
+                    }
+                }
+            });
+        }
+        if (closePopup) {
+            closePopup.addEventListener('click', () => {
+                document.getElementById('notifPopup')?.classList.add('hide');
+            });
+        }
+        updateBellBadge();
+    }
+    
+    document.addEventListener('click', (e) => {
+        const popup = document.getElementById('notifPopup');
+        const bell = document.getElementById('bellButton');
+        if (!popup || popup.classList.contains('hide')) return;
+        if (!popup.contains(e.target) && !bell.contains(e.target)) {
+            popup.classList.add('hide');
+        }
+    });
+
     // init
     document.addEventListener('DOMContentLoaded', () => {
         renderMembers();
@@ -807,7 +1275,9 @@
         handleLogoFallback();
         globalImageFallback();
         enforceNoBorderRadiusOnMemberImages();
+        setupNotificationBell();
         console.log("Senyawa Project web siap! Member foto tanpa crop / sudut halus, logo header dengan file no BG. Tombol 'Lihat semua project' di kanan atas section Our Projects dan menu 'Store' telah ditambahkan.");
+        console.log("✅ Sistem notifikasi lengkap (dengan gambar, link, countdown) siap digunakan!");
     });
 </script>
 </body>
