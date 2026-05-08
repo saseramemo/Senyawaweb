@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Diterima - Senyawa Project</title>
+    <link rel="icon" type="image/x-icon" href="assets/Logo Senyawa no BG.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0a0a0a;
+            font-family: 'Poppins', 'Segoe UI', system-ui, -apple-system, 'Inter', sans-serif;
+            color: #f0f0f0;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&family=Poppins:wght@400;500;600;700;800&display=swap');
+
+        :root {
+            --senyawa: #670C1F;
+            --senyawa-dark: #4a0715;
+            --senyawa-glow: rgba(103, 12, 31, 0.4);
+            --text-light: #f5f3f0;
+            --card-bg: #111111;
+            --border-dim: #2a2a2a;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e1e1e;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--senyawa);
+            border-radius: 10px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        /* navigasi */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            backdrop-filter: blur(16px);
+            background: rgba(10, 10, 10, 0.85);
+            z-index: 100;
+            border-bottom: 1px solid rgba(103, 12, 31, 0.5);
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 32px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .nav-logo-img {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .nav-logo-img img {
+            height: 44px;
+            width: auto;
+            display: block;
+            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4));
+            transition: transform 0.2s;
+        }
+        .nav-logo-img img:hover {
+            transform: scale(1.02);
+        }
+        .logo-text {
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            background: linear-gradient(135deg, #fff, #e0b0b0);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        .nav-links a {
+            color: #eee;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.2s;
+            font-size: 1rem;
+        }
+        .nav-links a:hover {
+            color: #e0a0a0;
+            border-bottom: 2px solid var(--senyawa);
+        }
+        .menu-toggle {
+            display: none;
+            font-size: 1.6rem;
+            cursor: pointer;
+            color: white;
+        }
+
+        /* header halaman */
+        .page-header {
+            padding-top: 120px;
+            padding-bottom: 40px;
+            background: radial-gradient(circle at 30% 10%, #1a0a0e, #020202 85%);
+            border-bottom: 1px solid #1f1f1f;
+        }
+        .page-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .page-header h1:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--senyawa);
+            margin-top: 12px;
+            border-radius: 4px;
+        }
+        .page-header p {
+            font-size: 1rem;
+            color: #ccc;
+            margin-top: 0.5rem;
+        }
+
+        /* back button */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(103, 12, 31, 0.2);
+            border: 1px solid var(--senyawa);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            transition: 0.2s;
+        }
+        .back-button:hover {
+            background: var(--senyawa);
+            transform: translateX(-5px);
+        }
+
+        /* statistik */
+        .stats-bar {
+            background: #0c0c0c;
+            border-radius: 20px;
+            padding: 16px 24px;
+            margin: 1.5rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            border: 1px solid #222;
+        }
+        .stats-count {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.1rem;
+        }
+        .stats-count i {
+            color: var(--senyawa);
+            font-size: 1.3rem;
+        }
+        .stats-count span {
+            font-weight: 700;
+            color: #e0a0a0;
+            font-size: 1.3rem;
+        }
+
+        /* fitur search */
+        .search-box {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            background: #1a1a1a;
+            padding: 8px 16px;
+            border-radius: 50px;
+            border: 1px solid #333;
+            transition: 0.2s;
+        }
+        .search-box:focus-within {
+            border-color: var(--senyawa);
+            box-shadow: 0 0 8px rgba(103, 12, 31, 0.3);
+        }
+        .search-box i {
+            color: #888;
+        }
+        .search-box input {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 0.95rem;
+            padding: 8px 0;
+            outline: none;
+            width: 250px;
+            font-family: inherit;
+        }
+        .search-box input::placeholder {
+            color: #555;
+        }
+        .clear-search {
+            background: none;
+            border: none;
+            color: #888;
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 0 4px;
+            transition: 0.2s;
+        }
+        .clear-search:hover {
+            color: var(--senyawa);
+        }
+
+        /* tabel */
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: 20px;
+            border: 1px solid #222;
+            background: #0c0c0c;
+            margin: 1.5rem 0 2rem;
+        }
+        .member-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            min-width: 500px;
+        }
+        .member-table th {
+            background: #1a1a1a;
+            padding: 14px 16px;
+            text-align: left;
+            font-weight: 600;
+            color: #e0a0a0;
+            border-bottom: 2px solid var(--senyawa);
+            position: sticky;
+            top: 0;
+            background: #141414;
+        }
+        .member-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #2a2a2a;
+            color: #ddd;
+        }
+        .member-table tr:hover td {
+            background: rgba(103, 12, 31, 0.1);
+        }
+        .member-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* nomor urut */
+        .no-col {
+            width: 60px;
+            text-align: center;
+            color: #888;
+            font-weight: 500;
+        }
+        .name-col {
+            font-weight: 500;
+        }
+        .name-col i {
+            margin-right: 10px;
+            color: var(--senyawa);
+            font-size: 0.85rem;
+        }
+
+        /* pesan tidak ditemukan */
+        .no-result {
+            text-align: center;
+            padding: 60px 20px;
+            color: #888;
+        }
+        .no-result i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        /* footer */
+        footer {
+            background: #050505;
+            padding: 2rem;
+            text-align: center;
+            color: #aaa;
+            font-size: 0.9rem;
+            border-top: 1px solid #1f1f1f;
+            margin-top: 2rem;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .table-wrapper {
+            animation: fadeInUp 0.4s ease;
+        }
+
+        @media (max-width: 880px) {
+            .container {
+                padding: 0 24px;
+            }
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                flex-direction: column;
+                background: rgba(0,0,0,0.95);
+                backdrop-filter: blur(20px);
+                width: 70%;
+                height: calc(100vh - 70px);
+                padding: 2rem;
+                gap: 2rem;
+                transition: 0.3s;
+                border-right: 1px solid var(--senyawa);
+            }
+            .nav-links.active {
+                left: 0;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+            .stats-bar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .search-box input {
+                width: 180px;
+            }
+            .member-table th, .member-table td {
+                padding: 10px 12px;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-container">
+        <div class="nav-logo-img">
+            <img src="assets/Logo Senyawa no BG.png" alt="Senyawa Icon" onerror="this.src='https://placehold.co/100x60?text=S'">
+            <span class="logo-text">SENYAWA</span>
+        </div>
+        <div class="menu-toggle" id="menuToggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#about">About Us</a></li>
+            <li><a href="index.html#members">Member</a></li>
+            <li><a href="index.html#projects">Project</a></li>
+            <li><a href="store.html">Store</a></li>
+            <li><a href="fanart.html">Fanart</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Header Halaman -->
+<div class="page-header">
+    <div class="container">
+        <a href="index.html" class="back-button">
+            <i class="fas fa-arrow-left"></i>
+            <span>Kembali ke Beranda</span>
+        </a>
+        <h1><i class="fas fa-user-check"></i> OC Diterima</h1>
+        <p>Daftar nama peserta yang diterima di event 100 Players One Chunk Battle Royale</p>
+    </div>
+</div>
+
+<section style="padding: 0 0 60px 0;">
+    <div class="container">
+        <!-- Statistik + Search -->
+        <div class="stats-bar">
+            <div class="stats-count">
+                <i class="fas fa-users"></i>
+                <span id="totalCount">0</span>
+                <span>Peserta Diterima</span>
+            </div>
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Cari nama peserta..." autocomplete="off">
+                <button class="clear-search" id="clearSearch" style="display: none;">
+                    <i class="fas fa-times-circle"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Tabel Member -->
+        <div class="table-wrapper">
+            <table class="member-table" id="memberTable">
+                <thead>
+                    <tr>
+                        <th class="no-col">#</th>
+                        <th class="name-col"><i class="fab fa-discord"></i> Nama Peserta</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <!-- Data akan diisi JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>© 2025 Senyawa Project — Komunitas Youtuber Minecraft Indonesia. All rights reserved.</p>
+    <p style="margin-top: 8px; font-size: 0.8rem;">Created by Sasera</p>
+</footer>
+
+<script>
+    // ==========================================
+    // DATA PESERTA OC DITERIMA
+    // ==========================================
+    const participantsList = [
+        "Amaruuru",
+        "ghathfan_",
+        "ayippmc",
+        "Brepli#8043",
+        "Camwynnn/ggsyamandi",
+        "christo_aja",
+        "Dainveil",
+        "diruuorenji",
+        "EndIcy",
+        "fiqun",
+        "Gadink",
+        "Garogae",
+        "thanfx1_50481",
+        "heiyado",
+        "urrizzk (display: IkanMino)",
+        "Imnesia",
+        "Mike'q",
+        "vastariyal",
+        "lyonxx0188",
+        "manta_id",
+        "mirokoci",
+        "@onlyhasya",
+        "lostpix",
+        "Penca._. / 135636611704",
+        "RazzGX",
+        "@rielrudesu001",
+        "RILCRAFT13",
+        "SupS / sups_xd",
+        "tsukasa",
+        "vabyanz29",
+        "@wintermidnightmc",
+        "zabizz",
+        "kenyataan_",
+        "arghrep",
+        "Nabilmc",
+        "richh_mc",
+        "kvoistory",
+        "xHelper",
+        "hypercraftt",
+        "zilomylo_",
+        "Kriss/eclipse.2gd",
+        "Captain",
+        "Kamooku",
+        "alipfz",
+        "Fanozer",
+        "Sukaadi",
+        "hilmyms",
+        "mashibiru",
+        "JonsLens",
+        "zennpaw",
+        "syid123",
+        ".refaaa",
+        "Akagim",
+        "itsslondoo",
+        "_faliq",
+        "SwiftSif/Motheomor",
+        "Loowac",
+        "@krebbipeti",
+        "zelbound/ZaaaaakiYS",
+        "zeeenth",
+        "benjamin7212",
+        "Muradrian",
+        "melincrew",
+        "keanturuxd",
+        "irbefps",
+        "malkidun1",
+        "okihann",
+        "athenax",
+        "nmzraa._",
+        "irsyadma_",
+        "gaisan0017_32272",
+        "who_k4i_01412",
+        "murid dzake",
+        "pinomcz",
+        "NorryCH",
+        "CiellVP",
+        "user: Gab/discord: woi_gab_.",
+        "asherzhang",
+        ".atha123",
+        "kurwa_y",
+        "@ditalvi",
+        "kixzs",
+        "Lynox",
+        "itscreepwakey",
+        "xlmi",
+        "storm_menkrep",
+        "reinwall",
+        "dzake",
+        "nijarr",
+        "gizanG15",
+        "aspect30",
+        "NevinGaming",
+        "GemmaDGG",
+        "Kloits",
+        "FirmanGG",
+        "SCORTCH_",
+        "Sharennn",
+        "Bluekun",
+        "SamsulCH",
+        "Ksatria"
+    ];
+
+    // Filter untuk menghapus duplikat (EzraMyName muncul 2x di list, kita hapus satu)
+    const uniqueList = [...new Map(participantsList.map((name, index) => [name.toLowerCase().trim(), name])).values()];
+    
+    // Urutkan berdasarkan abjad A-Z
+    uniqueList.sort((a, b) => {
+        const nameA = a.toLowerCase().replace(/[^a-z]/g, '');
+        const nameB = b.toLowerCase().replace(/[^a-z]/g, '');
+        return nameA.localeCompare(nameB);
+    });
+
+    // DOM Elements
+    const tableBody = document.getElementById('tableBody');
+    const searchInput = document.getElementById('searchInput');
+    const clearSearchBtn = document.getElementById('clearSearch');
+    const totalCountSpan = document.getElementById('totalCount');
+
+    let currentSearchTerm = '';
+
+    // Fungsi render tabel
+    function renderTable(searchTerm = '') {
+        if (!tableBody) return;
+        
+        const filtered = uniqueList.filter(name => 
+            name.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        
+        // Update total count
+        totalCountSpan.textContent = filtered.length;
+        
+        if (filtered.length === 0) {
+            tableBody.innerHTML = `
+                <tr>
+                    <td colspan="2" class="no-result">
+                        <i class="fas fa-user-slash"></i>
+                        <p>Tidak ada peserta dengan nama "${searchTerm}"</p>
+                        <p style="font-size: 0.8rem; margin-top: 8px;">Coba kata kunci lain</p>
+                    </td>
+                </tr>
+            `;
+            return;
+        }
+        
+        // Generate rows
+        let html = '';
+        filtered.forEach((name, index) => {
+            const rowNumber = index + 1;
+            // Escape HTML untuk mencegah XSS
+            const safeName = name.replace(/[&<>]/g, function(m) {
+                if (m === '&') return '&amp;';
+                if (m === '<') return '&lt;';
+                if (m === '>') return '&gt;';
+                return m;
+            });
+            html += `
+                <tr>
+                    <td class="no-col">${rowNumber}</td>
+                    <td class="name-col"><i class="fas fa-user-circle"></i> ${safeName}</td>
+                </tr>
+            `;
+        });
+        
+        tableBody.innerHTML = html;
+    }
+
+    // Event listener untuk search
+    function setupSearch() {
+        if (!searchInput) return;
+        
+        searchInput.addEventListener('input', (e) => {
+            currentSearchTerm = e.target.value;
+            renderTable(currentSearchTerm);
+            
+            // Tampilkan/sembunyikan tombol clear
+            if (currentSearchTerm.length > 0) {
+                clearSearchBtn.style.display = 'flex';
+            } else {
+                clearSearchBtn.style.display = 'none';
+            }
+        });
+        
+        if (clearSearchBtn) {
+            clearSearchBtn.addEventListener('click', () => {
+                searchInput.value = '';
+                currentSearchTerm = '';
+                renderTable('');
+                clearSearchBtn.style.display = 'none';
+                searchInput.focus();
+            });
+        }
+    }
+
+    // Mobile navigation toggle
+    function setupMobileNav() {
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        
+        if (menuToggle) {
+            menuToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+        }
+        
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+    }
+
+    // Logo fallback
+    function handleLogoFallback() {
+        const smallLogo = document.querySelector('.nav-logo-img img');
+        if (smallLogo) {
+            smallLogo.onerror = () => {
+                smallLogo.src = 'https://placehold.co/100x60/670C1F/white?text=SNY';
+            };
+        }
+    }
+
+    // Inisialisasi
+    document.addEventListener('DOMContentLoaded', () => {
+        renderTable('');
+        setupSearch();
+        setupMobileNav();
+        handleLogoFallback();
+        
+        console.log(`✅ OC Diterima loaded: ${uniqueList.length} peserta unik`);
+    });
+</script>
+</body>
+</html>
