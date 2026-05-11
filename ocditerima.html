@@ -239,7 +239,9 @@
             <span class="logo-text">SENYAWA</span>
         </div>
         <div class="menu-toggle" id="menuToggle">
-            <i class="fas fa-bars"></i>
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
         <ul class="nav-links" id="navLinks">
             <li><a href="index.html">Home</a></li>
@@ -510,12 +512,14 @@
         if (menuToggle) {
             menuToggle.addEventListener('click', () => {
                 navLinks.classList.toggle('active');
+                menuToggle.classList.toggle('active');
             });
         }
         
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 navLinks.classList.remove('active');
+                if (menuToggle) menuToggle.classList.remove("active");
             });
         });
     }

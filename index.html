@@ -44,7 +44,9 @@
                 <span class="logo-text">SENYAWA</span>
             </div>
             <div class="menu-toggle" id="menuToggle">
-                <i class="fas fa-bars"></i>
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#home">Home</a></li>
@@ -287,12 +289,14 @@
             if (menuToggle) {
                 menuToggle.addEventListener('click', () => {
                     navLinks.classList.toggle('active');
+                    menuToggle.classList.toggle('active');
                 });
             }
 
             document.querySelectorAll('.nav-links a').forEach(link => {
                 link.addEventListener('click', (e) => {
                     if (navLinks.classList.contains('active')) navLinks.classList.remove('active');
+                    if (menuToggle && menuToggle.classList.contains('active')) menuToggle.classList.remove('active');
 
                     const href = link.getAttribute('href');
                     if (href && href.startsWith('#')) {
@@ -316,6 +320,7 @@
                     e.preventDefault();
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                     if (navLinks.classList.contains('active')) navLinks.classList.remove('active');
+                    if (menuToggle && menuToggle.classList.contains('active')) menuToggle.classList.remove('active');
                 });
             }
             const memberLink = document.querySelector('a[href="#members"]');
@@ -323,18 +328,21 @@
                 e.preventDefault();
                 document.getElementById('members')?.scrollIntoView({ behavior: 'smooth' });
                 if (navLinks.classList.contains('active')) navLinks.classList.remove('active');
+                if (menuToggle && menuToggle.classList.contains('active')) menuToggle.classList.remove('active');
             });
             const aboutLink = document.querySelector('a[href="#about"]');
             if (aboutLink) aboutLink.addEventListener('click', (e) => {
                 e.preventDefault();
                 document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
                 if (navLinks.classList.contains('active')) navLinks.classList.remove('active');
+                if (menuToggle && menuToggle.classList.contains('active')) menuToggle.classList.remove('active');
             });
             const projectLink = document.querySelector('a[href="#projects"]');
             if (projectLink) projectLink.addEventListener('click', (e) => {
                 e.preventDefault();
                 document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
                 if (navLinks.classList.contains('active')) navLinks.classList.remove('active');
+                if (menuToggle && menuToggle.classList.contains('active')) menuToggle.classList.remove('active');
             });
         }
 
