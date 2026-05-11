@@ -123,10 +123,24 @@
             font-size: 1.4rem;
             font-weight: 700;
             letter-spacing: -0.3px;
-            background: linear-gradient(135deg, #fff, #e0b0b0);
+            background: linear-gradient(
+                to right,
+                #fff 20%,
+                #e0b0b0 30%,
+                #670C1F 70%,
+                #fff 80%
+            );
             -webkit-background-clip: text;
             background-clip: text;
+            -webkit-text-fill-color: transparent;
             color: transparent;
+            background-size: 500% auto;
+            animation: textShine 5s ease-in-out infinite alternate;
+        }
+
+        @keyframes textShine {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
         }
 
         .nav-links {
@@ -524,6 +538,10 @@
                 font-size: 1.2rem;
             }
 
+            .hero-socials {
+                gap: 1rem;
+            }
+
             .section-title {
                 font-size: 2rem;
             }
@@ -833,15 +851,15 @@
         </div>
         <div class="subtitle">Sehati, Sejiwa, Senyawa.</div>
         <div class="hero-socials">
-            <a href="https://www.youtube.com/@senyawaproject" target="_blank" class="social-icon"><i
+            <a href="https://youtube.senyawaproject.com" target="_blank" class="social-icon"><i
                     class="fab fa-youtube"></i></a>
-            <a href="https://www.instagram.com/projectsenyawa/" target="_blank" class="social-icon"><i
+            <a href="https://instagram.senyawaproject.com" target="_blank" class="social-icon"><i
                     class="fab fa-instagram"></i></a>
-            <a href="https://www.tiktok.com/@senyawaproject" target="_blank" class="social-icon"><i
+            <a href="https://tiktok.senyawaproject.com" target="_blank" class="social-icon"><i
                     class="fab fa-tiktok"></i></a>
-            <a href="https://discord.com/invite/xGTeNEsPjg" target="_blank" class="social-icon"><i
+            <a href="https://discord.senyawaproject.com" target="_blank" class="social-icon"><i
                     class="fab fa-discord"></i></a>
-            <a href="https://www.whatsapp.com/channel/0029Vb7VUtNCBtxLqh7n0C0n" target="_blank" class="social-icon"><i
+            <a href="https://whatsapp.senyawaproject.com" target="_blank" class="social-icon"><i
                     class="fab fa-whatsapp"></i>
             </a>
         </div>
