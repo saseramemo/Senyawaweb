@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -7,7 +8,8 @@
     <!-- Font Awesome 6 (free) -->
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>/* Gaya khusus untuk halaman ini */
+    <style>
+        /* Gaya khusus untuk halaman ini */
         * {
             margin: 0;
             padding: 0;
@@ -27,11 +29,13 @@
             background: radial-gradient(circle at 30% 10%, #1a0a0e, #020202 85%);
             border-bottom: 1px solid #1f1f1f;
         }
+
         .page-header h1 {
             font-size: 3rem;
             font-weight: 700;
             margin-bottom: 1rem;
         }
+
         .page-header h1:after {
             content: '';
             display: block;
@@ -41,6 +45,7 @@
             margin-top: 12px;
             border-radius: 4px;
         }
+
         .page-header p {
             font-size: 1.2rem;
             color: #ccc;
@@ -56,6 +61,7 @@
             padding-bottom: 1rem;
             border-bottom: 1px solid #222;
         }
+
         .filter-btn {
             background: transparent;
             border: 1px solid #333;
@@ -68,10 +74,12 @@
             transition: all 0.2s;
             font-family: inherit;
         }
+
         .filter-btn:hover {
             border-color: var(--senyawa);
             color: #fff;
         }
+
         .filter-btn.active {
             background: var(--senyawa);
             border-color: var(--senyawa);
@@ -85,6 +93,7 @@
             gap: 2rem;
             margin: 2rem 0 3rem;
         }
+
         .project-card {
             background: #0c0c0c;
             border-radius: 24px;
@@ -93,25 +102,30 @@
             border: 1px solid #222;
             animation: fadeInUp 0.5s ease;
         }
+
         .project-card:hover {
             transform: translateY(-8px);
             border-color: var(--senyawa);
-            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.5);
+            box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.5);
         }
-        .project-card iframe {
-            width: 100%;
-            aspect-ratio: 16 / 9;
+
+        .project-card .yt-lazy-facade {
             border: none;
+            border-radius: 0;
+            border-bottom: 1px solid #222;
         }
+
         .project-info {
             padding: 1.2rem;
         }
+
         .project-title {
             font-size: 1.2rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
             color: #fff;
         }
+
         .project-category {
             font-size: 0.8rem;
             color: var(--senyawa);
@@ -120,6 +134,7 @@
             font-weight: 600;
             margin-bottom: 0.5rem;
         }
+
         .project-desc {
             font-size: 0.85rem;
             color: #aaa;
@@ -141,6 +156,7 @@
             margin-bottom: 2rem;
             transition: 0.2s;
         }
+
         .back-button:hover {
             background: var(--senyawa);
             transform: translateX(-5px);
@@ -151,9 +167,11 @@
             .container {
                 padding: 0 24px;
             }
+
             .page-header h1 {
                 font-size: 2.2rem;
             }
+
             .projects-grid {
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
@@ -161,347 +179,542 @@
         }
     </style>
 </head>
+
 <body>
 
-<nav>
-    <div class="nav-container">
-        <div class="nav-logo-img">
-            <img src="assets/Logo Senyawa no BG.png" alt="Senyawa Icon" onerror="this.src='https://placehold.co/100x60?text=S'">
-            <span class="logo-text">SENYAWA</span>
-        </div>
-        <div class="menu-toggle" id="menuToggle">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-        <ul class="nav-links" id="navLinks">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="index.html#about">About Us</a></li>
-            <li><a href="index.html#members">Member</a></li>
-            <li><a href="index.html#projects">Project</a></li>
-            <li><a href="store.html">Store</a></li>
-            <!-- <li><a href="fanart.html" id="storeNavLink">fanart</a></li> -->
-        </ul>
-    </div>
-</nav>
-
-<!-- Header Halaman -->
-<div class="page-header">
-    <div class="container">
-        <a href="index.html" class="back-button">
-            <i class="fas fa-arrow-left"></i>
-            <span>Kembali ke Beranda</span>
-        </a>
-        <h1>Semua Project Senyawa</h1>
-        <p>Kumpulan playlist series, event, dan konten kolaborasi dari komunitas Senyawa Project.</p>
-    </div>
-</div>
-
-<section style="padding: 0 0 60px 0;">
-    <div class="container">
-        <!-- Filter tabs -->
-        <div class="filter-tabs" id="filterTabs">
-            <button class="filter-btn active" data-category="all">Semua Project</button>
-            <button class="filter-btn" data-category="series">Series</button>
-            <button class="filter-btn" data-category="event">Event</button>
-            <button class="filter-btn" data-category="collab">Collab</button>
-        </div>
-
-        <!-- Projects grid -->
-        <div class="projects-grid" id="projectsGrid">
-            <!-- Project cards akan di-generate oleh JavaScript -->
+    <!-- EFEK LOADING HALAMAN -->
+    <div id="page-loader" class="page-loader">
+        <div class="loader-content">
+            <img src="assets/Logo Senyawa no BG.png" alt="Loading..."
+                onerror="this.src='https://placehold.co/100x60?text=S'">
+            <div class="loader-spinner"></div>
         </div>
     </div>
-</section>
 
-<footer>
-    <p>© 2025 Senyawa Project — Komunitas Youtuber Minecraft Indonesia. All rights reserved.</p>
-    <p style="margin-top: 8px; font-size: 0.8rem;">Created by Sasera</p>
-</footer>
+    <nav>
+        <div class="nav-container">
+            <div class="nav-logo-img">
+                <img src="assets/Logo Senyawa no BG.png" alt="Senyawa Icon"
+                    onerror="this.src='https://placehold.co/100x60?text=S'">
+                <span class="logo-text">SENYAWA</span>
+            </div>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About Us</a></li>
+                <li><a href="index.html#members">Member</a></li>
+                <li><a href="index.html#projects">Project</a></li>
+                <li><a href="store.html">Store</a></li>
+                <!-- <li><a href="fanart.html" id="storeNavLink">fanart</a></li> -->
+            </ul>
+        </div>
+    </nav>
 
-<script>
-    // ==========================================
-    // DATA PROJECTS - SILAHKAN EDIT DI SINI
-    // ==========================================
-    // Tambahkan atau hapus project sesuai kebutuhan
-    // Format:
-    // {
-    //     id: 1,
-    //     title: "Nama Project",
-    //     playlistId: "ID_PLAYLIST_YOUTUBE",
-    //     category: "series / event / collab",
-    //     description: "Deskripsi singkat tentang project ini"
-    // }
-    
-    const projectsData = [
-        {
-            id: 17,
-            title: "The Last Voyage of the Harpy Express",
-            playlistId: "PLXxoI8twiEB_W-P4JFHCWihuOnKsX43az",
-            category: "collab",
-            description: "Simulasi pembunuhan di kereta."
-        },
-        {
-            id: 18,
-            title: "Devastated SMP Season 2",
-            playlistId: "PLXxoI8twiEB-mRvoEUvNTGJLgeoDEfq-T",
-            category: "series",
-            description: "Server Minecraft Hardcore di mana sekali mati, kamu langsung dibanned selamanya."
-        },
-        {
-            id: 1,
-            title: "Senyawa SMP",
-            playlistId: "PLXxoI8twiEB_nKrlz3M887MSVNNDlBUkV",
-            category: "series",
-            description: "Series survival multiplayer dengan para member Senyawa Project."
-        },
-        {
-            id: 2,
-            title: "Skyblock Battle Royale",
-            playlistId: "PLXxoI8twiEB_Z0uAUZwHE6I6JMQq8xCsg",
-            category: "event",
-            description: "Pertempuran di skyblock, siapa yang terakhir bertahan?"
-        },
-        {
-            id: 3,
-            title: "Underground Battle Royale",
-            playlistId: "PLXxoI8twiEB-wtzUfTzO89ADA_GOZ0LFn",
-            category: "event",
-            description: "Battle royale di bawah tanah dengan mekanik unik dan tantangan seru."
-        },
-        {
-            id: 4,
-            title: "Buildoria",
-            playlistId: "PLXxoI8twiEB99rCkw1ON6CHrwgU337EBB",
-            category: "series",
-            description: "Server building antar kreator/streamer."
-        },
-        {
-            id: 5,
-            title: "50 Player One Chunk",
-            playlistId: "PLXxoI8twiEB-cocyijLJ3a0bUk1Zhr8EP",
-            category: "event",
-            description: "50 pemain berjuang hanya dalam satu chunk! Tim mana yang akan menang?"
-        },
+    <!-- Header Halaman -->
+    <div class="page-header">
+        <div class="container">
+            <a href="index.html" class="back-button">
+                <i class="fas fa-arrow-left"></i>
+                <span>Kembali ke Beranda</span>
+            </a>
+            <h1>Semua Project Senyawa</h1>
+            <p>Kumpulan playlist series, event, dan konten kolaborasi dari komunitas Senyawa Project.</p>
+        </div>
+    </div>
+
+    <section style="padding: 0 0 60px 0;">
+        <div class="container">
+            <!-- Filter tabs -->
+            <div class="filter-tabs" id="filterTabs">
+                <button class="filter-btn active" data-category="all">Semua Project</button>
+                <button class="filter-btn" data-category="series">Series</button>
+                <button class="filter-btn" data-category="event">Event</button>
+                <button class="filter-btn" data-category="collab">Collab</button>
+            </div>
+
+            <!-- Projects grid -->
+            <div class="projects-grid" id="projectsGrid">
+                <!-- Project cards akan di-generate oleh JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 Senyawa Project — Komunitas Youtuber Minecraft Indonesia. All rights reserved.</p>
+        <p style="margin-top: 8px; font-size: 0.8rem;">Created by Sasera</p>
+    </footer>
+
+    <script>
         // ==========================================
-        // TAMBAHKAN PROJECT BARU DI BAWAH SINI
-        // Contoh:
+        // DATA PROJECTS - SILAHKAN EDIT DI SINI
+        // ==========================================
+        // Tambahkan atau hapus project sesuai kebutuhan
+        // Format:
         // {
-        //     id: 6,
-        //     title: "Nama Project Baru",
+        //     id: 1,
+        //     title: "Nama Project",
         //     playlistId: "ID_PLAYLIST_YOUTUBE",
-        //     category: "collab",
-        //     description: "Deskripsi project baru ini..."
-        // },
-        // ==========================================
-        {
-            id: 6,
-            title: "Devastated SMP",
-            playlistId: "PLXxoI8twiEB_RPTi2pKkCNbND2WkK8bmp",
-            category: "series",
-            description: "Server Minecraft Hardcore di mana sekali mati, kamu langsung dibanned selamanya."
-        },
-        {
-            id: 7,
-            title: "Half it and give it to the next person",
-            playlistId: "PLXxoI8twiEB_QR9yQiALtcmopsSIf9myk",
-            category: "series",
-            description: "Setengahin dan kasi ke orang selanjutnya."
-        },
-        {
-            id: 8,
-            title: "Share Heart",
-            playlistId: "PLXxoI8twiEB9Lkxlay07uroGvuJISUtE3",
-            category: "collab",
-            description: "Menamatkan minecraft tapi berbagi nyawa."
-        },
-        {
-            id: 9,
-            title: "Flooding World",
-            playlistId: "PLXxoI8twiEB_PWjq8E2TEW77W8isP1oIt",
-            category: "collab",
-            description: "Menamatkan minecraft tapi dunianya dipenuhi air."
-        },
-        {
-            id: 10,
-            title: "Random Layer    ",
-            playlistId: "PLXxoI8twiEB_idzSmRT-BXTBsJCAJxe9l",
-            category: "collab",
-            description: "Menamatkan minecraft tapi setiap lapisan dunia terdiri dari blok yang acak."
-        },
-         {
-            id: 11,
-            title: "Wither Storm",
-            playlistId: "PLXxoI8twiEB91lwwpWnMBPpxqg4_8wIQF",
-            category: "collab",
-            description: "Perjuangan mengalahkan Wither Storm yang menghancurkan segalanya."
-        },
-        {
-            id: 12,
-            title: "10 Players SKYBLOCK",
-            playlistId: "PLXxoI8twiEB8jp3JZgFFBRnw3iO1erqOW",
-            category: "collab",
-            description: "Menamatkan minecraft tapi semua player spawn di dalam 1 pulau skyblock."
-        },
-        {
-            id: 13,
-            title: "Sawit Civilization",
-            playlistId: "PLXxoI8twiEB_oT2HPvql8u5rf5Rles5GW",
-            category: "collab",
-            description: "Minecraft tapi seluruh dunia dipenuhi sawit."
-        },
-        {
-            id: 14,
-            title: "Chained Together",
-            playlistId: "PLXxoI8twiEB9k12j1xck0mI0FSAmVtPpg",
-            category: "collab",
-            description: "Menamatkan minecraft tapi semua pemain saling terikat."
-        },
-        {
-            id: 15,
-            title: "Random Size",
-            playlistId: "PLXxoI8twiEB-6jzMn40j2TAvuHcZUfabM",
-            category: "collab",
-            description: "Menamatkan minecraft tapi semua player dan mob berukuran random."
-        },
-        {
-            id: 16,
-            title: "Hide and Seek",
-            playlistId: "PLXxoI8twiEB-Tp0w_iVJ3fJsg_81zyKgM",
-            category: "collab",
-            description: "Petak umpet tapi yang nyari pakai senjata."
-        },
+        //     category: "series / event / collab",
+        //     description: "Deskripsi singkat tentang project ini",
+        //     thumb: "https://i.ytimg.com/vi_webp/ID_VIDEO_PERTAMA/maxresdefault.webp"
+        // }
 
+        const projectsData = [
+            {
+                id: 17,
+                title: "The Last Voyage of the Harpy Express",
+                playlistId: "PLXxoI8twiEB_W-P4JFHCWihuOnKsX43az",
+                category: "collab",
+                description: "Simulasi pembunuhan di kereta."
+            },
+            {
+                id: 18,
+                title: "Devastated SMP Season 2",
+                playlistId: "PLXxoI8twiEB-mRvoEUvNTGJLgeoDEfq-T",
+                category: "series",
+                description: "Server Minecraft Hardcore di mana sekali mati, kamu langsung dibanned selamanya."
+            },
+            {
+                id: 1,
+                title: "Senyawa SMP",
+                playlistId: "PLXxoI8twiEB_nKrlz3M887MSVNNDlBUkV",
+                category: "series",
+                description: "Series survival multiplayer dengan para member Senyawa Project."
+            },
+            {
+                id: 2,
+                title: "Skyblock Battle Royale",
+                playlistId: "PLXxoI8twiEB_Z0uAUZwHE6I6JMQq8xCsg",
+                category: "event",
+                description: "Pertempuran di skyblock, siapa yang terakhir bertahan?"
+            },
+            {
+                id: 3,
+                title: "Underground Battle Royale",
+                playlistId: "PLXxoI8twiEB-wtzUfTzO89ADA_GOZ0LFn",
+                category: "event",
+                description: "Battle royale di bawah tanah dengan mekanik unik dan tantangan seru."
+            },
+            {
+                id: 4,
+                title: "Buildoria",
+                playlistId: "PLXxoI8twiEB99rCkw1ON6CHrwgU337EBB",
+                category: "series",
+                description: "Server building antar kreator/streamer."
+            },
+            {
+                id: 5,
+                title: "50 Player One Chunk",
+                playlistId: "PLXxoI8twiEB-cocyijLJ3a0bUk1Zhr8EP",
+                category: "event",
+                description: "50 pemain berjuang hanya dalam satu chunk! Tim mana yang akan menang?"
+            },
+            // ==========================================
+            // TAMBAHKAN PROJECT BARU DI BAWAH SINI
+            // Contoh:
+            // {
+            //     id: 6,
+            //     title: "Nama Project Baru",
+            //     playlistId: "ID_PLAYLIST_YOUTUBE",
+            //     category: "collab",
+            //     description: "Deskripsi project baru ini..."
+            // },
+            // ==========================================
+            {
+                id: 6,
+                title: "Devastated SMP",
+                playlistId: "PLXxoI8twiEB_RPTi2pKkCNbND2WkK8bmp",
+                category: "series",
+                description: "Server Minecraft Hardcore di mana sekali mati, kamu langsung dibanned selamanya."
+            },
+            {
+                id: 7,
+                title: "Half it and give it to the next person",
+                playlistId: "PLXxoI8twiEB_QR9yQiALtcmopsSIf9myk",
+                category: "series",
+                description: "Setengahin dan kasi ke orang selanjutnya."
+            },
+            {
+                id: 8,
+                title: "Share Heart",
+                playlistId: "PLXxoI8twiEB9Lkxlay07uroGvuJISUtE3",
+                category: "collab",
+                description: "Menamatkan minecraft tapi berbagi nyawa."
+            },
+            {
+                id: 9,
+                title: "Flooding World",
+                playlistId: "PLXxoI8twiEB_PWjq8E2TEW77W8isP1oIt",
+                category: "collab",
+                description: "Menamatkan minecraft tapi dunianya dipenuhi air."
+            },
+            {
+                id: 10,
+                title: "Random Layer    ",
+                playlistId: "PLXxoI8twiEB_idzSmRT-BXTBsJCAJxe9l",
+                category: "collab",
+                description: "Menamatkan minecraft tapi setiap lapisan dunia terdiri dari blok yang acak."
+            },
+            {
+                id: 11,
+                title: "Wither Storm",
+                playlistId: "PLXxoI8twiEB91lwwpWnMBPpxqg4_8wIQF",
+                category: "collab",
+                description: "Perjuangan mengalahkan Wither Storm yang menghancurkan segalanya."
+            },
+            {
+                id: 12,
+                title: "10 Players SKYBLOCK",
+                playlistId: "PLXxoI8twiEB8jp3JZgFFBRnw3iO1erqOW",
+                category: "collab",
+                description: "Menamatkan minecraft tapi semua player spawn di dalam 1 pulau skyblock."
+            },
+            {
+                id: 13,
+                title: "Sawit Civilization",
+                playlistId: "PLXxoI8twiEB_oT2HPvql8u5rf5Rles5GW",
+                category: "collab",
+                description: "Minecraft tapi seluruh dunia dipenuhi sawit."
+            },
+            {
+                id: 14,
+                title: "Chained Together",
+                playlistId: "PLXxoI8twiEB9k12j1xck0mI0FSAmVtPpg",
+                category: "collab",
+                description: "Menamatkan minecraft tapi semua pemain saling terikat."
+            },
+            {
+                id: 15,
+                title: "Random Size",
+                playlistId: "PLXxoI8twiEB-6jzMn40j2TAvuHcZUfabM",
+                category: "collab",
+                description: "Menamatkan minecraft tapi semua player dan mob berukuran random."
+            },
+            {
+                id: 16,
+                title: "Hide and Seek",
+                playlistId: "PLXxoI8twiEB-Tp0w_iVJ3fJsg_81zyKgM",
+                category: "collab",
+                description: "Petak umpet tapi yang nyari pakai senjata."
+            },
 
+        ];
 
+        function renderProjects(category = "all") {
+            const container = document.getElementById("projectsGrid");
+            if (!container) return;
 
+            let filteredProjects = projectsData;
+            if (category !== "all") {
+                filteredProjects = projectsData.filter(project => project.category === category);
+            }
 
-        
-    ];
+            if (filteredProjects.length === 0) {
+                container.innerHTML = `
+            <div style="grid-column: 1/-1; text-align: center; padding: 60px 20px; background: #111; border-radius: 24px;">
+                <i class="fas fa-folder-open" style="font-size: 3rem; color: #670C1F; margin-bottom: 1rem; display: block;"></i>
+                <h3>Belum ada project di kategori ini</h3>
+                <p style="color: #aaa; margin-top: 0.5rem;">Project lainnya akan segera hadir!</p>
+            </div>
+        `;
+                return;
+            }
 
-    // Fungsi untuk render project cards
-    function renderProjects(category = "all") {
-        const container = document.getElementById("projectsGrid");
-        if (!container) return;
-        
-        let filteredProjects = projectsData;
-        if (category !== "all") {
-            filteredProjects = projectsData.filter(project => project.category === category);
-        }
-        
-        if (filteredProjects.length === 0) {
-            container.innerHTML = `
-                <div style="grid-column: 1/-1; text-align: center; padding: 60px 20px; background: #111; border-radius: 24px;">
-                    <i class="fas fa-folder-open" style="font-size: 3rem; color: #670C1F; margin-bottom: 1rem; display: block;"></i>
-                    <h3>Belum ada project di kategori ini</h3>
-                    <p style="color: #aaa; margin-top: 0.5rem;">Project lainnya akan segera hadir!</p>
+            container.innerHTML = "";
+            filteredProjects.forEach(project => {
+                const categoryName = getCategoryName(project.category);
+
+                const thumbUrl = project.thumb || '';
+
+                const card = document.createElement("div");
+                card.className = "project-card";
+                card.innerHTML = `
+            <div class="yt-lazy-facade" data-playlist="${project.playlistId}" data-thumb="${thumbUrl}">
+                <div class="yt-play-btn">
+                    <svg viewBox="0 0 68 48">
+                        <path class="yt-play-bg" d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,.13,34,.13s-21.79,0-27.1,.142C3.97,1.05,2.26,3.53,1.48,6.46A72.8,72.8,0,0,0,.13,24a72.8,72.8,0,0,0,1.35,17.54c0.78,2.93,2.49,5.41,5.42,6.19C12.21,47.87,34,47.87,34,47.87s21.79,0,27.1-.142c2.93-.78,4.64-3.26,5.42-6.19A72.8,72.8,0,0,0,67.87,24a72.8,72.8,0,0,0-1.35-16.26Z" fill="#ff0000"/>
+                        <path d="M27,36l18-12-18-12v24Z" fill="#ffffff"/>
+                    </svg>
                 </div>
-            `;
-            return;
+            </div>
+            <div class="project-info">
+                <div class="project-category">${categoryName}</div>
+                <div class="project-title">${project.title}</div>
+                <div class="project-desc">${project.description}</div>
+            </div>
+        `;
+                container.appendChild(card);
+            });
+
+            setupYoutubeFacades();
         }
-        
-        container.innerHTML = "";
-        filteredProjects.forEach(project => {
-            const embedUrl = `https://www.youtube.com/embed/videoseries?list=${project.playlistId}&controls=1&rel=0`;
-            const categoryName = getCategoryName(project.category);
-            
-            const card = document.createElement("div");
-            card.className = "project-card";
-            card.innerHTML = `
-                <iframe src="${embedUrl}" title="${project.title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-                <div class="project-info">
-                    <div class="project-category">${categoryName}</div>
-                    <div class="project-title">${project.title}</div>
-                    <div class="project-desc">${project.description}</div>
-                </div>
-            `;
-            container.appendChild(card);
-        });
-    }
-    
-    function getCategoryName(category) {
-        const categories = {
-            "series": "SERIES",
-            "event": "EVENT",
-            "collab": "COLLAB"
-        };
-        return categories[category] || "📺 PROJECT";
-    }
-    
-    // Setup filter tabs
-    function setupFilters() {
-        const filterBtns = document.querySelectorAll(".filter-btn");
-        filterBtns.forEach(btn => {
-            btn.addEventListener("click", () => {
-                // Update active class
-                filterBtns.forEach(b => b.classList.remove("active"));
-                btn.classList.add("active");
-                
-                // Filter projects
-                const category = btn.getAttribute("data-category");
-                renderProjects(category);
-                
-                // Scroll sedikit ke atas setelah filter
-                setTimeout(() => {
-                    const projectsSection = document.querySelector(".projects-grid");
-                    if (projectsSection) {
-                        projectsSection.scrollIntoView({ behavior: "smooth", block: "start" });
+
+        // Script Click-to-Play Facade (Tidak perlu diubah, sudah sangat bagus!)
+        function setupYoutubeFacades() {
+            const ytFacades = document.querySelectorAll(".yt-lazy-facade");
+            // Gunakan async untuk menunggu hasil fetch dari oEmbed
+            ytFacades.forEach(async (facade) => {
+                let thumbUrl = facade.getAttribute("data-thumb");
+                const playlistId = facade.getAttribute("data-playlist");
+
+                // Otomatis tarik gambar dari oEmbed jika url masih kosong/menggunakan placeholder
+                if (!thumbUrl || thumbUrl.includes("ID_VIDEO_PERTAMA")) {
+                    try {
+                        const playlistUrl = `https://www.youtube.com/playlist?list=${playlistId}`;
+                        // Mengambil URL fetch dari konstanta VIDEO_OEMBED_ENDPOINTS
+                        const endpoint = VIDEO_OEMBED_ENDPOINTS.youtube(playlistUrl);
+                        const res = await fetch(endpoint);
+                        const data = await res.json();
+                        if (data && data.thumbnail_url) {
+                            thumbUrl = data.thumbnail_url;
+                        }
+                    } catch (e) {
+                        console.error("Gagal mengambil thumbnail otomatis", e);
                     }
-                }, 100);
-            });
-        });
-    }
-    
-    // Mobile navigation toggle
-    function setupMobileNav() {
-        const menuToggle = document.getElementById("menuToggle");
-        const navLinks = document.getElementById("navLinks");
-        
-        if (menuToggle) {
-            menuToggle.addEventListener("click", () => {
-                navLinks.classList.toggle("active");
-                menuToggle.classList.toggle("active");
+                }
+
+                // Pengecekan thumbUrl dipertajam agar tidak pasang URL kosong/invalid
+                if (thumbUrl && thumbUrl.trim() !== "" && !thumbUrl.includes("ID_VIDEO_PERTAMA")) {
+                    facade.style.backgroundImage = `url('${thumbUrl}')`;
+                } else {
+                    // Fallback elegan jika gambar gagal/tidak disediakan
+                    facade.style.background = "linear-gradient(135deg, #111, #1a1a1a)";
+                }
+
+                facade.addEventListener("click", () => {
+                    // Ganti isi facade dengan animasi loading (spinner)
+                    facade.innerHTML = '<div class="loader-spinner" style="position: absolute; top: 50%; left: 50%; margin-top: -18px; margin-left: -18px; z-index: 1;"></div>';
+
+                    // Coba ekstrak Video ID dari URL thumbnail yang didapat oEmbed
+                    let videoId = "";
+                    if (thumbUrl && thumbUrl.includes("/vi/")) {
+                        videoId = thumbUrl.split("/vi/")[1].split("/")[0];
+                    }
+
+                    const iframe = document.createElement("iframe");
+                    if (videoId) {
+                        iframe.setAttribute("src", `https://www.youtube.com/embed/${videoId}?feature=oembed&autoplay=1`);
+                    } else {
+                        iframe.setAttribute("src", `https://www.youtube.com/embed/videoseries?list=${playlistId}&autoplay=1&rel=0`);
+                    }
+                    iframe.setAttribute("frameborder", "0");
+                    iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture");
+                    iframe.setAttribute("allowfullscreen", "true");
+
+                    // Sembunyikan iframe sementara sampai selesai loading
+                    iframe.style.opacity = "0";
+                    iframe.style.transition = "opacity 0.4s ease";
+
+                    iframe.onload = () => {
+                        iframe.style.opacity = "1"; // Munculkan iframe perlahan
+                        const spinner = facade.querySelector('.loader-spinner');
+                        if (spinner) spinner.remove(); // Hapus spinner
+                    };
+
+                    facade.appendChild(iframe);
+                    facade.style.cursor = "default";
+                }, { once: true });
             });
         }
-        
-        // Tutup nav saat link diklik
-        document.querySelectorAll(".nav-links a").forEach(link => {
-            link.addEventListener("click", () => {
-                navLinks.classList.remove("active");
-                if (menuToggle) menuToggle.classList.remove("active");
-            });
-        });
-    }
-    
-    // Logo fallback
-    function handleLogoFallback() {
-        const smallLogo = document.querySelector(".nav-logo-img img");
-        if (smallLogo) {
-            smallLogo.onerror = () => {
-                smallLogo.src = "https://placehold.co/100x60/670C1F/white?text=SNY";
+
+        function getCategoryName(category) {
+            const categories = {
+                "series": "SERIES",
+                "event": "EVENT",
+                "collab": "COLLAB"
             };
+            return categories[category] || "📺 PROJECT";
         }
-    }
-    
-    // Hitung total projects untuk ditampilkan di header
-    function updateProjectCount() {
-        const totalProjects = projectsData.length;
-        const headerP = document.querySelector(".page-header p");
-        if (headerP && totalProjects > 0) {
-            // Optional: tambahkan jumlah project di deskripsi
-            // headerP.innerHTML = `Kumpulan playlist series, event, dan konten kolaborasi dari komunitas Senyawa Project. (${totalProjects} project)`;
+
+        // Setup filter tabs
+        function setupFilters() {
+            const filterBtns = document.querySelectorAll(".filter-btn");
+            filterBtns.forEach(btn => {
+                btn.addEventListener("click", () => {
+                    // Update active class
+                    filterBtns.forEach(b => b.classList.remove("active"));
+                    btn.classList.add("active");
+
+                    // Filter projects
+                    const category = btn.getAttribute("data-category");
+                    renderProjects(category);
+
+                    // Scroll sedikit ke atas setelah filter
+                    setTimeout(() => {
+                        const projectsSection = document.querySelector(".projects-grid");
+                        if (projectsSection) {
+                            projectsSection.scrollIntoView({ behavior: "smooth", block: "start" });
+                        }
+                    }, 100);
+                });
+            });
         }
-    }
-    
-    // Init
-    document.addEventListener("DOMContentLoaded", () => {
-        renderProjects("all");
-        setupFilters();
-        setupMobileNav();
-        handleLogoFallback();
-        updateProjectCount();
-        console.log("Project page loaded with", projectsData.length, "projects");
-    });
-</script>
+
+        // Mobile navigation toggle
+        function setupMobileNav() {
+            const menuToggle = document.getElementById("menuToggle");
+            const navLinks = document.getElementById("navLinks");
+
+            if (menuToggle) {
+                menuToggle.addEventListener("click", () => {
+                    navLinks.classList.toggle("active");
+                    menuToggle.classList.toggle("active");
+                });
+            }
+
+            // Tutup nav saat link diklik
+            document.querySelectorAll(".nav-links a").forEach(link => {
+                link.addEventListener("click", () => {
+                    navLinks.classList.remove("active");
+                    if (menuToggle) menuToggle.classList.remove("active");
+                });
+            });
+        }
+
+        // Logo fallback
+        function handleLogoFallback() {
+            const smallLogo = document.querySelector(".nav-logo-img img");
+            if (smallLogo) {
+                smallLogo.onerror = () => {
+                    smallLogo.src = "https://placehold.co/100x60/670C1F/white?text=SNY";
+                };
+            }
+        }
+
+        // Hitung total projects untuk ditampilkan di header
+        function updateProjectCount() {
+            const totalProjects = projectsData.length;
+            const headerP = document.querySelector(".page-header p");
+            if (headerP && totalProjects > 0) {
+                // Optional: tambahkan jumlah project di deskripsi
+                // headerP.innerHTML = `Kumpulan playlist series, event, dan konten kolaborasi dari komunitas Senyawa Project. (${totalProjects} project)`;
+            }
+        }
+
+        // Init
+        document.addEventListener("DOMContentLoaded", () => {
+            renderProjects("all");
+            setupFilters();
+            setupMobileNav();
+            handleLogoFallback();
+            updateProjectCount();
+            console.log("Project page loaded with", projectsData.length, "projects");
+        });
+
+        // Menghilangkan efek loading ketika SEMUA data (gambar, iframe) selesai dimuat
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('page-loader');
+            if (loader) {
+                loader.classList.add('hidden');
+                setTimeout(() => loader.remove(), 800);
+            }
+        });
+
+        // ==========================================
+        // SCRIPT VIDEO THUMBNAIL PREVIEW 
+        // ==========================================
+        const VIDEO_OEMBED_ENDPOINTS = {
+            youtube: (url) => `https://www.youtube.com/oembed?url=${encodeURIComponent(url)}&format=json`,
+            vimeo: (url) => `https://vimeo.com/api/oembed.json?url=${encodeURIComponent(url)}`,
+            wistia: (url) => `https://fast.wistia.com/oembed?url=${encodeURIComponent(url)}&format=json`
+        };
+
+        class VideoThumbnailPreview {
+            constructor(container) {
+                this.container = container;
+                this.input = container.querySelector('.video-input');
+                this.thumbnailOutput = container.querySelector('.video-thumbnail-output');
+                this.dataOutput = container.querySelector('.video-data-output');
+                this.urlOutput = container.querySelector('.video-url-output');
+
+                this.dataTitleOutput = container.querySelector('.video-data-title-output');
+                this.dataHtmlOutput = container.querySelector('.video-data-html-output');
+                this.dataHtmlRawOutput = container.querySelector('.video-data-html-raw-output');
+
+                // Bind event listeners
+                this.input.addEventListener('input', () => this.fetchThumbnail());
+
+                // Initial fetch if there's a value
+                this.fetchThumbnail();
+            }
+
+            async fetchThumbnail() {
+                const url = this.input.value;
+                if (!url) {
+                    this.clearOutput();
+                    return;
+                }
+
+                const videoProvider = this.detectVideoProvider(url);
+                if (!videoProvider) {
+                    this.clearOutput();
+                    return;
+                }
+
+                try {
+                    const data = await this.fetchOembedData(url, videoProvider);
+                    if (data) {
+                        this.thumbnailOutput.innerHTML = `
+                            <figure>
+                                <img src="${data.thumbnail_url}" alt="${data.title}">
+                                <figcaption>${data.thumbnail_url}</figcaption>
+                            </figure>`;
+                        this.dataOutput.textContent = JSON.stringify(data, null, 2);
+                        this.urlOutput.textContent = VIDEO_OEMBED_ENDPOINTSvideoProvider;
+
+                        this.dataTitleOutput.textContent = data.title;
+                        this.dataHtmlOutput.innerHTML = data.html;
+                        this.dataHtmlRawOutput.textContent = data.html.replace(/\\"/g, '"');
+                    } else {
+                        this.clearOutput();
+                    }
+                } catch (error) {
+                    console.error('Error fetching thumbnail:', error);
+                    this.clearOutput();
+                }
+            }
+
+            clearOutput() {
+                this.thumbnailOutput.innerHTML = '';
+                this.dataOutput.innerHTML = '';
+                this.urlOutput.textContent = '';
+                this.dataTitleOutput.textContent = '';
+                this.dataHtmlOutput.innerHTML = '';
+                this.dataHtmlRawOutput.textContent = '';
+            }
+
+            detectVideoProvider(url) {
+                if (url.match(/youtu/)) return 'youtube';
+                if (url.match(/vimeo/)) return 'vimeo';
+                if (url.match(/wistia/)) return 'wistia';
+                return null;
+            }
+
+            async fetchOembedData(url, provider) {
+                const endpointGenerator = VIDEO_OEMBED_ENDPOINTS[provider];
+                if (!endpointGenerator) return null;
+
+                const endpoint = endpointGenerator(url);
+                const response = await fetch(endpoint);
+                if (!response.ok) return null;
+
+                const data = await response.json();
+                return data;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('video-preview-container');
+            // Cek apakah elemen ada di halaman agar tidak terjadi error "null is not an object"
+            if (container) {
+                window.videoPreview = new VideoThumbnailPreview(container);
+            }
+        });
+    </script>
 </body>
+
 </html>

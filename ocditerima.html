@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Diterima - Senyawa Project</title>
-    <link rel="icon" type="image/x-icon" href="assets/Logo Senyawa no BG.ico">
+    <link rel="icon" type="image/x-icon" href="assets/Logoicon.ico">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>/* Gaya khusus untuk halaman ini */
@@ -231,6 +231,14 @@
     </style>
 </head>
 <body>
+
+<!-- EFEK LOADING HALAMAN -->
+<div id="page-loader" class="page-loader">
+    <div class="loader-content">
+        <img src="assets/Logo Senyawa no BG.png" alt="Loading..." onerror="this.src='https://placehold.co/100x60?text=S'">
+        <div class="loader-spinner"></div>
+    </div>
+</div>
 
 <nav>
     <div class="nav-container">
@@ -542,6 +550,15 @@
         handleLogoFallback();
         
         console.log(`✅ OC Diterima loaded: ${uniqueList.length} peserta unik`);
+    });
+
+    // Menghilangkan efek loading ketika SEMUA data (gambar, iframe) selesai dimuat
+    window.addEventListener('load', () => {
+        const loader = document.getElementById('page-loader');
+        if (loader) {
+            loader.classList.add('hidden');
+            setTimeout(() => loader.remove(), 800);
+        }
     });
 </script>
 </body>

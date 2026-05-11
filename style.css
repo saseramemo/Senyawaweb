@@ -438,16 +438,70 @@ section {
     border: 1px solid #222;
 }
 
-.project-card iframe {
+/* YOUTUBE LAZY FACADE (CLICK-TO-PLAY) */
+.yt-lazy-facade {
+    position: relative;
     width: 100%;
     aspect-ratio: 16 / 9;
+    background-color: #000;
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.yt-lazy-facade .yt-play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 68px;
+    height: 48px;
+    transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));
+}
+
+.yt-lazy-facade:hover .yt-play-btn {
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+.yt-lazy-facade iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     border: none;
+    background-color: #000;
 }
 
 .project-info {
     padding: 1rem;
     font-weight: 500;
     text-align: center;
+}
+
+/* GAYA TEKS DI DALAM KARTU PROJECT */
+.project-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #fff;
+}
+
+.project-category {
+    font-size: 0.8rem;
+    color: var(--senyawa);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.project-desc {
+    font-size: 0.85rem;
+    color: #aaa;
+    line-height: 1.4;
 }
 
 /* BAGIAN KAKI WEB (FOOTER): Hak Cipta dan area bawah halaman */
@@ -824,4 +878,59 @@ a {
     .bell-button i {
         font-size: 24px;
     }
+}
+
+/* =========================================================
+   PAGE LOADER
+   Animasi loading saat halaman / data baru dibuka
+   ========================================================= */
+.page-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #0a0a0a;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.page-loader.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+.loader-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.page-loader.hidden .loader-content {
+    transform: scale(0.9) translateY(-10px);
+    opacity: 0;
+}
+.loader-content img {
+    width: 100px;
+    height: auto;
+    animation: pulseLoader 1.2s infinite alternate;
+    filter: drop-shadow(0 0 10px rgba(103, 12, 31, 0.5));
+}
+.loader-spinner {
+    width: 36px;
+    height: 36px;
+    border: 4px solid rgba(103, 12, 31, 0.3);
+    border-top-color: var(--senyawa);
+    border-radius: 50%;
+    animation: spinLoader 1s linear infinite;
+}
+@keyframes pulseLoader {
+    0% { transform: scale(0.95); opacity: 0.8; }
+    100% { transform: scale(1.05); opacity: 1; filter: drop-shadow(0 0 20px rgba(103, 12, 31, 0.9)); }
+}
+@keyframes spinLoader {
+    100% { transform: rotate(360deg); }
 }
