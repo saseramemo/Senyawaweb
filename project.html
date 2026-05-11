@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>All Projects - Senyawa Project</title>
     <!-- Font Awesome 6 (free) -->
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
+    <style>/* Gaya khusus untuk halaman ini */
         * {
             margin: 0;
             padding: 0;
@@ -17,100 +18,6 @@
             background-color: #0a0a0a;
             font-family: 'Poppins', 'Segoe UI', system-ui, -apple-system, 'Inter', sans-serif;
             color: #f0f0f0;
-        }
-
-        @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&family=Poppins:wght@400;500;600;700;800&display=swap');
-
-        :root {
-            --senyawa: #670C1F;
-            --senyawa-dark: #4a0715;
-            --senyawa-glow: rgba(103, 12, 31, 0.4);
-            --text-light: #f5f3f0;
-            --card-bg: #111111;
-            --border-dim: #2a2a2a;
-        }
-
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #1e1e1e;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: var(--senyawa);
-            border-radius: 10px;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 32px;
-        }
-
-        /* navigasi */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            backdrop-filter: blur(16px);
-            background: rgba(10, 10, 10, 0.85);
-            z-index: 100;
-            border-bottom: 1px solid rgba(103, 12, 31, 0.5);
-        }
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 14px 32px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-        .nav-logo-img {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .nav-logo-img img {
-            height: 44px;
-            width: auto;
-            display: block;
-            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4));
-            transition: transform 0.2s;
-        }
-        .nav-logo-img img:hover {
-            transform: scale(1.02);
-        }
-        .logo-text {
-            font-size: 1.4rem;
-            font-weight: 700;
-            letter-spacing: -0.3px;
-            background: linear-gradient(135deg, #fff, #e0b0b0, #670C1F);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-        .nav-links a {
-            color: #eee;
-            text-decoration: none;
-            font-weight: 500;
-            transition: 0.2s;
-            font-size: 1rem;
-        }
-        .nav-links a:hover {
-            color: #e0a0a0;
-            border-bottom: 2px solid var(--senyawa);
-        }
-        .menu-toggle {
-            display: none;
-            font-size: 1.6rem;
-            cursor: pointer;
-            color: white;
         }
 
         /* header halaman */
@@ -239,52 +146,10 @@
             transform: translateX(-5px);
         }
 
-        /* footer */
-        footer {
-            background: #050505;
-            padding: 2rem;
-            text-align: center;
-            color: #aaa;
-            font-size: 0.9rem;
-            border-top: 1px solid #1f1f1f;
-            margin-top: 2rem;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
         /* responsive */
         @media (max-width: 880px) {
             .container {
                 padding: 0 24px;
-            }
-            .nav-links {
-                position: fixed;
-                top: 70px;
-                left: -100%;
-                flex-direction: column;
-                background: rgba(0,0,0,0.95);
-                backdrop-filter: blur(20px);
-                width: 70%;
-                height: calc(100vh - 70px);
-                padding: 2rem;
-                gap: 2rem;
-                transition: 0.3s;
-                border-right: 1px solid var(--senyawa);
-            }
-            .nav-links.active {
-                left: 0;
-            }
-            .menu-toggle {
-                display: block;
             }
             .page-header h1 {
                 font-size: 2.2rem;
