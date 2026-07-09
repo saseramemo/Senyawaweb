@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Photo Channel Trend - Senyawa Project</title>
+    <link rel="icon" type="image/x-icon" href="assets/Logo Senyawa no BG.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0a0a0a;
+            font-family: 'Poppins', 'Segoe UI', system-ui, -apple-system, 'Inter', sans-serif;
+            color: #f0f0f0;
+            min-height: 100vh;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&family=Poppins:wght@400;500;600;700;800&display=swap');
+
+        :root {
+            --senyawa: #670C1F;
+            --senyawa-dark: #4a0715;
+            --senyawa-glow: rgba(103, 12, 31, 0.4);
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e1e1e;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--senyawa);
+            border-radius: 10px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            backdrop-filter: blur(16px);
+            background: rgba(10, 10, 10, 0.85);
+            z-index: 100;
+            border-bottom: 1px solid rgba(103, 12, 31, 0.5);
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 32px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .nav-logo-img {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .nav-logo-img img {
+            height: 44px;
+            width: auto;
+            display: block;
+            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4));
+            transition: transform 0.2s;
+        }
+        .nav-logo-img img:hover {
+            transform: scale(1.02);
+        }
+        .logo-text {
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            background: linear-gradient(135deg, #fff, #e0b0b0);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        .nav-links a {
+            color: #eee;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.2s;
+            font-size: 1rem;
+        }
+        .nav-links a:hover {
+            color: #e0a0a0;
+            border-bottom: 2px solid var(--senyawa);
+        }
+        .menu-toggle {
+            display: none;
+            font-size: 1.6rem;
+            cursor: pointer;
+            color: white;
+        }
+
+        .page-header {
+            padding-top: 120px;
+            padding-bottom: 30px;
+            background: radial-gradient(circle at 30% 10%, #1a0a0e, #020202 85%);
+            border-bottom: 1px solid #1f1f1f;
+        }
+        .page-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .page-header h1:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--senyawa);
+            margin-top: 12px;
+            border-radius: 4px;
+        }
+        .page-header p {
+            font-size: 1rem;
+            color: #ccc;
+            margin-top: 0.5rem;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(103, 12, 31, 0.2);
+            border: 1px solid var(--senyawa);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            transition: 0.2s;
+        }
+        .back-button:hover {
+            background: var(--senyawa);
+            transform: translateX(-5px);
+        }
+
+        .editor-section {
+            padding: 30px 0 60px;
+        }
+
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 10px 24px;
+            border-radius: 40px;
+            border: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #670C1F, #4a0715);
+            color: white;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(103, 12, 31, 0.4);
+        }
+        .btn-success {
+            background: linear-gradient(135deg, #1e8a4a, #166d3a);
+            color: white;
+        }
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(30, 138, 74, 0.4);
+        }
+        .btn-danger {
+            background: linear-gradient(135deg, #c0392b, #922b21);
+            color: white;
+        }
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(192, 57, 43, 0.4);
+        }
+
+        .file-input-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+        .file-input-wrapper input[type="file"] {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .canvas-wrapper {
+            position: relative;
+            background: #0c0c0c;
+            border-radius: 24px;
+            border: 2px solid #222;
+            overflow: hidden;
+            display: inline-block;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        .canvas-wrapper canvas {
+            display: block;
+            max-width: 100%;
+            max-height: 80vh;
+            cursor: default;
+            image-rendering: auto;
+        }
+
+        .channel-list {
+            background: #0c0c0c;
+            border-radius: 20px;
+            border: 1px solid #222;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .channel-list h3 {
+            margin-bottom: 1rem;
+            color: #e0a0a0;
+            font-size: 1.1rem;
+        }
+        .channel-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .channel-tag {
+            background: #1a1a1a;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            color: #aaa;
+            border: 1px solid #333;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .channel-tag i {
+            color: var(--senyawa);
+            font-size: 0.6rem;
+        }
+        .channel-tag.active {
+            border-color: var(--senyawa);
+            color: white;
+            background: rgba(103, 12, 31, 0.2);
+        }
+
+        .info-box {
+            background: rgba(103, 12, 31, 0.1);
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 12px 16px;
+            color: #aaa;
+            font-size: 0.85rem;
+            margin-top: 1rem;
+        }
+        .info-box i {
+            color: var(--senyawa);
+            margin-right: 8px;
+        }
+
+        footer {
+            background: #050505;
+            padding: 2rem;
+            text-align: center;
+            color: #aaa;
+            font-size: 0.9rem;
+            border-top: 1px solid #1f1f1f;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 880px) {
+            .container {
+                padding: 0 24px;
+            }
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                flex-direction: column;
+                background: rgba(0,0,0,0.95);
+                backdrop-filter: blur(20px);
+                width: 70%;
+                height: calc(100vh - 70px);
+                padding: 2rem;
+                gap: 2rem;
+                transition: 0.3s;
+                border-right: 1px solid var(--senyawa);
+            }
+            .nav-links.active {
+                left: 0;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .controls .btn {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-container">
+        <div class="nav-logo-img">
+            <img src="assets/Logo Senyawa no BG.png" alt="Senyawa Icon" onerror="this.src='https://placehold.co/100x60?text=S'">
+            <span class="logo-text">SENYAWA</span>
+        </div>
+        <div class="menu-toggle" id="menuToggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#about">About Us</a></li>
+            <li><a href="index.html#members">Member</a></li>
+            <li><a href="index.html#projects">Project</a></li>
+            <li><a href="store.html">Store</a></li>
+            <li><a href="fanart.html">Fanart</a></li>
+            <li><a href="berita.html">Berita</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="page-header">
+    <div class="container">
+        <a href="index.html" class="back-button">
+            <i class="fas fa-arrow-left"></i>
+            <span>Kembali ke Beranda</span>
+        </a>
+        <h1><i class="fas fa-images"></i> Photo Channel Trend</h1>
+        <p>Upload selfie, tambahkan channel-channel Senyawa di sekitarmu, dan download hasilnya!</p>
+    </div>
+</div>
+
+<section class="editor-section">
+    <div class="container">
+        <div class="controls">
+            <div class="file-input-wrapper">
+                <button class="btn btn-primary">
+                    <i class="fas fa-upload"></i> Upload Foto
+                </button>
+                <input type="file" id="photoUpload" accept="image/*">
+            </div>
+            <button class="btn btn-success" id="addChannelsBtn">
+                <i class="fas fa-plus-circle"></i> Tambah Semua Channel
+            </button>
+            <button class="btn btn-danger" id="resetBtn">
+                <i class="fas fa-trash"></i> Reset Semua
+            </button>
+            <button class="btn btn-primary" id="downloadBtn">
+                <i class="fas fa-download"></i> Download Hasil
+            </button>
+        </div>
+
+        <div style="text-align: center;">
+            <div class="canvas-wrapper" id="canvasWrapper">
+                <canvas id="editorCanvas"></canvas>
+            </div>
+        </div>
+
+        <div class="channel-list">
+            <h3><i class="fas fa-users"></i> Channel Senyawa (18 Channel) - HD 16:9</h3>
+            <div class="channel-grid" id="channelGrid"></div>
+            <div class="info-box">
+                <i class="fas fa-info-circle"></i>
+                <span>Klik dan seret (drag) channel PNG untuk memindahkan posisinya. Semua channel dalam resolusi HD 1080 (16:9).</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>© 2025 Senyawa Project — Komunitas Youtuber Minecraft Indonesia. All rights reserved.</p>
+    <p style="margin-top: 8px; font-size: 0.8rem;">Created by Sasera</p>
+</footer>
+
+<script>
+    // ==========================================
+    // DATA CHANNEL - HD 16:9 (1080p)
+    // ==========================================
+    const channelList = [
+        { name: "Ryashel", file: "Ryashel Channel.png" },
+        { name: "Apid", file: "Apid Channel.png" },
+        { name: "Trindz", file: "Trindz Channel.png" },
+        { name: "Ermalio", file: "Ermalio Channel.png" },
+        { name: "Sasera", file: "Sasera Channel.png" },
+        { name: "Dzake", file: "Dzake Channel.png" },
+        { name: "Nijar", file: "Nijar Channel.png" },
+        { name: "Rein", file: "Rein Channel.png" },
+        { name: "Agim", file: "Agim Channel.png" },
+        { name: "Dain", file: "Dain Channel.png" },
+        { name: "Darel", file: "Darel Channel.png" },
+        { name: "Epa", file: "Epa Channel.png" },
+        { name: "Oxy", file: "Oxy Channel.png" },
+        { name: "Dink", file: "Dink Channel.png" },
+        { name: "Ama", file: "Ama Channel.png" },
+        { name: "Nun", file: "Nun Channel.png" },
+        { name: "Kean", file: "Kean Channel.png" },
+        { name: "Ulerr", file: "Ulerr Channel.png" }
+    ];
+
+    // ==========================================
+    // STATE
+    // ==========================================
+    const canvas = document.getElementById('editorCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    let backgroundImage = null;
+    let channelImages = [];
+    let isDragging = false;
+    let dragIndex = -1;
+    let dragOffsetX = 0;
+    let dragOffsetY = 0;
+    let canvasWidth = 800;
+    let canvasHeight = 600;
+
+    // Konfigurasi HD 16:9
+    const HD_WIDTH = 1080;
+    const HD_HEIGHT = 607.5; // 1080 / 16 * 9 = 607.5
+    const CHANNEL_DISPLAY_WIDTH = 180; // Lebar tampilan channel di canvas (lebih besar = lebih HD)
+    const CHANNEL_DISPLAY_HEIGHT = 101.25; // 180 / 16 * 9
+
+    // ==========================================
+    // FUNGSI UTAMA
+    // ==========================================
+
+    function resizeCanvas() {
+        const wrapper = document.getElementById('canvasWrapper');
+        const maxWidth = wrapper.clientWidth || 800;
+        const maxHeight = window.innerHeight * 0.75;
+        
+        let w = canvasWidth;
+        let h = canvasHeight;
+        if (w > maxWidth) {
+            const ratio = maxWidth / w;
+            w = maxWidth;
+            h = h * ratio;
+        }
+        if (h > maxHeight) {
+            const ratio = maxHeight / h;
+            h = maxHeight;
+            w = w * ratio;
+        }
+        canvas.style.width = w + 'px';
+        canvas.style.height = h + 'px';
+    }
+
+    function render() {
+        ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+        
+        if (backgroundImage) {
+            ctx.drawImage(backgroundImage, 0, 0, canvasWidth, canvasHeight);
+        } else {
+            const grad = ctx.createLinearGradient(0, 0, canvasWidth, canvasHeight);
+            grad.addColorStop(0, '#1a0a0e');
+            grad.addColorStop(1, '#0a0a0a');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+            
+            ctx.fillStyle = '#444';
+            ctx.font = '20px Poppins, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('Upload foto selfie untuk memulai', canvasWidth/2, canvasHeight/2);
+        }
+        
+        // Gambar semua channel dengan kualitas HD
+        channelImages.forEach((ch) => {
+            if (ch.img) {
+                // Gunakan imageSmoothingEnabled = true untuk hasil yang lebih halus
+                ctx.imageSmoothingEnabled = true;
+                ctx.imageSmoothingQuality = 'high';
+                ctx.drawImage(ch.img, ch.x, ch.y, ch.width, ch.height);
+            }
+        });
+        
+        resizeCanvas();
+    }
+
+    function loadChannelImages(callback) {
+        let loaded = 0;
+        const total = channelList.length;
+        
+        channelImages = [];
+        
+        channelList.forEach((channel) => {
+            const img = new Image();
+            img.crossOrigin = 'anonymous';
+            img.src = `assets/${channel.file}`;
+            img.onload = function() {
+                // Ukuran channel HD 16:9 (lebih besar dari sebelumnya)
+                const w = CHANNEL_DISPLAY_WIDTH;
+                const h = CHANNEL_DISPLAY_HEIGHT;
+                
+                channelImages.push({
+                    img: img,
+                    x: Math.random() * (canvasWidth - w - 20) + 10,
+                    y: Math.random() * (canvasHeight - h - 20) + 10,
+                    name: channel.name,
+                    file: channel.file,
+                    width: w,
+                    height: h,
+                    naturalWidth: img.width,
+                    naturalHeight: img.height
+                });
+                loaded++;
+                if (loaded === total && callback) callback();
+            };
+            img.onerror = function() {
+                console.warn(`⚠️ Gagal load: assets/${channel.file}`);
+                // Buat placeholder transparan
+                const canvasPlaceholder = document.createElement('canvas');
+                canvasPlaceholder.width = 180;
+                canvasPlaceholder.height = 101.25;
+                const pctx = canvasPlaceholder.getContext('2d');
+                pctx.clearRect(0, 0, 180, 101.25);
+                pctx.fillStyle = 'rgba(103, 12, 31, 0.3)';
+                pctx.fillRect(0, 0, 180, 101.25);
+                pctx.fillStyle = 'rgba(255,255,255,0.5)';
+                pctx.font = '14px Poppins, sans-serif';
+                pctx.textAlign = 'center';
+                pctx.fillText(channel.name, 90, 55);
+                
+                const imgPlaceholder = new Image();
+                imgPlaceholder.src = canvasPlaceholder.toDataURL('image/png');
+                imgPlaceholder.onload = function() {
+                    channelImages.push({
+                        img: imgPlaceholder,
+                        x: Math.random() * (canvasWidth - 180 - 20) + 10,
+                        y: Math.random() * (canvasHeight - 101.25 - 20) + 10,
+                        name: channel.name,
+                        file: channel.file,
+                        width: 180,
+                        height: 101.25,
+                        naturalWidth: 180,
+                        naturalHeight: 101.25
+                    });
+                    loaded++;
+                    if (loaded === total && callback) callback();
+                };
+            };
+        });
+    }
+
+    function addAllChannels() {
+        if (channelImages.length > 0) {
+            if (!confirm('Channel sudah ada. Ingin menambahkan ulang semua channel?')) return;
+        }
+        loadChannelImages(() => {
+            render();
+            updateChannelTags();
+        });
+    }
+
+    function resetAll() {
+        if (channelImages.length === 0 && !backgroundImage) return;
+        if (!confirm('Reset semua? Foto dan channel akan dihapus.')) return;
+        backgroundImage = null;
+        channelImages = [];
+        document.getElementById('photoUpload').value = '';
+        render();
+        updateChannelTags();
+    }
+
+    // ==========================================
+    // DRAG & DROP
+    // ==========================================
+
+    function getMousePos(e) {
+        const rect = canvas.getBoundingClientRect();
+        const scaleX = canvasWidth / rect.width;
+        const scaleY = canvasHeight / rect.height;
+        const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+        const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+        return {
+            x: (clientX - rect.left) * scaleX,
+            y: (clientY - rect.top) * scaleY
+        };
+    }
+
+    function getChannelAt(x, y) {
+        for (let i = channelImages.length - 1; i >= 0; i--) {
+            const ch = channelImages[i];
+            if (x >= ch.x && x <= ch.x + ch.width &&
+                y >= ch.y && y <= ch.y + ch.height) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    function onPointerDown(e) {
+        e.preventDefault();
+        const pos = getMousePos(e);
+        const idx = getChannelAt(pos.x, pos.y);
+        if (idx !== -1) {
+            isDragging = true;
+            dragIndex = idx;
+            const ch = channelImages[idx];
+            dragOffsetX = pos.x - ch.x;
+            dragOffsetY = pos.y - ch.y;
+            canvas.style.cursor = 'grabbing';
+        }
+    }
+
+    function onPointerMove(e) {
+        e.preventDefault();
+        const pos = getMousePos(e);
+        
+        if (isDragging && dragIndex !== -1) {
+            const ch = channelImages[dragIndex];
+            ch.x = Math.max(0, Math.min(canvasWidth - ch.width, pos.x - dragOffsetX));
+            ch.y = Math.max(0, Math.min(canvasHeight - ch.height, pos.y - dragOffsetY));
+            render();
+        } else {
+            const idx = getChannelAt(pos.x, pos.y);
+            canvas.style.cursor = idx !== -1 ? 'grab' : 'default';
+        }
+    }
+
+    function onPointerUp(e) {
+        if (isDragging) {
+            isDragging = false;
+            dragIndex = -1;
+            canvas.style.cursor = 'default';
+            render();
+        }
+    }
+
+    canvas.addEventListener('mousedown', onPointerDown);
+    window.addEventListener('mousemove', onPointerMove);
+    window.addEventListener('mouseup', onPointerUp);
+
+    canvas.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        onPointerDown(e);
+    });
+    window.addEventListener('touchmove', (e) => {
+        onPointerMove(e);
+    });
+    window.addEventListener('touchend', (e) => {
+        onPointerUp(e);
+    });
+
+    // ==========================================
+    // UPLOAD FOTO
+    // ==========================================
+
+    document.getElementById('photoUpload').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            const img = new Image();
+            img.onload = function() {
+                let w = img.width;
+                let h = img.height;
+                const maxSize = 2000;
+                if (w > maxSize || h > maxSize) {
+                    const ratio = Math.min(maxSize / w, maxSize / h);
+                    w = w * ratio;
+                    h = h * ratio;
+                }
+                canvasWidth = w;
+                canvasHeight = h;
+                canvas.width = w;
+                canvas.height = h;
+                backgroundImage = img;
+                
+                channelImages.forEach(ch => {
+                    ch.x = Math.min(ch.x, canvasWidth - ch.width);
+                    ch.y = Math.min(ch.y, canvasHeight - ch.height);
+                });
+                
+                render();
+            };
+            img.src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+    });
+
+    // ==========================================
+    // DOWNLOAD
+    // ==========================================
+
+    document.getElementById('downloadBtn').addEventListener('click', function() {
+        if (!backgroundImage && channelImages.length === 0) {
+            alert('Belum ada foto atau channel. Upload foto dulu!');
+            return;
+        }
+        render();
+        
+        // Download dengan kualitas HD
+        const link = document.createElement('a');
+        link.download = 'channel_trend_senyawa_hd.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+    });
+
+    // ==========================================
+    // TOMBOL LAINNYA
+    // ==========================================
+
+    document.getElementById('addChannelsBtn').addEventListener('click', addAllChannels);
+    document.getElementById('resetBtn').addEventListener('click', resetAll);
+
+    // ==========================================
+    // CHANNEL TAGS
+    // ==========================================
+
+    function updateChannelTags() {
+        const grid = document.getElementById('channelGrid');
+        grid.innerHTML = '';
+        channelList.forEach(ch => {
+            const exists = channelImages.some(c => c.name === ch.name);
+            const tag = document.createElement('span');
+            tag.className = `channel-tag ${exists ? 'active' : ''}`;
+            tag.innerHTML = `<i class="fas ${exists ? 'fa-check-circle' : 'fa-circle'}"></i> ${ch.name}`;
+            grid.appendChild(tag);
+        });
+    }
+
+    // ==========================================
+    // NAVIGASI
+    // ==========================================
+
+    function setupMobileNav() {
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        if (menuToggle) {
+            menuToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+        }
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+    }
+
+    function handleLogoFallback() {
+        const smallLogo = document.querySelector('.nav-logo-img img');
+        if (smallLogo) {
+            smallLogo.onerror = () => {
+                smallLogo.src = 'https://placehold.co/100x60/670C1F/white?text=SNY';
+            };
+        }
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Delete' || e.key === 'Backspace') {
+            if (isDragging && dragIndex !== -1) {
+                if (confirm(`Hapus channel ${channelImages[dragIndex].name}?`)) {
+                    channelImages.splice(dragIndex, 1);
+                    isDragging = false;
+                    dragIndex = -1;
+                    render();
+                    updateChannelTags();
+                }
+            }
+        }
+    });
+
+    // ==========================================
+    // INIT
+    // ==========================================
+
+    document.addEventListener('DOMContentLoaded', function() {
+        canvasWidth = 1080;
+        canvasHeight = 607.5;
+        canvas.width = canvasWidth;
+        canvas.height = canvasHeight;
+        
+        render();
+        updateChannelTags();
+        setupMobileNav();
+        handleLogoFallback();
+        
+        console.log('✅ Photo Channel Trend HD siap!');
+        console.log(`📁 ${channelList.length} channel dengan resolusi 16:9 HD (${HD_WIDTH}x${HD_HEIGHT})`);
+        console.log('📌 Upload foto selfie, lalu klik "Tambah Semua Channel"');
+    });
+
+    window.addEventListener('resize', resizeCanvas);
+</script>
+</body>
+</html>
