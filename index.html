@@ -179,6 +179,26 @@
         <div class="notification-body" id="notifBody"></div>
     </div>
 
+    <!-- ========== MODAL POPUP MEMBER ========== -->
+    <div id="memberModal" class="member-modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-body">
+                <div class="modal-member-img">
+                    <img id="modalMemberImg" src="" alt="Member">
+                </div>
+                <h2 id="modalMemberName" class="modal-member-name"></h2>
+                <p id="modalMemberDesc" class="modal-member-desc"></p>
+                <div class="modal-socials" id="modalSocials">
+                    <!-- Social links akan diisi oleh JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
     <footer>
         <p>© 2025 Senyawa Project — Komunitas Youtuber Minecraft Indonesia. All rights reserved.</p>
         <p style="margin-top: 8px; font-size: 0.8rem;">Created by Sasera</p>
@@ -203,27 +223,243 @@
         updateDateTime();
         setInterval(updateDateTime, 1000);
 
-        // Daftar Member sesuai file gambar + channel youtube 
+        // Daftar Member dengan data lengkap (bisa dikustomisasi per member)
         const membersList = [
-            { img: "Akagim.png", name: "Akagim", yt: "https://www.youtube.com/@Akagim" },
-            { img: "Amaruuru.png", name: "Amaruuru", yt: "https://www.youtube.com/@amaruuru" },
-            { img: "Dainveil.png", name: "Dainveil", yt: "https://www.youtube.com/@Dainveil" },
-            { img: "Darel.png", name: "Darel", yt: "https://www.youtube.com/channel/UCILE_q8OdzE4kJ2Hc9lMJkQ" },
-            { img: "Dzake.png", name: "Dzake", yt: "https://www.youtube.com/@dzakeee" },
-            { img: "Ermalio.png", name: "Ermalio", yt: "https://www.youtube.com/@ErmaisErolio" },
-            { img: "Gadink.png", name: "Gadink", yt: "https://www.youtube.com/@gadinkmc" },
-            { img: "IkiApid.png", name: "IkiApid", yt: "https://www.youtube.com/@ikiapid" },
-            { img: "Kean.png", name: "Kean", yt: "https://www.youtube.com/@KeanTuruXD" },
-            { img: "Nijar.png", name: "Nijar", yt: "https://www.youtube.com/@NijarMC" },
-            { img: "nunskuy.png", name: "nunskuy", yt: "https://www.youtube.com/@nunskuy" },
-            { img: "oxynix.png", name: "oxynix", yt: "https://www.youtube.com/@LordOxynix" },
-            { img: "RefaMC.png", name: "RefaMC", yt: "https://www.youtube.com/@RefaMC13" },
-            { img: "Reinwal.png", name: "Reinwal", yt: "https://www.youtube.com/@reinwal" },
-            { img: "Ryashel.png", name: "Ryashel", yt: "https://www.youtube.com/@Nyashel" },
-            { img: "Sasera.png", name: "Sasera", yt: "https://www.youtube.com/@Saseraa" },
-            { img: "Trindz.png", name: "Trindz", yt: "https://www.youtube.com/@trindz" },
-            { img: "Ulerr.png", name: "Ulerr", yt: "https://www.youtube.com/@ulersakti2" },
-            // { img: "Zabizz.png", name: "Zabizz", yt: "https://www.youtube.com/@Zabiz28" },
+            { 
+                img: "Akagim.png", 
+                name: "Akagim", 
+                yt: "https://www.youtube.com/@Akagim",
+                desc: "Halo guys gw Gim, selamat datang di channel gw. Semoga video gw dapat menghibur kalian dan tetap jadi sadboy :v",
+                socials: {
+                    youtube: "https://www.youtube.com/@Akagim",
+                    instagram: "https://www.instagram.com/akagim_/",
+                    discord: "https://discord.gg/Vu6SJNQKJn",
+                    tiktok: "https://www.tiktok.com/@akagimm",
+                    whatsapp: "https://whatsapp.com/channel/0029Vb66v9R0bIdwbZ2yqD30"
+                }
+            },
+            { 
+                img: "Amaruuru.png", 
+                name: "Amaruuru", 
+                yt: "https://www.youtube.com/@amaruuru",
+                desc: "Tidak ada deskripsi.",
+                socials: {
+                    youtube: "https://www.youtube.com/@amaruuru",
+                    instagram: "https://www.instagram.com/amaruuru/",
+                    
+                    
+                }
+            },
+            { 
+                img: "Dainveil.png", 
+                name: "Dainveil", 
+                yt: "https://www.youtube.com/@Dainveil",
+                desc: "Pemula Minecraft.",
+                socials: {
+                    youtube: "https://www.youtube.com/@Dainveil",
+                    instagram: "https://www.instagram.com/dainveil/",
+                    discord: "https://discord.gg/zBZRfqsPgB",
+                    tiktok: "https://www.tiktok.com/@dainveil",
+                    whatsapp: "https://whatsapp.com/channel/0029VbC8JVqHAdNUIBAyRr2e"
+                }
+            },
+            { 
+                img: "Darel.png", 
+                name: "Darel", 
+                yt: "https://www.youtube.com/channel/UCILE_q8OdzE4kJ2Hc9lMJkQ",
+                desc: "Lucu? menarik? seru? itu adalah saya (semoga)",
+                socials: {
+                    youtube: "https://www.youtube.com/channel/UCILE_q8OdzE4kJ2Hc9lMJkQ",
+                    instagram: "https://www.instagram.com/yasfi_ken01/",
+                
+                    tiktok: "https://www.tiktok.com/@yasfi_tm",
+                
+                    
+                    
+                }
+            },
+            { 
+                img: "Dzake.png", 
+                name: "Dzake", 
+                yt: "https://www.youtube.com/@dzakeee",
+                desc: "minecraft n stuff panggil aja jake",
+                socials: {
+                    youtube: "https://www.youtube.com/@dzakeee",
+                    instagram: "https://www.instagram.com/dza_ke/",
+                
+                    tiktok: "https://www.tiktok.com/@dzakegktersedia",
+                   
+                }
+            },
+            { 
+                img: "Ermalio.png", 
+                name: "Ermalio", 
+                yt: "https://www.youtube.com/@ErmaisErolio",
+                desc: "Vtuber Minecraft.",
+                socials: {
+                    youtube: "https://www.youtube.com/@ErmaisErolio",
+                    
+                    
+                    tiktok: "https://www.tiktok.com/@ermaiserolio",
+                    
+                }
+            },
+            { 
+                img: "Gadink.png", 
+                name: "Gadink", 
+                yt: "https://www.youtube.com/@gadinkmc",
+                desc: "aku suka mencoba hal baru. minecraft cuma jadi tempatnya.",
+                socials: {
+                    youtube: "https://www.youtube.com/@gadinkmc",
+                    instagram: "https://www.instagram.com/gxdnkfx/",
+              
+                    tiktok: "https://www.tiktok.com/@gadnkfx?lang=id-ID",
+                    whatsapp: "https://whatsapp.com/channel/0029VbDA4bUCsU9PyYiAMS0n"
+                }
+            },
+            { 
+                img: "IkiApid.png", 
+                name: "IkiApid", 
+                yt: "https://www.youtube.com/@ikiapid",
+                desc: "Tidak ada deskripsi.",
+                socials: {
+                    youtube: "https://www.youtube.com/@ikiapid",
+                    instagram: "https://www.instagram.com/ikiapid/",
+                    
+                    tiktok: "https://www.tiktok.com/@ikiapid?lang=id-ID",
+                   
+                }
+            },
+            { 
+                img: "Kean.png", 
+                name: "Kean", 
+                yt: "https://www.youtube.com/@KeanTuruXD",
+                desc: "sleeping bzbzbzbzz",
+                socials: {
+                    youtube: "https://www.youtube.com/@KeanTuruXD",
+                   instagram: "https://www.instagram.com/keanturuxd/",
+                    discord: "https://discord.gg/cqJNVfq2Gd",
+                    tiktok: "https://www.tiktok.com/@keanturuxd?lang=id-ID",
+                   
+                }
+            },
+            { 
+                img: "Nijar.png", 
+                name: "Nijar", 
+                yt: "https://www.youtube.com/@NijarMC",
+                desc: "Sup bro gw Nijar, Butuh konten hiburan? Channel ini solusinyaa... 😎",
+                socials: {
+                    youtube: "https://www.youtube.com/@NijarMC",
+                   instagram: "https://www.instagram.com/nijarmc/",
+                    
+                    tiktok: "https://www.tiktok.com/@nijarmc?lang=id-ID",
+                
+                }
+            },
+            { 
+                img: "nunskuy.png", 
+                name: "nunskuy", 
+                yt: "https://www.youtube.com/@nunskuy",
+                desc: "#nunskuyforpresident",
+                socials: {
+                    youtube: "https://www.youtube.com/@nunskuy",
+                   instagram: "https://www.instagram.com/nunskuyyy/",
+                    discord: "https://discord.com/invite/Ge4XKPuy2H",
+                    tiktok: "https://www.tiktok.com/@nunskuyyy",
+                    
+                }
+            },
+            { 
+                img: "oxynix.png", 
+                name: "oxynix", 
+                yt: "https://www.youtube.com/@LordOxynix",
+                desc: "kadang trap, kadang kiding.",
+                socials: {
+                    youtube: "https://www.youtube.com/@LordOxynix",
+                   instagram: "https://www.instagram.com/imoxynix/",
+                   
+                    tiktok: "https://www.tiktok.com/@imoxynix?lang=id-ID",
+                    whatsapp: "https://whatsapp.com/channel/0029VbC8Og7FXUuiehegUK3J"
+                }
+            },
+            { 
+                img: "RefaMC.png", 
+                name: "RefaMC", 
+                yt: "https://www.youtube.com/@RefaMC13",
+                desc: "Hi Aku Refa.",
+                socials: {
+                    youtube: "https://www.youtube.com/@RefaMC13",
+                   instagram: "https://www.instagram.com/refamcaseli/",
+                    
+                    tiktok: "https://www.tiktok.com/@refamcaseli?lang=id-ID",
+                    
+                }
+            },
+            { 
+                img: "Reinwal.png", 
+                name: "Reinwal", 
+                yt: "https://www.youtube.com/@reinwal",
+                desc: "i tell stories.",
+                socials: {
+                    youtube: "https://www.youtube.com/@reinwal",
+                   instagram: "https://www.instagram.com/reinnwal/",
+                
+                    tiktok: "https://www.tiktok.com/@reinwall?lang=id-ID",
+                    whatsapp: "https://whatsapp.com/channel/0029VbCtkfAGE56kPdoeya0q"
+                }
+            },
+            { 
+                img: "Ryashel.png", 
+                name: "Ryashel", 
+                yt: "https://www.youtube.com/@Nyashel",
+                desc: "Just Chillin Here. so take a look of my videos :3.",
+                socials: {
+                    youtube: "https://www.youtube.com/@Nyashel",
+                  instagram: "http://instagram.com/lemme.be.your.friends/",
+                  
+                    tiktok: "https://www.tiktok.com/@ryashel.ch?lang=id-ID",
+                   
+                }
+            },
+            { 
+                img: "Sasera.png", 
+                name: "Sasera", 
+                yt: "https://www.youtube.com/@Saseraa",
+                desc: "Minecraft dan Editing.",
+                socials: {
+                    youtube: "https://www.youtube.com/@Saseraa",
+                   instagram: "https://www.instagram.com/sasera_yt/",
+                    discord: "https://discord.com/invite/8D6PhpEB4k",
+                    tiktok: "https://www.tiktok.com/@sasera_yt?lang=id-ID",
+                    whatsapp: "https://whatsapp.com/channel/0029Vb8jTFTLNSaAuBvJIs31"
+                }
+            },
+            { 
+                img: "Trindz.png", 
+                name: "Trindz", 
+                yt: "https://www.youtube.com/@trindz",
+                desc: "a ton of minecraft here.",
+                socials: {
+                    youtube: "https://www.youtube.com/@trindz",
+                    instagram: "https://www.instagram.com/3.ndz/",
+                   
+                    tiktok: "https://www.tiktok.com/@_trindz?lang=id-ID",
+                  
+                }
+            },
+            { 
+                img: "Ulerr.png", 
+                name: "Ulerr", 
+                yt: "https://www.youtube.com/@ulersakti2",
+                desc: "gatau males.",
+                socials: {
+                    youtube: "https://www.youtube.com/@ulersakti2",
+                  instagram: "https://www.instagram.com/ulersakti/",
+                   
+                    tiktok: "https://www.tiktok.com/@ulerpendek?lang=id-ID",
+                    
+                }
+            },
         ];
 
         // Daftar project playlist
@@ -236,25 +472,125 @@
             { title: "Devastated SMP Season 2", playlistId: "PLXxoI8twiEB-mRvoEUvNTGJLgeoDEfq-T", category: "series", description: "Server Minecraft Hardcore di mana sekali mati, kamu langsung dibanned selamanya." },
         ];
 
-        // Render members 
+        // Render members dengan event click untuk modal
         function renderMembers() {
             const container = document.getElementById("membersGrid");
             if (!container) return;
             container.innerHTML = "";
-            membersList.forEach(member => {
+            membersList.forEach((member, index) => {
                 const card = document.createElement("div");
                 card.className = "member-card";
+                card.style.cursor = "pointer";
                 const imgPath = `assets/${member.img}`;
                 card.innerHTML = `
-                <div class="member-img">
-                    <img src="${imgPath}" alt="${member.name}" loading="lazy" onerror="this.src='https://placehold.co/400x400/333333/white?text=${member.name}'">
-                </div>
-                <div class="member-name">${member.name}</div>
-                <a href="${member.yt}" target="_blank" class="member-yt"><i class="fab fa-youtube"></i> YouTube</a>
-            `;
+                    <div class="member-img">
+                        <img src="${imgPath}" alt="${member.name}" loading="lazy" onerror="this.src='https://placehold.co/400x400/333333/white?text=${member.name}'">
+                    </div>
+                    <div class="member-name">${member.name}</div>
+                    <a href="${member.yt}" target="_blank" class="member-yt" onclick="event.stopPropagation();"><i class="fab fa-youtube"></i> YouTube</a>
+                `;
+                // Event click untuk membuka modal
+                card.addEventListener('click', function(e) {
+                    // Jangan buka modal jika yang diklik adalah link YouTube
+                    if (e.target.closest('.member-yt')) return;
+                    openMemberModal(index);
+                });
                 container.appendChild(card);
             });
         }
+
+        // ========== MODAL POPUP MEMBER ==========
+        function openMemberModal(index) {
+            const member = membersList[index];
+            if (!member) return;
+
+            const modal = document.getElementById('memberModal');
+            const img = document.getElementById('modalMemberImg');
+            const name = document.getElementById('modalMemberName');
+            const desc = document.getElementById('modalMemberDesc');
+            const socialsContainer = document.getElementById('modalSocials');
+
+            // Set data
+            img.src = `assets/${member.img}`;
+            img.alt = member.name;
+            img.onerror = function() {
+                this.src = `https://placehold.co/400x400/333333/white?text=${member.name}`;
+            };
+            name.textContent = member.name;
+            desc.textContent = member.desc || 'Anggota komunitas Senyawa Project.';
+
+            // Generate social links
+            socialsContainer.innerHTML = '';
+            if (member.socials) {
+                const socialIcons = {
+                    youtube: 'fab fa-youtube',
+                    instagram: 'fab fa-instagram',
+                    tiktok: 'fab fa-tiktok',
+                    discord: 'fab fa-discord',
+                    whatsapp: 'fab fa-whatsapp',
+                    twitter: 'fab fa-x-twitter',
+                    github: 'fab fa-github',
+                    twitch: 'fab fa-twitch',
+                    website: 'fas fa-globe'
+                };
+
+                const socialLabels = {
+                    youtube: 'YouTube',
+                    instagram: 'Instagram',
+                    tiktok: 'TikTok',
+                    discord: 'Discord',
+                    whatsapp: 'WhatsApp',
+                    twitter: 'X (Twitter)',
+                    github: 'GitHub',
+                    twitch: 'Twitch',
+                    website: 'Website'
+                };
+
+                Object.keys(member.socials).forEach(key => {
+                    const url = member.socials[key];
+                    if (url && url.trim() !== '') {
+                        const link = document.createElement('a');
+                        link.href = url;
+                        link.target = '_blank';
+                        link.className = `modal-social-link ${key}`;
+                        link.innerHTML = `<i class="${socialIcons[key] || 'fas fa-link'}"></i> ${socialLabels[key] || key}`;
+                        socialsContainer.appendChild(link);
+                    }
+                });
+            }
+
+            // Tampilkan modal
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMemberModal() {
+            const modal = document.getElementById('memberModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Event listener untuk menutup modal
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.getElementById('memberModal');
+            const closeBtn = document.getElementById('modalClose');
+            const overlay = modal?.querySelector('.modal-overlay');
+
+            if (closeBtn) {
+                closeBtn.addEventListener('click', closeMemberModal);
+            }
+
+            if (overlay) {
+                overlay.addEventListener('click', closeMemberModal);
+            }
+
+            // Tutup dengan tombol ESC
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    closeMemberModal();
+                }
+            });
+        });
 
         function renderProjects(category = "all") {
             const container = document.getElementById("projectsGrid");
@@ -267,12 +603,12 @@
 
             if (filteredProjects.length === 0) {
                 container.innerHTML = `
-            <div style="grid-column: 1/-1; text-align: center; padding: 60px 20px; background: #111; border-radius: 24px;">
-                <i class="fas fa-folder-open" style="font-size: 3rem; color: #670C1F; margin-bottom: 1rem; display: block;"></i>
-                <h3>Belum ada project di kategori ini</h3>
-                <p style="color: #aaa; margin-top: 0.5rem;">Project lainnya akan segera hadir!</p>
-            </div>
-        `;
+                    <div style="grid-column: 1/-1; text-align: center; padding: 60px 20px; background: #111; border-radius: 24px;">
+                        <i class="fas fa-folder-open" style="font-size: 3rem; color: #670C1F; margin-bottom: 1rem; display: block;"></i>
+                        <h3>Belum ada project di kategori ini</h3>
+                        <p style="color: #aaa; margin-top: 0.5rem;">Project lainnya akan segera hadir!</p>
+                    </div>
+                `;
                 return;
             }
 
@@ -286,20 +622,20 @@
                 const card = document.createElement("div");
                 card.className = "project-card";
                 card.innerHTML = `
-            <div class="yt-lazy-facade" data-playlist="${project.playlistId}" data-thumb="${thumbUrl}"${styleAttr}>
-                <div class="yt-play-btn">
-                    <svg viewBox="0 0 68 48">
-                        <path class="yt-play-bg" d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,.13,34,.13s-21.79,0-27.1,.142C3.97,1.05,2.26,3.53,1.48,6.46A72.8,72.8,0,0,0,.13,24a72.8,72.8,0,0,0,1.35,17.54c0.78,2.93,2.49,5.41,5.42,6.19C12.21,47.87,34,47.87,34,47.87s21.79,0,27.1-.142c2.93-.78,4.64-3.26,5.42-6.19A72.8,72.8,0,0,0,67.87,24a72.8,72.8,0,0,0-1.35-16.26Z" fill="#ff0000"></path>
-                        <path d="M27,36l18-12-18-12v24Z" fill="#ffffff"></path>
-                    </svg>
-                </div>
-            </div>
-            <div class="project-info">
-                <div class="project-category">${categoryName}</div>
-                <div class="project-title">${project.title}</div>
-                <div class="project-desc">${project.description}</div>
-            </div>
-        `;
+                    <div class="yt-lazy-facade" data-playlist="${project.playlistId}" data-thumb="${thumbUrl}"${styleAttr}>
+                        <div class="yt-play-btn">
+                            <svg viewBox="0 0 68 48">
+                                <path class="yt-play-bg" d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,.13,34,.13s-21.79,0-27.1,.142C3.97,1.05,2.26,3.53,1.48,6.46A72.8,72.8,0,0,0,.13,24a72.8,72.8,0,0,0,1.35,17.54c0.78,2.93,2.49,5.41,5.42,6.19C12.21,47.87,34,47.87,34,47.87s21.79,0,27.1-.142c2.93-.78,4.64-3.26,5.42-6.19A72.8,72.8,0,0,0,67.87,24a72.8,72.8,0,0,0-1.35-16.26Z" fill="#ff0000"></path>
+                                <path d="M27,36l18-12-18-12v24Z" fill="#ffffff"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <div class="project-category">${categoryName}</div>
+                        <div class="project-title">${project.title}</div>
+                        <div class="project-desc">${project.description}</div>
+                    </div>
+                `;
                 container.appendChild(card);
             });
             
@@ -338,34 +674,34 @@
                 }
 
                 facade.addEventListener("click", () => {
-                // Ganti isi facade dengan animasi loading (spinner)
-                facade.innerHTML = '<div class="loader-spinner" style="position: absolute; top: 50%; left: 50%; margin-top: -18px; margin-left: -18px; z-index: 1;"></div>';
+                    // Ganti isi facade dengan animasi loading (spinner)
+                    facade.innerHTML = '<div class="loader-spinner" style="position: absolute; top: 50%; left: 50%; margin-top: -18px; margin-left: -18px; z-index: 1;"></div>';
 
-                // Coba ekstrak Video ID dari URL thumbnail yang didapat oEmbed
-                let videoId = "";
-                if (thumbUrl && thumbUrl.includes("/vi/")) {
-                    videoId = thumbUrl.split("/vi/")[1].split("/")[0];
-                }
+                    // Coba ekstrak Video ID dari URL thumbnail yang didapat oEmbed
+                    let videoId = "";
+                    if (thumbUrl && thumbUrl.includes("/vi/")) {
+                        videoId = thumbUrl.split("/vi/")[1].split("/")[0];
+                    }
 
                     const iframe = document.createElement("iframe");
-                if (videoId) {
-                    iframe.setAttribute("src", `https://www.youtube.com/embed/${videoId}?feature=oembed&autoplay=1`);
-                } else {
-                    iframe.setAttribute("src", `https://www.youtube.com/embed/videoseries?list=${playlistId}&autoplay=1&rel=0`);
-                }
+                    if (videoId) {
+                        iframe.setAttribute("src", `https://www.youtube.com/embed/${videoId}?feature=oembed&autoplay=1`);
+                    } else {
+                        iframe.setAttribute("src", `https://www.youtube.com/embed/videoseries?list=${playlistId}&autoplay=1&rel=0`);
+                    }
                     iframe.setAttribute("frameborder", "0");
                     iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture");
                     iframe.setAttribute("allowfullscreen", "true");
 
-                // Sembunyikan iframe sementara sampai selesai loading
-                iframe.style.opacity = "0";
-                iframe.style.transition = "opacity 0.4s ease";
+                    // Sembunyikan iframe sementara sampai selesai loading
+                    iframe.style.opacity = "0";
+                    iframe.style.transition = "opacity 0.4s ease";
 
-                iframe.onload = () => {
-                    iframe.style.opacity = "1"; // Munculkan iframe perlahan
-                    const spinner = facade.querySelector('.loader-spinner');
-                    if (spinner) spinner.remove(); // Hapus spinner
-                };
+                    iframe.onload = () => {
+                        iframe.style.opacity = "1"; // Munculkan iframe perlahan
+                        const spinner = facade.querySelector('.loader-spinner');
+                        if (spinner) spinner.remove(); // Hapus spinner
+                    };
 
                     facade.appendChild(iframe);
                     facade.style.cursor = "default";
@@ -474,51 +810,24 @@
         function enforceNoBorderRadiusOnMemberImages() {
             const style = document.createElement('style');
             style.textContent = `
-            .member-img, .member-img img, .member-card .member-img, .member-card .member-img img {
-                border-radius: 0px !important;
-                overflow: visible !important;
-            }
-            .member-card {
-                border-radius: 20px;
-            }
-            .member-img {
-                border-radius: 0px !important;
-                background: transparent;
-            }
-        `;
+                .member-img, .member-img img, .member-card .member-img, .member-card .member-img img {
+                    border-radius: 0px !important;
+                    overflow: visible !important;
+                }
+                .member-card {
+                    border-radius: 20px;
+                }
+                .member-img {
+                    border-radius: 0px !important;
+                    background: transparent;
+                }
+            `;
             document.head.appendChild(style);
         }
 
         // ========== SISTEM NOTIFIKASI LENGKAP ==========
         // DATA NOTIFIKASI - EDIT SESUAI KEBUTUHAN
         const notificationsData = [
-            // {
-            //     id: 2, // Sesuaikan dengan urutan ID terakhir Anda
-            //     message: "Kesempatan terakhir! Pendaftaran 100 Player One Chunk akan segera ditutup.",
-            //     date: "8 Mei 2026",
-            //     targetDate: "2026-05-08 23:59:59",
-            //     isCountdown: true,
-            //     countdownText: "Pendaftaran berakhir dalam: ",
-            //     expiredText: "Pendaftaran 100 Player One Chunk telah ditutup!",
-            //     link: "https://docs.google.com/forms/d/e/1FAIpQLSdixVLElWSZ4l092MFg47Wwm5BkJofkZfyyiqvv2cgrRDPv5w/viewform",
-            //     linkText: "Daftar Sekarang →"
-            // },
-            // {
-            //     id: 10, 
-            //     message: "Daftar pemain terpilih telah dirilis, cek namamu sekarang!",
-            //     date: "9 Mei 2026",
-            //     link: "ocditerima.html",
-            //     linkText: "Cek Daftar →"
-            // },
-            // {
-            //     id: 1, 
-            //     message: "Persiapkan dirimu! Event 100 Player One Chunk akan segera dimulai!",
-            //     date: "10 Mei 2026",
-            //     targetDate: "2026-05-10 19:00:00",
-            //     isCountdown: true,
-            //     countdownText: "Event dimulai dalam: ",
-            //     expiredText: "Event sedang berlangsung!"
-            // },
             {
                 id: 9,
                 message: "Ingin info lebih lengkap soal event, jadwal, dan lainnya? Join Discord resmi kami sekarang!",
@@ -526,61 +835,27 @@
                 link: "https://discord.com/invite/xGTeNEsPjg",
                 linkText: "Join Discord Senyawa →"
             },
-{
+            {
+                id: 11, 
+                message: "Cape Senyawa Telah Hadir!",
+                date: "3 Agustus 2026",
+                link: "https://youtu.be/i38jWKhw7sE",
+                linkText: "Tutorial Pasang →"
+            },
+            {
                 id: 10, 
                 message: "Cobain Trend Foto Channel Senyawa!",
                 date: "10 Juli 2026",
                 link: "photochanneltrend.html",
                 linkText: "Edit Fotomu! →"
             },
-            // Notifikasi biasa (hanya teks)
-            // {
-            //     id: 1,
-            //     message: "Selamat! Event Skyblock Battle Royale akan segera dimulai minggu depan!",
-            //     date: "15 Mei 2025"
-            // },
-            // {
-            //     id: 2,
-            //     message: "Merchandise terbaru Senyawa Hoodie sudah tersedia di Store!",
-            //     date: "10 Mei 2025"
-            // },
-            // Notifikasi dengan link
-            // {
-            //     id: 3,
-            //     message: "Dapatkan diskon 20% untuk pembelian merchandise Senyawa!",
-            //     date: "12 Mei 2025",
-            //     link: "store.html",
-            //     linkText: "Belanja Sekarang →"
-            // },
-            // Notifikasi dengan gambar
-            // {
-            //     id: 4,
-            //     message: "Hoodie Senyawa Edition sekarang tersedia! Desain eksklusif limited edition.",
-            //     date: "5 Mei 2025",
-            //     imageUrl: "assets/merch/hoodie.png",
-            //     imageAlt: "Hoodie Senyawa",
-            //     link: "store.html",
-            //     linkText: "Lihat Detail"
-            // },
-            // Notifikasi COUNTDOWN (hitungan mundur)
-            // {
-            //     id: 5,
-            //     message: "Pendaftaran Event Skyblock Battle Royale akan ditutup!",
-            //     date: "20 Mei 2025",
-            //     targetDate: "2025-06-01 23:59:59",
-            //     isCountdown: true,
-            //     countdownText: "Pendaftaran ditutup dalam: ",
-            //     expiredText: "Pendaftaran telah ditutup!"
-            // },
-            // {
-            //     id: 6,
-            //     message: "Pre-Order Merchandise Hoodie Senyawa berakhir!",
-            //     date: "18 Mei 2025",
-            //     targetDate: "2025-05-31 23:59:59",
-            //     isCountdown: true,
-            //     countdownText: "Pre-Order berakhir dalam: ",
-            //     expiredText: "Pre-Order telah berakhir!"
-            // }
+            {
+                id: 12, 
+                message: "Aset-aset png Senyawa",
+                date: "3 Agustus 2026",
+                link: "https://drive.google.com/drive/folders/1WgI0qqA7EaghrXyiuAFbXzhI1XVcb0ce?usp=drive_link",
+                linkText: "Download →"
+            },
         ];
 
         function getReadNotifIds() {
@@ -679,33 +954,33 @@
 
                 if (hasImage) {
                     html += `
-                    <div class="notification-item has-image" data-id="${notif.id}" style="opacity: ${isRead ? 0.6 : 1};">
-                        <div class="notif-thumb">
-                            <img src="${notif.imageUrl}" alt="${notif.imageAlt || 'Gambar notifikasi'}" onerror="this.src='https://placehold.co/55x55/333/666?text=No+Image'">
+                        <div class="notification-item has-image" data-id="${notif.id}" style="opacity: ${isRead ? 0.6 : 1};">
+                            <div class="notif-thumb">
+                                <img src="${notif.imageUrl}" alt="${notif.imageAlt || 'Gambar notifikasi'}" onerror="this.src='https://placehold.co/55x55/333/666?text=No+Image'">
+                            </div>
+                            <div class="notif-content">
+                                <div>${notif.message}</div>
+                                ${notif.date ? `<span class="notification-date"><i class="far fa-calendar-alt"></i> ${notif.date}</span>` : ''}
+                                ${isCountdown ? `<div class="countdown-timer" data-target="${notif.targetDate}" data-expired="${notif.expiredText || '⏰ Waktu telah habis!'}">${notif.countdownText || ''} menghitung...</div>` : ''}
+                                ${hasLink ? `<div style="margin-top: 6px;"><a href="${notif.link}" target="${notif.link.startsWith('http') ? '_blank' : '_self'}" class="notif-link">${notif.linkText || 'Lihat Selengkapnya →'}</a></div>` : ''}
+                                ${!isRead ? `<button class="mark-read-btn" data-id="${notif.id}" style="margin-top: 6px;">✓ Tandai Dibaca</button>` : `<span style="font-size: 10px; color: #558; margin-top: 6px; display: inline-block;"><i class="fas fa-check-circle"></i> Sudah dibaca</span>`}
+                            </div>
                         </div>
-                        <div class="notif-content">
-                            <div>${notif.message}</div>
-                            ${notif.date ? `<span class="notification-date"><i class="far fa-calendar-alt"></i> ${notif.date}</span>` : ''}
-                            ${isCountdown ? `<div class="countdown-timer" data-target="${notif.targetDate}" data-expired="${notif.expiredText || '⏰ Waktu telah habis!'}">${notif.countdownText || ''} menghitung...</div>` : ''}
-                            ${hasLink ? `<div style="margin-top: 6px;"><a href="${notif.link}" target="${notif.link.startsWith('http') ? '_blank' : '_self'}" class="notif-link">${notif.linkText || 'Lihat Selengkapnya →'}</a></div>` : ''}
-                            ${!isRead ? `<button class="mark-read-btn" data-id="${notif.id}" style="margin-top: 6px;">✓ Tandai Dibaca</button>` : `<span style="font-size: 10px; color: #558; margin-top: 6px; display: inline-block;"><i class="fas fa-check-circle"></i> Sudah dibaca</span>`}
-                        </div>
-                    </div>
-                `;
+                    `;
                 } else {
                     html += `
-                    <div class="notification-item" data-id="${notif.id}" style="opacity: ${isRead ? 0.6 : 1};">
-                        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                            <div style="flex:1;">
-                                ${notif.message}
-                                ${notif.date ? `<span class="notification-date"><i class="far fa-calendar-alt"></i> ${notif.date}</span>` : ''}
-                                ${isCountdown ? `<div class="countdown-timer" data-target="${notif.targetDate}" data-expired="${notif.expiredText || 'Waktu telah habis!'}">${notif.countdownText || ''} menghitung...</div>` : ''}
-                                ${hasLink ? `<div style="margin-top: 6px;"><a href="${notif.link}" target="${notif.link.startsWith('http') ? '_blank' : '_self'}" class="notif-link">${notif.linkText || 'Selengkapnya →'}</a></div>` : ''}
+                        <div class="notification-item" data-id="${notif.id}" style="opacity: ${isRead ? 0.6 : 1};">
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                                <div style="flex:1;">
+                                    ${notif.message}
+                                    ${notif.date ? `<span class="notification-date"><i class="far fa-calendar-alt"></i> ${notif.date}</span>` : ''}
+                                    ${isCountdown ? `<div class="countdown-timer" data-target="${notif.targetDate}" data-expired="${notif.expiredText || 'Waktu telah habis!'}">${notif.countdownText || ''} menghitung...</div>` : ''}
+                                    ${hasLink ? `<div style="margin-top: 6px;"><a href="${notif.link}" target="${notif.link.startsWith('http') ? '_blank' : '_self'}" class="notif-link">${notif.linkText || 'Selengkapnya →'}</a></div>` : ''}
+                                </div>
+                                ${!isRead ? `<button class="mark-read-btn" data-id="${notif.id}" style="margin-left: 8px;">Baca</button>` : '<span style="font-size: 10px; color: #558; margin-left: 8px;"><i class="fas fa-check-circle"></i></span>'}
                             </div>
-                            ${!isRead ? `<button class="mark-read-btn" data-id="${notif.id}" style="margin-left: 8px;">Baca</button>` : '<span style="font-size: 10px; color: #558; margin-left: 8px;"><i class="fas fa-check-circle"></i></span>'}
                         </div>
-                    </div>
-                `;
+                    `;
                 }
             });
 
@@ -787,6 +1062,7 @@
             setupNotificationBell();
             console.log("Senyawa Project web siap! Member foto tanpa crop / sudut halus, logo header dengan file no BG. Tombol 'Lihat semua project' di kanan atas section Our Projects dan menu 'Store' telah ditambahkan.");
             console.log("✅ Sistem notifikasi lengkap (dengan gambar, link, countdown) siap digunakan!");
+            console.log("✅ Sistem modal popup member siap digunakan!");
         });
 
         // Menghilangkan efek loading ketika SEMUA data (gambar, iframe) selesai dimuat
