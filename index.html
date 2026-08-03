@@ -46,7 +46,6 @@
     <nav>
         <div class="nav-container">
             <div class="nav-logo-img">
-                <!-- Logo kecil tanpa background dari folder assets (Logo Senyawa no BG.png) -->
                 <img src="assets/Logo Senyawa no BG.png" alt="Senyawa Icon"
                     onerror="this.src='https://placehold.co/100x60?text=S'">
                 <span class="logo-text">SENYAWA</span>
@@ -64,15 +63,12 @@
                 <li><a href="#members">Member</a></li>
                 <li><a href="#projects">Project</a></li>
                 <li><a href="store.html" id="storeNavLink">Store</a></li>
-                <!-- <li><a href="fanart.html" id="storeNavLink">fanart</a></li> -->
             </ul>
         </div>
     </nav>
 
-    <!-- Hero section dengan logo besar satu layar -->
     <section id="home" class="hero">
         <div class="hero-logo">
-            <!-- Logo Senyawa Project utama -->
             <img src="assets/Logo Senyawa Project.png" alt="Senyawa Project Logo"
                 onerror="this.src='https://placehold.co/800x400?text=Logo+Senyawa'">
         </div>
@@ -92,7 +88,6 @@
         </div>
     </section>
 
-    <!-- ABOUT US section -->
     <section id="about">
         <div class="container">
             <h2 class="section-title">◈ About Us</h2>
@@ -105,17 +100,14 @@
         </div>
     </section>
 
-    <!-- MEMBERS SECTION (foto asli, tanpa crop sudut halus, tidak ada border-radius) -->
     <section id="members">
         <div class="container">
             <h2 class="section-title">◈ Members</h2>
             <div class="members-grid" id="membersGrid">
-                <!-- Data member akan diisi javascript dari daftar foto dan channel youtube -->
             </div>
         </div>
     </section>
 
-    <!-- COLLABORATORS section -->
     <section id="collaborators">
         <div class="container">
             <h2 class="section-title">◈ Collaborators</h2>
@@ -145,24 +137,20 @@
         </div>
     </section>
 
-    <!-- OUR PROJECTS section: playlist youtube + tombol Lihat Semua Project di kanan atas -->
     <section id="projects">
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">◈ Our Projects</h2>
-                <!-- Tombol lihat semua project yang mengarah ke project.html (posisi kanan atas) -->
                 <a href="project.html" class="section-view-btn" id="viewAllProjectsBtn">
                     <span>Lihat semua project</span>
                     <i class="fas fa-arrow-right"></i>
                 </a>
             </div>
             <div class="projects-grid" id="projectsGrid">
-                <!-- playlist akan di generate via js -->
             </div>
         </div>
     </section>
 
-    <!-- ========== FLOATING NOTIFICATION BELL ========== -->
     <div class="notification-bell">
         <div class="bell-button" id="bellButton">
             <i class="fas fa-bell"></i>
@@ -170,7 +158,6 @@
         </div>
     </div>
 
-    <!-- Popup Notifikasi -->
     <div class="notification-popup hide" id="notifPopup">
         <div class="notification-header">
             <span><i class="fas fa-bell" style="margin-right: 8px;"></i> Notifikasi</span>
@@ -179,7 +166,6 @@
         <div class="notification-body" id="notifBody"></div>
     </div>
 
-    <!-- ========== MODAL POPUP MEMBER ========== -->
     <div id="memberModal" class="member-modal">
         <div class="modal-overlay"></div>
         <div class="modal-content">
@@ -193,7 +179,6 @@
                 <h2 id="modalMemberName" class="modal-member-name"></h2>
                 <p id="modalMemberDesc" class="modal-member-desc"></p>
                 <div class="modal-socials" id="modalSocials">
-                    <!-- Social links akan diisi oleh JS -->
                 </div>
             </div>
         </div>
@@ -202,8 +187,6 @@
     <footer>
         <p>© 2025 Senyawa Project — Komunitas Youtuber Minecraft Indonesia. All rights reserved.</p>
         <p style="margin-top: 8px; font-size: 0.8rem;">Created by Sasera</p>
-
-        <!-- TAMBAHAN: dekorasi garis & jam real-time (tanpa merubah struktur footer asli) -->
         <div class="footer-divider"></div>
         <div class="footer-time" id="liveDateTime"></div>
         <div style="margin-top: 10px; font-size: 0.75rem;">
@@ -212,7 +195,9 @@
     </footer>
 
     <script>
-        // Fungsi update jam & tanggal real-time (tambahan)
+        // ============================================================
+        // FUNGSI UTILITY
+        // ============================================================
         function updateDateTime() {
             const now = new Date();
             const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', timeZoneName: 'short' };
@@ -223,7 +208,9 @@
         updateDateTime();
         setInterval(updateDateTime, 1000);
 
-        // Daftar Member dengan data lengkap (bisa dikustomisasi per member)
+        // ============================================================
+        // DATA MEMBER
+        // ============================================================
         const membersList = [
             { 
                 img: "Akagim.png", 
@@ -246,8 +233,6 @@
                 socials: {
                     youtube: "https://www.youtube.com/@amaruuru",
                     instagram: "https://www.instagram.com/amaruuru/",
-                    
-                    
                 }
             },
             { 
@@ -271,11 +256,7 @@
                 socials: {
                     youtube: "https://www.youtube.com/channel/UCILE_q8OdzE4kJ2Hc9lMJkQ",
                     instagram: "https://www.instagram.com/yasfi_ken01/",
-                
                     tiktok: "https://www.tiktok.com/@yasfi_tm",
-                
-                    
-                    
                 }
             },
             { 
@@ -286,9 +267,7 @@
                 socials: {
                     youtube: "https://www.youtube.com/@dzakeee",
                     instagram: "https://www.instagram.com/dza_ke/",
-                
                     tiktok: "https://www.tiktok.com/@dzakegktersedia",
-                   
                 }
             },
             { 
@@ -298,10 +277,7 @@
                 desc: "Vtuber Minecraft.",
                 socials: {
                     youtube: "https://www.youtube.com/@ErmaisErolio",
-                    
-                    
                     tiktok: "https://www.tiktok.com/@ermaiserolio",
-                    
                 }
             },
             { 
@@ -312,7 +288,6 @@
                 socials: {
                     youtube: "https://www.youtube.com/@gadinkmc",
                     instagram: "https://www.instagram.com/gxdnkfx/",
-              
                     tiktok: "https://www.tiktok.com/@gadnkfx?lang=id-ID",
                     whatsapp: "https://whatsapp.com/channel/0029VbDA4bUCsU9PyYiAMS0n"
                 }
@@ -325,9 +300,7 @@
                 socials: {
                     youtube: "https://www.youtube.com/@ikiapid",
                     instagram: "https://www.instagram.com/ikiapid/",
-                    
                     tiktok: "https://www.tiktok.com/@ikiapid?lang=id-ID",
-                   
                 }
             },
             { 
@@ -337,10 +310,9 @@
                 desc: "sleeping bzbzbzbzz",
                 socials: {
                     youtube: "https://www.youtube.com/@KeanTuruXD",
-                   instagram: "https://www.instagram.com/keanturuxd/",
+                    instagram: "https://www.instagram.com/keanturuxd/",
                     discord: "https://discord.gg/cqJNVfq2Gd",
                     tiktok: "https://www.tiktok.com/@keanturuxd?lang=id-ID",
-                   
                 }
             },
             { 
@@ -350,10 +322,8 @@
                 desc: "Sup bro gw Nijar, Butuh konten hiburan? Channel ini solusinyaa... 😎",
                 socials: {
                     youtube: "https://www.youtube.com/@NijarMC",
-                   instagram: "https://www.instagram.com/nijarmc/",
-                    
+                    instagram: "https://www.instagram.com/nijarmc/",
                     tiktok: "https://www.tiktok.com/@nijarmc?lang=id-ID",
-                
                 }
             },
             { 
@@ -363,10 +333,9 @@
                 desc: "#nunskuyforpresident",
                 socials: {
                     youtube: "https://www.youtube.com/@nunskuy",
-                   instagram: "https://www.instagram.com/nunskuyyy/",
+                    instagram: "https://www.instagram.com/nunskuyyy/",
                     discord: "https://discord.com/invite/Ge4XKPuy2H",
                     tiktok: "https://www.tiktok.com/@nunskuyyy",
-                    
                 }
             },
             { 
@@ -376,8 +345,7 @@
                 desc: "kadang trap, kadang kiding.",
                 socials: {
                     youtube: "https://www.youtube.com/@LordOxynix",
-                   instagram: "https://www.instagram.com/imoxynix/",
-                   
+                    instagram: "https://www.instagram.com/imoxynix/",
                     tiktok: "https://www.tiktok.com/@imoxynix?lang=id-ID",
                     whatsapp: "https://whatsapp.com/channel/0029VbC8Og7FXUuiehegUK3J"
                 }
@@ -389,10 +357,8 @@
                 desc: "Hi Aku Refa.",
                 socials: {
                     youtube: "https://www.youtube.com/@RefaMC13",
-                   instagram: "https://www.instagram.com/refamcaseli/",
-                    
+                    instagram: "https://www.instagram.com/refamcaseli/",
                     tiktok: "https://www.tiktok.com/@refamcaseli?lang=id-ID",
-                    
                 }
             },
             { 
@@ -402,8 +368,7 @@
                 desc: "i tell stories.",
                 socials: {
                     youtube: "https://www.youtube.com/@reinwal",
-                   instagram: "https://www.instagram.com/reinnwal/",
-                
+                    instagram: "https://www.instagram.com/reinnwal/",
                     tiktok: "https://www.tiktok.com/@reinwall?lang=id-ID",
                     whatsapp: "https://whatsapp.com/channel/0029VbCtkfAGE56kPdoeya0q"
                 }
@@ -415,10 +380,8 @@
                 desc: "Just Chillin Here. so take a look of my videos :3.",
                 socials: {
                     youtube: "https://www.youtube.com/@Nyashel",
-                  instagram: "http://instagram.com/lemme.be.your.friends/",
-                  
+                    instagram: "http://instagram.com/lemme.be.your.friends/",
                     tiktok: "https://www.tiktok.com/@ryashel.ch?lang=id-ID",
-                   
                 }
             },
             { 
@@ -428,7 +391,7 @@
                 desc: "Minecraft dan Editing.",
                 socials: {
                     youtube: "https://www.youtube.com/@Saseraa",
-                   instagram: "https://www.instagram.com/sasera_yt/",
+                    instagram: "https://www.instagram.com/sasera_yt/",
                     discord: "https://discord.com/invite/8D6PhpEB4k",
                     tiktok: "https://www.tiktok.com/@sasera_yt?lang=id-ID",
                     whatsapp: "https://whatsapp.com/channel/0029Vb8jTFTLNSaAuBvJIs31"
@@ -442,9 +405,7 @@
                 socials: {
                     youtube: "https://www.youtube.com/@trindz",
                     instagram: "https://www.instagram.com/3.ndz/",
-                   
                     tiktok: "https://www.tiktok.com/@_trindz?lang=id-ID",
-                  
                 }
             },
             { 
@@ -454,15 +415,15 @@
                 desc: "gatau males.",
                 socials: {
                     youtube: "https://www.youtube.com/@ulersakti2",
-                  instagram: "https://www.instagram.com/ulersakti/",
-                   
+                    instagram: "https://www.instagram.com/ulersakti/",
                     tiktok: "https://www.tiktok.com/@ulerpendek?lang=id-ID",
-                    
                 }
             },
         ];
 
-        // Daftar project playlist
+        // ============================================================
+        // DATA PROJECT
+        // ============================================================
         const projectsData = [
             { title: "Senyawa SMP", playlistId: "PLXxoI8twiEB_nKrlz3M887MSVNNDlBUkV", category: "series", description: "Series survival multiplayer dengan para member Senyawa Project." },
             { title: "Skyblock Battle Royale", playlistId: "PLXxoI8twiEB_Z0uAUZwHE6I6JMQq8xCsg", category: "event", description: "Pertempuran di skyblock, siapa yang terakhir bertahan?" },
@@ -472,7 +433,9 @@
             { title: "Devastated SMP Season 2", playlistId: "PLXxoI8twiEB-mRvoEUvNTGJLgeoDEfq-T", category: "series", description: "Server Minecraft Hardcore di mana sekali mati, kamu langsung dibanned selamanya." },
         ];
 
-        // Render members dengan event click untuk modal
+        // ============================================================
+        // RENDER MEMBERS
+        // ============================================================
         function renderMembers() {
             const container = document.getElementById("membersGrid");
             if (!container) return;
@@ -489,9 +452,7 @@
                     <div class="member-name">${member.name}</div>
                     <a href="${member.yt}" target="_blank" class="member-yt" onclick="event.stopPropagation();"><i class="fab fa-youtube"></i> YouTube</a>
                 `;
-                // Event click untuk membuka modal
                 card.addEventListener('click', function(e) {
-                    // Jangan buka modal jika yang diklik adalah link YouTube
                     if (e.target.closest('.member-yt')) return;
                     openMemberModal(index);
                 });
@@ -499,7 +460,9 @@
             });
         }
 
-        // ========== MODAL POPUP MEMBER ==========
+        // ============================================================
+        // MODAL POPUP MEMBER
+        // ============================================================
         function openMemberModal(index) {
             const member = membersList[index];
             if (!member) return;
@@ -510,7 +473,6 @@
             const desc = document.getElementById('modalMemberDesc');
             const socialsContainer = document.getElementById('modalSocials');
 
-            // Set data
             img.src = `assets/${member.img}`;
             img.alt = member.name;
             img.onerror = function() {
@@ -519,7 +481,6 @@
             name.textContent = member.name;
             desc.textContent = member.desc || 'Anggota komunitas Senyawa Project.';
 
-            // Generate social links
             socialsContainer.innerHTML = '';
             if (member.socials) {
                 const socialIcons = {
@@ -559,7 +520,6 @@
                 });
             }
 
-            // Tampilkan modal
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
@@ -570,28 +530,9 @@
             document.body.style.overflow = '';
         }
 
-        // Event listener untuk menutup modal
-        document.addEventListener('DOMContentLoaded', () => {
-            const modal = document.getElementById('memberModal');
-            const closeBtn = document.getElementById('modalClose');
-            const overlay = modal?.querySelector('.modal-overlay');
-
-            if (closeBtn) {
-                closeBtn.addEventListener('click', closeMemberModal);
-            }
-
-            if (overlay) {
-                overlay.addEventListener('click', closeMemberModal);
-            }
-
-            // Tutup dengan tombol ESC
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') {
-                    closeMemberModal();
-                }
-            });
-        });
-
+        // ============================================================
+        // RENDER PROJECTS
+        // ============================================================
         function renderProjects(category = "all") {
             const container = document.getElementById("projectsGrid");
             if (!container) return;
@@ -615,7 +556,6 @@
             container.innerHTML = "";
             filteredProjects.forEach(project => {
                 const categoryName = getCategoryName(project.category);
-
                 const thumbUrl = project.thumb || '';
                 const styleAttr = thumbUrl ? ` style="background-image: url('${thumbUrl}');"` : '';
 
@@ -641,21 +581,29 @@
             
             setupYoutubeFacades();
         }
-        
-        // Script Click-to-Play Facade
+
+        function getCategoryName(category) {
+            const categories = {
+                "series": "SERIES",
+                "event": "EVENT",
+                "collab": "COLLAB"
+            };
+            return categories[category] || "📺 PROJECT";
+        }
+
+        // ============================================================
+        // YOUTUBE FACADE
+        // ============================================================
         function setupYoutubeFacades() {
             const ytFacades = document.querySelectorAll(".yt-lazy-facade");
-            // Gunakan async untuk menunggu hasil fetch dari oEmbed
             ytFacades.forEach(async (facade) => {
                 let thumbUrl = facade.getAttribute("data-thumb");
                 const playlistId = facade.getAttribute("data-playlist");
                 
-                // Otomatis tarik gambar dari oEmbed jika url masih kosong/menggunakan placeholder
                 if (!thumbUrl || thumbUrl.includes("ID_VIDEO_PERTAMA")) {
                     try {
                         const playlistUrl = `https://www.youtube.com/playlist?list=${playlistId}`;
-                        // Mengambil URL fetch dari konstanta VIDEO_OEMBED_ENDPOINTS
-                        const endpoint = VIDEO_OEMBED_ENDPOINTS.youtube(playlistUrl);
+                        const endpoint = `https://www.youtube.com/oembed?url=${encodeURIComponent(playlistUrl)}&format=json`;
                         const res = await fetch(endpoint);
                         const data = await res.json();
                         if (data && data.thumbnail_url) {
@@ -666,7 +614,6 @@
                     }
                 }
 
-                // Pengecekan thumbUrl dipertajam agar tidak pasang URL kosong/invalid
                 if (thumbUrl && thumbUrl.trim() !== "" && !thumbUrl.includes("ID_VIDEO_PERTAMA")) {
                     facade.style.backgroundImage = `url('${thumbUrl}')`;
                 } else {
@@ -674,10 +621,8 @@
                 }
 
                 facade.addEventListener("click", () => {
-                    // Ganti isi facade dengan animasi loading (spinner)
                     facade.innerHTML = '<div class="loader-spinner" style="position: absolute; top: 50%; left: 50%; margin-top: -18px; margin-left: -18px; z-index: 1;"></div>';
 
-                    // Coba ekstrak Video ID dari URL thumbnail yang didapat oEmbed
                     let videoId = "";
                     if (thumbUrl && thumbUrl.includes("/vi/")) {
                         videoId = thumbUrl.split("/vi/")[1].split("/")[0];
@@ -693,14 +638,13 @@
                     iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture");
                     iframe.setAttribute("allowfullscreen", "true");
 
-                    // Sembunyikan iframe sementara sampai selesai loading
                     iframe.style.opacity = "0";
                     iframe.style.transition = "opacity 0.4s ease";
 
                     iframe.onload = () => {
-                        iframe.style.opacity = "1"; // Munculkan iframe perlahan
+                        iframe.style.opacity = "1";
                         const spinner = facade.querySelector('.loader-spinner');
-                        if (spinner) spinner.remove(); // Hapus spinner
+                        if (spinner) spinner.remove();
                     };
 
                     facade.appendChild(iframe);
@@ -709,32 +653,9 @@
             });
         }
 
-        function getCategoryName(category) {
-            const categories = {
-                "series": "SERIES",
-                "event": "EVENT",
-                "collab": "COLLAB"
-            };
-            return categories[category] || "📺 PROJECT";
-        }
-
-        // fallback untuk logo utama dan logo navbar tanpa background
-        function handleLogoFallback() {
-            const mainLogo = document.querySelector('.hero-logo img');
-            if (mainLogo) {
-                mainLogo.onerror = () => {
-                    mainLogo.src = 'https://placehold.co/800x400/670C1F/white?text=SENYAWA+PROJECT';
-                };
-            }
-            const smallLogo = document.querySelector('.nav-logo-img img');
-            if (smallLogo) {
-                smallLogo.onerror = () => {
-                    smallLogo.src = 'https://placehold.co/100x60/670C1F/white?text=SNY';
-                };
-            }
-        }
-
-        // Navigasi smooth + mobile toggle + penanganan link store & project agar tidak menggangu smooth scroll asli
+        // ============================================================
+        // NAVIGATION
+        // ============================================================
         function setupNavigation() {
             const menuToggle = document.getElementById('menuToggle');
             const navLinks = document.getElementById('navLinks');
@@ -765,37 +686,24 @@
                     }
                 });
             });
+        }
 
-            const homeLink = document.querySelector('a[href="#home"]');
-            if (homeLink) {
-                homeLink.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                    if (navLinks.classList.contains('active')) navLinks.classList.remove('active');
-                    if (menuToggle && menuToggle.classList.contains('active')) menuToggle.classList.remove('active');
-                });
+        // ============================================================
+        // IMAGE FALLBACK
+        // ============================================================
+        function handleLogoFallback() {
+            const mainLogo = document.querySelector('.hero-logo img');
+            if (mainLogo) {
+                mainLogo.onerror = () => {
+                    mainLogo.src = 'https://placehold.co/800x400/670C1F/white?text=SENYAWA+PROJECT';
+                };
             }
-            const memberLink = document.querySelector('a[href="#members"]');
-            if (memberLink) memberLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                document.getElementById('members')?.scrollIntoView({ behavior: 'smooth' });
-                if (navLinks.classList.contains('active')) navLinks.classList.remove('active');
-                if (menuToggle && menuToggle.classList.contains('active')) menuToggle.classList.remove('active');
-            });
-            const aboutLink = document.querySelector('a[href="#about"]');
-            if (aboutLink) aboutLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
-                if (navLinks.classList.contains('active')) navLinks.classList.remove('active');
-                if (menuToggle && menuToggle.classList.contains('active')) menuToggle.classList.remove('active');
-            });
-            const projectLink = document.querySelector('a[href="#projects"]');
-            if (projectLink) projectLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
-                if (navLinks.classList.contains('active')) navLinks.classList.remove('active');
-                if (menuToggle && menuToggle.classList.contains('active')) menuToggle.classList.remove('active');
-            });
+            const smallLogo = document.querySelector('.nav-logo-img img');
+            if (smallLogo) {
+                smallLogo.onerror = () => {
+                    smallLogo.src = 'https://placehold.co/100x60/670C1F/white?text=SNY';
+                };
+            }
         }
 
         function globalImageFallback() {
@@ -807,26 +715,9 @@
             });
         }
 
-        function enforceNoBorderRadiusOnMemberImages() {
-            const style = document.createElement('style');
-            style.textContent = `
-                .member-img, .member-img img, .member-card .member-img, .member-card .member-img img {
-                    border-radius: 0px !important;
-                    overflow: visible !important;
-                }
-                .member-card {
-                    border-radius: 20px;
-                }
-                .member-img {
-                    border-radius: 0px !important;
-                    background: transparent;
-                }
-            `;
-            document.head.appendChild(style);
-        }
-
-        // ========== SISTEM NOTIFIKASI LENGKAP ==========
-        // DATA NOTIFIKASI - EDIT SESUAI KEBUTUHAN
+        // ============================================================
+        // NOTIFICATION SYSTEM
+        // ============================================================
         const notificationsData = [
             {
                 id: 9,
@@ -897,43 +788,6 @@
             }
         }
 
-        function getCountdownText(targetDateStr, expiredText) {
-            const target = new Date(targetDateStr).getTime();
-            const now = new Date().getTime();
-            const diff = target - now;
-
-            if (diff <= 0) {
-                return { text: expiredText, isExpired: true };
-            }
-
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-            let text = "";
-            if (days > 0) text += `${days} hari `;
-            if (hours > 0 || days > 0) text += `${hours} jam `;
-            text += `${minutes} menit ${seconds} detik`;
-
-            return { text: text, isExpired: false };
-        }
-
-        function updateAllCountdowns() {
-            const countdownElements = document.querySelectorAll('.countdown-timer[data-target]');
-            countdownElements.forEach(elem => {
-                const targetDate = elem.getAttribute('data-target');
-                const expiredText = elem.getAttribute('data-expired');
-                const result = getCountdownText(targetDate, expiredText);
-                elem.textContent = result.text;
-                if (result.isExpired) {
-                    elem.classList.add('countdown-expired');
-                } else {
-                    elem.classList.remove('countdown-expired');
-                }
-            });
-        }
-
         function renderNotificationPopup() {
             const container = document.getElementById('notifBody');
             if (!container) return;
@@ -1001,21 +855,7 @@
                     markAllAsRead();
                 });
             }
-
-            updateAllCountdowns();
         }
-
-        let countdownInterval = null;
-        function startCountdownUpdater() {
-            if (countdownInterval) clearInterval(countdownInterval);
-            countdownInterval = setInterval(() => {
-                const popup = document.getElementById('notifPopup');
-                if (popup && !popup.classList.contains('hide')) {
-                    updateAllCountdowns();
-                }
-            }, 1000);
-        }
-        startCountdownUpdater();
 
         function setupNotificationBell() {
             const bellBtn = document.getElementById('bellButton');
@@ -1051,127 +891,48 @@
             }
         });
 
-        // init
+        // ============================================================
+        // INITIALIZATION
+        // ============================================================
         document.addEventListener('DOMContentLoaded', () => {
             renderMembers();
             renderProjects();
             setupNavigation();
             handleLogoFallback();
             globalImageFallback();
-            enforceNoBorderRadiusOnMemberImages();
             setupNotificationBell();
-            console.log("Senyawa Project web siap! Member foto tanpa crop / sudut halus, logo header dengan file no BG. Tombol 'Lihat semua project' di kanan atas section Our Projects dan menu 'Store' telah ditambahkan.");
-            console.log("✅ Sistem notifikasi lengkap (dengan gambar, link, countdown) siap digunakan!");
-            console.log("✅ Sistem modal popup member siap digunakan!");
+            console.log("✅ Senyawa Project web siap!");
+            console.log("✅ Sistem notifikasi siap!");
+            console.log("✅ Sistem modal popup member siap!");
         });
 
-        // Menghilangkan efek loading ketika SEMUA data (gambar, iframe) selesai dimuat
+        // Close modal events (dijalankan langsung setelah DOM siap)
+        (function setupModalEvents() {
+            const modal = document.getElementById('memberModal');
+            const closeBtn = document.getElementById('modalClose');
+            const overlay = modal?.querySelector('.modal-overlay');
+
+            if (closeBtn) {
+                closeBtn.addEventListener('click', closeMemberModal);
+            }
+
+            if (overlay) {
+                overlay.addEventListener('click', closeMemberModal);
+            }
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    closeMemberModal();
+                }
+            });
+        })();
+
+        // Hilangkan loading
         window.addEventListener('load', () => {
             const loader = document.getElementById('page-loader');
             if (loader) {
                 loader.classList.add('hidden');
-                setTimeout(() => loader.remove(), 800); // Hapus elemen dari HTML setelah transisi selesai
-            }
-        });
-
-        // ==========================================
-        // SCRIPT VIDEO THUMBNAIL PREVIEW 
-        // ==========================================
-        const VIDEO_OEMBED_ENDPOINTS = {
-            youtube: (url) => `https://www.youtube.com/oembed?url=${encodeURIComponent(url)}&format=json`,
-            vimeo: (url) => `https://vimeo.com/api/oembed.json?url=${encodeURIComponent(url)}`,
-            wistia: (url) => `https://fast.wistia.com/oembed?url=${encodeURIComponent(url)}&format=json`
-        };
-
-        class VideoThumbnailPreview {
-            constructor(container) {
-                this.container = container;
-                this.input = container.querySelector('.video-input');
-                this.thumbnailOutput = container.querySelector('.video-thumbnail-output');
-                this.dataOutput = container.querySelector('.video-data-output');
-                this.urlOutput = container.querySelector('.video-url-output');
-
-                this.dataTitleOutput = container.querySelector('.video-data-title-output');
-                this.dataHtmlOutput = container.querySelector('.video-data-html-output');
-                this.dataHtmlRawOutput = container.querySelector('.video-data-html-raw-output');
-
-                // Bind event listeners
-                this.input.addEventListener('input', () => this.fetchThumbnail());
-
-                // Initial fetch if there's a value
-                this.fetchThumbnail();
-            }
-
-            async fetchThumbnail() {
-                const url = this.input.value;
-                if (!url) {
-                    this.clearOutput();
-                    return;
-                }
-
-                const videoProvider = this.detectVideoProvider(url);
-                if (!videoProvider) {
-                    this.clearOutput();
-                    return;
-                }
-
-                try {
-                    const data = await this.fetchOembedData(url, videoProvider);
-                    if (data) {
-                        this.thumbnailOutput.innerHTML = `
-                            <figure>
-                                <img src="${data.thumbnail_url}" alt="${data.title}">
-                                <figcaption>${data.thumbnail_url}</figcaption>
-                            </figure>`;
-                        this.dataOutput.textContent = JSON.stringify(data, null, 2);
-                        this.urlOutput.textContent = VIDEO_OEMBED_ENDPOINTSvideoProvider;
-
-                        this.dataTitleOutput.textContent = data.title;
-                        this.dataHtmlOutput.innerHTML = data.html;
-                        this.dataHtmlRawOutput.textContent = data.html.replace(/\\"/g, '"');
-                    } else {
-                        this.clearOutput();
-                    }
-                } catch (error) {
-                    console.error('Error fetching thumbnail:', error);
-                    this.clearOutput();
-                }
-            }
-
-            clearOutput() {
-                this.thumbnailOutput.innerHTML = '';
-                this.dataOutput.innerHTML = '';
-                this.urlOutput.textContent = '';
-                this.dataTitleOutput.textContent = '';
-                this.dataHtmlOutput.innerHTML = '';
-                this.dataHtmlRawOutput.textContent = '';
-            }
-
-            detectVideoProvider(url) {
-                if (url.match(/youtu/)) return 'youtube';
-                if (url.match(/vimeo/)) return 'vimeo';
-                if (url.match(/wistia/)) return 'wistia';
-                return null;
-            }
-
-            async fetchOembedData(url, provider) {
-                const endpointGenerator = VIDEO_OEMBED_ENDPOINTS[provider];
-                if (!endpointGenerator) return null;
-
-                const endpoint = endpointGenerator(url);
-                const response = await fetch(endpoint);
-                if (!response.ok) return null;
-
-                const data = await response.json();
-                return data;
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const container = document.getElementById('video-preview-container');
-            // Cek apakah elemen ada di halaman agar tidak terjadi error "null is not an object"
-            if (container) {
-                window.videoPreview = new VideoThumbnailPreview(container);
+                setTimeout(() => loader.remove(), 800);
             }
         });
     </script>
