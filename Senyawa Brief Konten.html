@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brief Mabar · Senyawa Project</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #0a0a0a;
+    color: #e8e8e8;
+    font-size: 14px;
+    line-height: 1.5;
+    padding: 24px 16px 80px;
+    min-height: 100vh;
+  }
+
+  .wrap { max-width: 960px; margin: 0 auto; }
+
+  /* HEADER */
+  .header {
+    padding: 22px 24px;
+    background: linear-gradient(135deg, #670C1F 0%, #1a0308 100%);
+    border-radius: 16px;
+    border: 1px solid #670C1F;
+    margin-bottom: 22px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -50%; right: -20%;
+    width: 240px; height: 240px;
+    background: radial-gradient(circle, rgba(255,0,85,0.25), transparent 70%);
+    border-radius: 50%;
+  }
+
+  .header-inner { position: relative; z-index: 1; }
+
+  h1 {
+    color: #fff;
+    font-size: 1.35rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 800;
+  }
+
+  h1 span { color: #ff0055; }
+
+  .note {
+    color: #d0a0a8;
+    font-size: 0.82rem;
+    margin-top: 6px;
+  }
+
+  .note .req { color: #ff0055; font-weight: 700; }
+
+  /* CARD */
+  .card {
+    background: #141414;
+    border: 1px solid #2a2a2a;
+    border-left: 4px solid #670C1F;
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 14px;
+    transition: 0.2s;
+  }
+
+  .card:hover {
+    border-left-color: #ff0055;
+    box-shadow: 0 4px 24px rgba(255, 0, 85, 0.08);
+  }
+
+  .card h2 {
+    color: #ff0055;
+    margin-bottom: 14px;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .card h2 .num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px; height: 24px;
+    background: #670C1F;
+    color: #fff;
+    border-radius: 6px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .card h2 .hint {
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: normal;
+    color: #777;
+    font-size: 0.72rem;
+    margin-left: auto;
+  }
+
+  /* GRID */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+  }
+
+  .full { grid-column: 1 / -1; }
+  .field { display: flex; flex-direction: column; gap: 5px; }
+
+  label {
+    color: #c8b0b4;
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+
+  label .req { color: #ff0055; margin-left: 2px; }
+
+  label small {
+    color: #777;
+    font-size: 0.72rem;
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  /* INPUT */
+  input[type="text"],
+  input[type="date"],
+  input[type="time"],
+  textarea {
+    width: 100%;
+    background: #0f0f0f;
+    border: 1px solid #2e2e2e;
+    border-radius: 8px;
+    padding: 10px 12px;
+    color: #f0f0f0;
+    font-size: 0.9rem;
+    font-family: inherit;
+    transition: 0.15s;
+  }
+
+  input::placeholder, textarea::placeholder { color: transparent; }
+
+  input:focus, textarea:focus {
+    outline: none;
+    border-color: #ff0055;
+    background: #171717;
+    box-shadow: 0 0 0 3px rgba(255, 0, 85, 0.15);
+  }
+
+  input[type="date"]::-webkit-calendar-picker-indicator,
+  input[type="time"]::-webkit-calendar-picker-indicator {
+    filter: invert(0.85) sepia(1) saturate(6) hue-rotate(320deg);
+    cursor: pointer;
+    opacity: 0.9;
+  }
+
+  textarea { resize: vertical; min-height: 70px; line-height: 1.5; }
+
+  /* ACTIONS */
+  .actions {
+    display: flex;
+    gap: 10px;
+    margin: 22px 0 16px;
+    flex-wrap: wrap;
+    position: sticky;
+    bottom: 0;
+    background: linear-gradient(to top, #0a0a0a 60%, transparent);
+    padding: 14px 0;
+    z-index: 10;
+  }
+
+  button {
+    background: #670C1F;
+    color: #fff;
+    border: 1px solid #670C1F;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.15s;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  button:hover {
+    background: #ff0055;
+    border-color: #ff0055;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(255, 0, 85, 0.25);
+  }
+
+  button:active { transform: translateY(0); }
+
+  #generateBtn {
+    background: linear-gradient(135deg, #ff0055, #670C1F);
+    border-color: #ff0055;
+  }
+  #generateBtn:hover { background: linear-gradient(135deg, #670C1F, #ff0055); }
+
+  #copyBtn {
+    background: #1a1a1a;
+    border-color: #333;
+    color: #ddd;
+  }
+  #copyBtn:hover { background: #262626; border-color: #ff0055; color: #fff; }
+
+  /* OUTPUT */
+  .card.output {
+    border-left-color: #ff0055;
+    background: #0f0a0a;
+  }
+
+  #hasilBrief {
+    width: 100%;
+    background: #080808;
+    border: 1px solid #2e2e2e;
+    border-radius: 10px;
+    padding: 16px;
+    color: #e8e8e8;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.83rem;
+    line-height: 1.6;
+    min-height: 400px;
+    resize: vertical;
+  }
+
+  #hasilBrief:focus { outline: none; border-color: #ff0055; }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: #0a0a0a; }
+  ::-webkit-scrollbar-thumb {
+    background: #670C1F;
+    border-radius: 5px;
+  }
+  ::-webkit-scrollbar-thumb:hover { background: #ff0055; }
+
+  ::selection { background: #670C1F; color: #fff; }
+  input::selection, textarea::selection { background: #670C1F; color: #fff; }
+
+  @media (max-width: 600px) {
+    body { padding: 16px 10px 70px; }
+    .card { padding: 14px; }
+    h1 { font-size: 1.05rem; letter-spacing: 1px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="header">
+  <div class="header-inner">
+    <h1>Senyawa <span>Brief Mabar</span></h1>
+    <p class="note">Isi field bertanda <span class="req">*</span> (wajib). Field lain boleh dikosongkan.</p>
+  </div>
+</div>
+
+<!-- 1. DATA UTAMA -->
+<div class="card">
+  <h2><span class="num">01</span> Data Utama</h2>
+  <div class="grid">
+    <div class="field full">
+      <label>Judul <span class="req">*</span></label>
+      <input type="text" id="judul">
+    </div>
+    <div class="field full">
+      <label>Pemilik Konten <span class="req">*</span></label>
+      <input type="text" id="pemilik">
+    </div>
+  </div>
+</div>
+
+<!-- 2. JADWAL -->
+<div class="card">
+  <h2><span class="num">02</span> Jadwal</h2>
+  <div class="grid">
+    <div class="field"><label>Tanggal <span class="req">*</span></label><input type="date" id="tanggal"></div>
+    <div class="field"><label>Jam Kumpul <span class="req">*</span> (WIB)</label><input type="time" id="jamKumpul"></div>
+    <div class="field"><label>Mulai Rekam <span class="req">*</span> (WIB)</label><input type="time" id="mulaiRekam"></div>
+    <div class="field"><label>Estimasi Durasi <span class="req">*</span></label><input type="text" id="durasi"></div>
+  </div>
+</div>
+
+<!-- 3. SERVER -->
+<div class="card">
+  <h2><span class="num">03</span> Server</h2>
+  <div class="grid">
+    <div class="field"><label>Host <span class="req">*</span></label><input type="text" id="host"></div>
+    <div class="field"><label>IP <span class="req">*</span></label><input type="text" id="ip"></div>
+  </div>
+</div>
+
+<!-- 4. VERSI & MOD -->
+<div class="card">
+  <h2><span class="num">04</span> Versi &amp; Mod</h2>
+  <div class="grid">
+    <div class="field"><label>Versi <span class="req">*</span></label><input type="text" id="versi"></div>
+    <div class="field full">
+      <label>Mod Wajib <small>(opsional — satu per baris, boleh nama + link)</small></label>
+      <textarea id="modList" rows="4"></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- 5. GOALS / ATURAN -->
+<div class="card">
+  <h2><span class="num">05</span> Goals / Aturan</h2>
+  <div class="field">
+    <label>Daftar Goals / Aturan <span class="req">*</span> <small>(satu per baris)</small></label>
+    <textarea id="aturanList" rows="4"></textarea>
+  </div>
+</div>
+
+<!-- 6. OBS -->
+<div class="card">
+  <h2><span class="num">06</span> Setting OBS Rekaman</h2>
+  <div class="grid">
+    <div class="field"><label>Resolusi <span class="req">*</span></label><input type="text" id="resolusi" value="1920x1080"></div>
+    <div class="field"><label>FPS <span class="req">*</span></label><input type="text" id="fps" value="60"></div>
+    <div class="field"><label>Encoder <span class="req">*</span></label><input type="text" id="encoder" value="menyesuaikan"></div>
+    <div class="field"><label>Bitrate (Kbps) <span class="req">*</span></label><input type="text" id="bitrate" value="8000-10000"></div>
+    <div class="field"><label>Format <span class="req">*</span></label><input type="text" id="format" value="MKV / Hybrid MP4"></div>
+    <div class="field"><label>Audio <span class="req">*</span></label><input type="text" id="audio" value="320 kbps, track 1 + track 2"></div>
+  </div>
+</div>
+
+<!-- 7. SETELAH SELESAI -->
+<div class="card">
+  <h2><span class="num">07</span> Setelah Selesai</h2>
+  <div class="grid">
+    <div class="field"><label>Kirim Rekaman Via <span class="req">*</span></label><input type="text" id="kirimVia"></div>
+    <div class="field"><label>Kirim Link Ke <span class="req">*</span></label><input type="text" id="kirimKe"></div>
+    <div class="field"><label>Deadline <span class="req">*</span></label><input type="text" id="deadline"></div>
+  </div>
+</div>
+
+<div class="actions">
+  <button type="button" id="generateBtn">⚡ Generate Brief</button>
+  <button type="button" id="copyBtn">📋 Copy ke Clipboard</button>
+</div>
+
+<div class="card output">
+  <h2><span class="num">★</span> Hasil Brief</h2>
+  <textarea id="hasilBrief" rows="22" readonly></textarea>
+</div>
+
+</div>
+
+<script>
+(function () {
+  function val(id) {
+    var el = document.getElementById(id);
+    return el ? el.value.trim() : "";
+  }
+
+  function lines(id) {
+    return val(id).split("\n").map(function (s) { return s.trim(); }).filter(Boolean);
+  }
+
+  var hari = ["Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"];
+  var bulan = ["Januari","Februari","Maret","April","Mei","Juni",
+               "Juli","Agustus","September","Oktober","November","Desember"];
+
+  function formatTanggal(iso) {
+    if (!iso) return "";
+    var parts = iso.split("-");
+    if (parts.length !== 3) return iso;
+    var d = new Date(parts[0], parts[1] - 1, parts[2]);
+    var dd = String(d.getDate()).padStart(2, "0");
+    return hari[d.getDay()] + ", " + dd + " " + bulan[d.getMonth()] + " " + d.getFullYear();
+  }
+
+  function formatJam(t) { return t ? t + " WIB" : ""; }
+
+  function formatMod(raw) {
+    var urlMatch = raw.match(/(https?:\/\/\S+|www\.\S+)/i);
+    if (!urlMatch) return raw;
+    var url = urlMatch[1];
+    var urlFix = url.startsWith("http") ? url : "https://" + url;
+    var nama = raw.replace(urlMatch[1], "")
+                  .replace(/[-:|,]+\s*$/, "")
+                  .replace(/\s*[-:|,]+\s*$/, "")
+                  .trim();
+    if (!nama) nama = url;
+    return "[" + nama + "](" + urlFix + ")";
+  }
+
+  function generate() {
+    var out = [];
+    var pemilik = val("pemilik");
+
+    out.push("## BRIEF MABAR: " + val("judul"));
+    out.push("");
+    out.push("**Judul:** " + val("judul"));
+    out.push("");
+    out.push("**Pemilik Konten:** " + pemilik);
+    out.push("");
+
+    out.push("**Jadwal**");
+    out.push("Tanggal: " + formatTanggal(val("tanggal")));
+    out.push("Jam kumpul: " + formatJam(val("jamKumpul")));
+    out.push("Mulai rekam: " + formatJam(val("mulaiRekam")));
+    out.push("Estimasi durasi: " + val("durasi"));
+    out.push("");
+
+    out.push("**Server**");
+    out.push("Host: " + val("host"));
+    out.push("IP: " + val("ip"));
+    out.push("");
+
+    out.push("**Versi & Mod**");
+    out.push("Versi: " + val("versi"));
+    out.push("");
+    var mods = lines("modList");
+    if (mods.length) {
+      out.push("Mod wajib:");
+      mods.forEach(function (m) { out.push("- " + formatMod(m)); });
+      out.push("");
+    }
+
+    out.push("**Pemain**");
+    out.push("1. " + (pemilik || "..."));
+    out.push("2. ");
+    out.push("3. ");
+    out.push("4. ");
+    out.push("");
+
+    out.push("**Yang Rekam**");
+    out.push("- ...");
+    out.push("");
+
+    var aturan = lines("aturanList");
+    out.push("**Goals / Aturan**");
+    if (aturan.length) aturan.forEach(function (a) { out.push("- " + a); });
+    else out.push("- ...");
+    out.push("");
+
+    out.push("**Persiapan Sebelum Main**");
+    out.push("- Install semua mod di versi yang sama");
+    out.push("- Test mic di Simple Voice Chat");
+    out.push("- Cek OBS dan sisa storage");
+    out.push("");
+
+    out.push("Setting OBS Rekaman");
+    out.push("Resolusi: " + val("resolusi"));
+    out.push("FPS: " + val("fps"));
+    out.push("Encoder: " + val("encoder"));
+    out.push("Bitrate: " + val("bitrate") + " Kbps");
+    out.push("Format: " + val("format"));
+    out.push("Audio: " + val("audio"));
+    out.push("");
+
+    out.push("Setelah Selesai");
+    out.push("Kirim rekaman via: " + val("kirimVia"));
+    out.push("Kirim link ke: " + val("kirimKe"));
+    out.push("Deadline: " + val("deadline"));
+
+    return out.join("\n");
+  }
+
+  function update() { document.getElementById("hasilBrief").value = generate(); }
+
+  document.getElementById("generateBtn").addEventListener("click", update);
+
+  document.getElementById("copyBtn").addEventListener("click", function () {
+    var ta = document.getElementById("hasilBrief");
+    if (!ta.value) update();
+    ta.removeAttribute("readonly");
+    ta.select();
+    document.execCommand("copy");
+    ta.setAttribute("readonly", "readonly");
+    alert("Brief berhasil dicopy!");
+  });
+
+  document.querySelectorAll("input, textarea").forEach(function (el) {
+    if (el.id !== "hasilBrief") el.addEventListener("input", update);
+  });
+
+  update();
+})();
+</script>
+
+</body>
+</html>
